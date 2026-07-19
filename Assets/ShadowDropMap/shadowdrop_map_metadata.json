@@ -1,0 +1,23 @@
+{
+  "sourceWidth": 1448,
+  "sourceHeight": 1086,
+  "scale": 2,
+  "width": 2896,
+  "height": 2172,
+  "recommendedPixelsPerUnit": 18.285714285714285,
+  "worldScaleComparedWithOriginal": 7,
+  "walkablePixels": 2078248,
+  "blockedPixels": 4211864,
+  "roadExpansionSourcePixels": 3,
+  "colliderCellSizePixels": 4,
+  "colliderBlockedThreshold": 0.65,
+  "colliderWalkableComponents": 3,
+  "largestColliderWalkableComponentCells": 125038,
+  "notes": [
+    "AI-assisted road-only segmentation followed by deterministic 2x Lanczos upscaling.",
+    "Road corridors are expanded by 3 source pixels to preserve player clearance and connectivity.",
+    "Visual occlusion keeps the original building and wall extraction boundary.",
+    "Generated road art is used below all blocked foreground pixels, including perimeter walls.",
+    "Keep Unity object scale at 1,1,1; 18.285714 PPU matches the previous 7x scene scale."
+  ]
+}
