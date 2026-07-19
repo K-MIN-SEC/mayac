@@ -1,0 +1,436 @@
+{
+  "sourceWidth": 1448,
+  "sourceHeight": 1086,
+  "scale": 2,
+  "pixelsPerUnit": 18.285714285714285,
+  "gridColumns": 5,
+  "gridRows": 4,
+  "componentCount": 39,
+  "extendedComponentCount": 5,
+  "zoneCount": 19,
+  "zones": [
+    {
+      "name": "building_zone_r01_c01",
+      "row": 0,
+      "column": 0,
+      "componentCount": 1,
+      "sourceRect": [
+        0,
+        0,
+        490,
+        197
+      ],
+      "width": 980,
+      "height": 394,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        245.0,
+        98.5
+      ]
+    },
+    {
+      "name": "building_zone_r01_c02",
+      "row": 0,
+      "column": 1,
+      "componentCount": 2,
+      "sourceRect": [
+        411,
+        0,
+        654,
+        271
+      ],
+      "width": 486,
+      "height": 542,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        532.5,
+        135.5
+      ]
+    },
+    {
+      "name": "building_zone_r01_c03",
+      "row": 0,
+      "column": 2,
+      "componentCount": 1,
+      "sourceRect": [
+        596,
+        145,
+        710,
+        275
+      ],
+      "width": 228,
+      "height": 260,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        653.0,
+        210.0
+      ]
+    },
+    {
+      "name": "building_zone_r01_c04",
+      "row": 0,
+      "column": 3,
+      "componentCount": 1,
+      "sourceRect": [
+        990,
+        35,
+        1276,
+        260
+      ],
+      "width": 572,
+      "height": 450,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1133.0,
+        147.5
+      ]
+    },
+    {
+      "name": "building_zone_r02_c01",
+      "row": 1,
+      "column": 0,
+      "componentCount": 1,
+      "sourceRect": [
+        89,
+        218,
+        313,
+        492
+      ],
+      "width": 448,
+      "height": 548,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        201.0,
+        355.0
+      ]
+    },
+    {
+      "name": "building_zone_r02_c02",
+      "row": 1,
+      "column": 1,
+      "componentCount": 2,
+      "sourceRect": [
+        274,
+        192,
+        614,
+        404
+      ],
+      "width": 680,
+      "height": 424,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        444.0,
+        298.0
+      ]
+    },
+    {
+      "name": "building_zone_r02_c03",
+      "row": 1,
+      "column": 2,
+      "componentCount": 3,
+      "sourceRect": [
+        586,
+        249,
+        849,
+        521
+      ],
+      "width": 526,
+      "height": 544,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        717.5,
+        385.0
+      ]
+    },
+    {
+      "name": "building_zone_r02_c04",
+      "row": 1,
+      "column": 3,
+      "componentCount": 3,
+      "sourceRect": [
+        721,
+        102,
+        1033,
+        506
+      ],
+      "width": 624,
+      "height": 808,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        877.0,
+        304.0
+      ]
+    },
+    {
+      "name": "building_zone_r02_c05",
+      "row": 1,
+      "column": 4,
+      "componentCount": 1,
+      "sourceRect": [
+        1203,
+        32,
+        1414,
+        370
+      ],
+      "width": 422,
+      "height": 676,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1308.5,
+        201.0
+      ]
+    },
+    {
+      "name": "building_zone_r03_c01",
+      "row": 2,
+      "column": 0,
+      "componentCount": 2,
+      "sourceRect": [
+        0,
+        349,
+        155,
+        753
+      ],
+      "width": 310,
+      "height": 808,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        77.5,
+        551.0
+      ]
+    },
+    {
+      "name": "building_zone_r03_c02",
+      "row": 2,
+      "column": 1,
+      "componentCount": 2,
+      "sourceRect": [
+        242,
+        365,
+        563,
+        721
+      ],
+      "width": 642,
+      "height": 712,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        402.5,
+        543.0
+      ]
+    },
+    {
+      "name": "building_zone_r03_c03",
+      "row": 2,
+      "column": 2,
+      "componentCount": 3,
+      "sourceRect": [
+        511,
+        480,
+        922,
+        802
+      ],
+      "width": 822,
+      "height": 644,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        716.5,
+        641.0
+      ]
+    },
+    {
+      "name": "building_zone_r03_c04",
+      "row": 2,
+      "column": 3,
+      "componentCount": 1,
+      "sourceRect": [
+        989,
+        516,
+        1136,
+        662
+      ],
+      "width": 294,
+      "height": 292,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1062.5,
+        589.0
+      ]
+    },
+    {
+      "name": "building_zone_r03_c05",
+      "row": 2,
+      "column": 4,
+      "componentCount": 2,
+      "sourceRect": [
+        984,
+        262,
+        1448,
+        658
+      ],
+      "width": 928,
+      "height": 792,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1216.0,
+        460.0
+      ]
+    },
+    {
+      "name": "building_zone_r04_c01",
+      "row": 3,
+      "column": 0,
+      "componentCount": 4,
+      "sourceRect": [
+        16,
+        555,
+        386,
+        1085
+      ],
+      "width": 740,
+      "height": 1060,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        201.0,
+        820.0
+      ]
+    },
+    {
+      "name": "building_zone_r04_c02",
+      "row": 3,
+      "column": 1,
+      "componentCount": 3,
+      "sourceRect": [
+        289,
+        672,
+        583,
+        1086
+      ],
+      "width": 588,
+      "height": 828,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        436.0,
+        879.0
+      ]
+    },
+    {
+      "name": "building_zone_r04_c03",
+      "row": 3,
+      "column": 2,
+      "componentCount": 3,
+      "sourceRect": [
+        525,
+        648,
+        1011,
+        1085
+      ],
+      "width": 972,
+      "height": 874,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        768.0,
+        866.5
+      ]
+    },
+    {
+      "name": "building_zone_r04_c04",
+      "row": 3,
+      "column": 3,
+      "componentCount": 3,
+      "sourceRect": [
+        891,
+        645,
+        1169,
+        1086
+      ],
+      "width": 556,
+      "height": 882,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1030.0,
+        865.5
+      ]
+    },
+    {
+      "name": "building_zone_r04_c05",
+      "row": 3,
+      "column": 4,
+      "componentCount": 1,
+      "sourceRect": [
+        1315,
+        642,
+        1448,
+        1086
+      ],
+      "width": 266,
+      "height": 888,
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "mapPositionSourcePixels": [
+        1381.5,
+        864.0
+      ]
+    }
+  ],
+  "notes": [
+    "Visual pixels come from the original map; generated sheets are used only as alpha masks.",
+    "Connected building components are never split across zones.",
+    "The existing road collision mask is not modified."
+  ]
+}

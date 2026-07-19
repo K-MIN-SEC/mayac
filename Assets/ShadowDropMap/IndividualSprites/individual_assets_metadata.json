@@ -1,0 +1,178 @@
+{
+  "sourceWidth": 1448,
+  "sourceHeight": 1086,
+  "scale": 2,
+  "pixelsPerUnit": 18.285714285714285,
+  "assets": [
+    {
+      "name": "building_01_red_brick",
+      "kind": "building",
+      "sourceRect": [
+        24,
+        85,
+        365,
+        587
+      ],
+      "width": 682,
+      "height": 1004,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "building_02_beige_balcony",
+      "kind": "building",
+      "sourceRect": [
+        378,
+        132,
+        718,
+        578
+      ],
+      "width": 680,
+      "height": 892,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "building_03_white_pilotis",
+      "kind": "building",
+      "sourceRect": [
+        729,
+        102,
+        1073,
+        580
+      ],
+      "width": 688,
+      "height": 956,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "building_04_corner_store",
+      "kind": "building",
+      "sourceRect": [
+        1071,
+        110,
+        1437,
+        595
+      ],
+      "width": 732,
+      "height": 970,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "building_05_small_red_house",
+      "kind": "building",
+      "sourceRect": [
+        170,
+        636,
+        523,
+        994
+      ],
+      "width": 706,
+      "height": 716,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "tree_01_round",
+      "kind": "tree",
+      "sourceRect": [
+        569,
+        652,
+        805,
+        988
+      ],
+      "width": 472,
+      "height": 672,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "tree_02_large",
+      "kind": "tree",
+      "sourceRect": [
+        858,
+        582,
+        1143,
+        991
+      ],
+      "width": 570,
+      "height": 818,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    }
+  ],
+  "examplePlacements": [
+    {
+      "asset": "building_01_red_brick",
+      "anchorSourcePixels": [
+        185,
+        485
+      ],
+      "scale": 0.56
+    },
+    {
+      "asset": "building_02_beige_balcony",
+      "anchorSourcePixels": [
+        565,
+        395
+      ],
+      "scale": 0.54
+    },
+    {
+      "asset": "building_03_white_pilotis",
+      "anchorSourcePixels": [
+        955,
+        390
+      ],
+      "scale": 0.54
+    },
+    {
+      "asset": "building_04_corner_store",
+      "anchorSourcePixels": [
+        1250,
+        350
+      ],
+      "scale": 0.52
+    },
+    {
+      "asset": "building_05_small_red_house",
+      "anchorSourcePixels": [
+        680,
+        575
+      ],
+      "scale": 0.62
+    },
+    {
+      "asset": "tree_01_round",
+      "anchorSourcePixels": [
+        350,
+        720
+      ],
+      "scale": 0.35
+    },
+    {
+      "asset": "tree_02_large",
+      "anchorSourcePixels": [
+        1060,
+        700
+      ],
+      "scale": 0.33
+    }
+  ]
+}
