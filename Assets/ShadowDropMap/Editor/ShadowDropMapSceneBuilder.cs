@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,8 +18,8 @@ public static class ShadowDropMapSceneBuilder
     {
         EditorApplication.delayCall += () =>
         {
-            ConfigureTexture(TextureRoot + "/shadowdrop_map_base.png", isMask: false, hasAlpha: false);
-            ConfigureTexture(TextureRoot + "/shadowdrop_occlusion_layer.png", isMask: false, hasAlpha: true);
+            ConfigureTexture(TextureRoot + "/shadowdrop_road_base.png", isMask: false, hasAlpha: false);
+            ConfigureTexture(TextureRoot + "/shadowdrop_buildings.png", isMask: false, hasAlpha: true);
             ConfigureTexture(TextureRoot + "/shadowdrop_walkable_mask.png", isMask: true, hasAlpha: false);
         };
     }
@@ -30,18 +29,18 @@ public static class ShadowDropMapSceneBuilder
     {
         Directory.CreateDirectory(SceneRoot);
 
-        string basePath = TextureRoot + "/shadowdrop_map_base.png";
-        string occlusionPath = TextureRoot + "/shadowdrop_occlusion_layer.png";
+        string roadPath = TextureRoot + "/shadowdrop_road_base.png";
+        string buildingsPath = TextureRoot + "/shadowdrop_buildings.png";
         string maskPath = TextureRoot + "/shadowdrop_walkable_mask.png";
 
-        ConfigureTexture(basePath, isMask: false, hasAlpha: false);
-        ConfigureTexture(occlusionPath, isMask: false, hasAlpha: true);
+        ConfigureTexture(roadPath, isMask: false, hasAlpha: false);
+        ConfigureTexture(buildingsPath, isMask: false, hasAlpha: true);
         ConfigureTexture(maskPath, isMask: true, hasAlpha: false);
 
         AssetDatabase.Refresh();
 
-        Sprite baseSprite = AssetDatabase.LoadAssetAtPath<Sprite>(basePath);
-        Sprite occlusionSprite = AssetDatabase.LoadAssetAtPath<Sprite>(occlusionPath);
+        Sprite roadSprite = AssetDatabase.LoadAssetAtPath<Sprite>(roadPath);
+        Sprite buildingsSprite = AssetDatabase.LoadAssetAtPath<Sprite>(buildingsPath);
         Texture2D walkableMask = AssetDatabase.LoadAssetAtPath<Texture2D>(maskPath);
 
         Scene scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -49,17 +48,17 @@ public static class ShadowDropMapSceneBuilder
 
         GameObject root = new GameObject("ShadowDrop_Map");
 
-        GameObject baseMap = new GameObject("BaseMap");
-        baseMap.transform.SetParent(root.transform, false);
-        SpriteRenderer baseRenderer = baseMap.AddComponent<SpriteRenderer>();
-        baseRenderer.sprite = baseSprite;
-        baseRenderer.sortingOrder = 0;
+        GameObject roadBase = new GameObject("RoadBase");
+        roadBase.transform.SetParent(root.transform, false);
+        SpriteRenderer roadRenderer = roadBase.AddComponent<SpriteRenderer>();
+        roadRenderer.sprite = roadSprite;
+        roadRenderer.sortingOrder = 0;
 
-        GameObject occlusion = new GameObject("BuildingOcclusion");
-        occlusion.transform.SetParent(root.transform, false);
-        SpriteRenderer occlusionRenderer = occlusion.AddComponent<SpriteRenderer>();
-        occlusionRenderer.sprite = occlusionSprite;
-        occlusionRenderer.sortingOrder = 100;
+        GameObject buildings = new GameObject("Buildings");
+        buildings.transform.SetParent(root.transform, false);
+        SpriteRenderer buildingsRenderer = buildings.AddComponent<SpriteRenderer>();
+        buildingsRenderer.sprite = buildingsSprite;
+        buildingsRenderer.sortingOrder = 100;
 
         GameObject collision = new GameObject("CollisionFromWalkableMask");
         collision.transform.SetParent(root.transform, false);
@@ -69,13 +68,15 @@ public static class ShadowDropMapSceneBuilder
         serialized.FindProperty("pixelsPerUnit").floatValue = PixelsPerUnit;
         serialized.FindProperty("cellSizePixels").intValue = 4;
         serialized.FindProperty("blockedThreshold").floatValue = 0.65f;
+        serialized.FindProperty("boundaryOnly").boolValue = true;
+        serialized.FindProperty("boundaryThicknessCells").intValue = 2;
         serialized.ApplyModifiedPropertiesWithoutUndo();
         maskCollider.RebuildColliders();
 
         GameObject cameraObject = new GameObject("Main Camera");
         Camera camera = cameraObject.AddComponent<Camera>();
         camera.orthographic = true;
-        camera.orthographicSize = baseSprite.bounds.size.y * 0.5f;
+        camera.orthographicSize = roadSprite.bounds.size.y * 0.5f;
         camera.clearFlags = CameraClearFlags.SolidColor;
         camera.backgroundColor = new Color(0.12f, 0.13f, 0.14f);
         cameraObject.transform.position = new Vector3(0f, 0f, -10f);
@@ -83,18 +84,19 @@ public static class ShadowDropMapSceneBuilder
 
         EditorSceneManager.SaveScene(scene, ScenePath);
         AssetDatabase.SaveAssets();
+        Debug.Log($"Shadow Drop fresh 2x prototype scene built: {ScenePath}");
         EditorUtility.DisplayDialog("Shadow Drop", $"Prototype map scene saved:\n{ScenePath}", "OK");
     }
 
-    [MenuItem("Shadow Drop/Apply 2x Map To Current Scene")]
+    [MenuItem("Shadow Drop/Apply Fresh 2x Map To Current Scene")]
     public static void ApplyToCurrentScene()
     {
-        string basePath = TextureRoot + "/shadowdrop_map_base.png";
-        string occlusionPath = TextureRoot + "/shadowdrop_occlusion_layer.png";
+        string roadPath = TextureRoot + "/shadowdrop_road_base.png";
+        string buildingsPath = TextureRoot + "/shadowdrop_buildings.png";
         string maskPath = TextureRoot + "/shadowdrop_walkable_mask.png";
 
-        ConfigureTexture(basePath, isMask: false, hasAlpha: false);
-        ConfigureTexture(occlusionPath, isMask: false, hasAlpha: true);
+        ConfigureTexture(roadPath, isMask: false, hasAlpha: false);
+        ConfigureTexture(buildingsPath, isMask: false, hasAlpha: true);
         ConfigureTexture(maskPath, isMask: true, hasAlpha: false);
         AssetDatabase.Refresh();
 
@@ -109,10 +111,20 @@ public static class ShadowDropMapSceneBuilder
             return;
         }
 
-        Transform baseMap = root.transform.Find("BaseMap");
-        Transform occlusion = root.transform.Find("BuildingOcclusion");
+        Transform roadBase = root.transform.Find("RoadBase");
+        if (roadBase == null)
+        {
+            roadBase = root.transform.Find("BaseMap");
+        }
+
+        Transform buildings = root.transform.Find("Buildings");
+        if (buildings == null)
+        {
+            buildings = root.transform.Find("BuildingOcclusion");
+        }
+
         Transform collision = root.transform.Find("CollisionFromWalkableMask");
-        if (baseMap == null || occlusion == null || collision == null)
+        if (roadBase == null || buildings == null || collision == null)
         {
             EditorUtility.DisplayDialog(
                 "Shadow Drop",
@@ -122,10 +134,10 @@ public static class ShadowDropMapSceneBuilder
             return;
         }
 
-        SpriteRenderer baseRenderer = baseMap.GetComponent<SpriteRenderer>();
-        SpriteRenderer occlusionRenderer = occlusion.GetComponent<SpriteRenderer>();
+        SpriteRenderer roadRenderer = roadBase.GetComponent<SpriteRenderer>();
+        SpriteRenderer buildingsRenderer = buildings.GetComponent<SpriteRenderer>();
         ShadowDropPixelMaskCollider2D maskCollider = collision.GetComponent<ShadowDropPixelMaskCollider2D>();
-        if (baseRenderer == null || occlusionRenderer == null || maskCollider == null)
+        if (roadRenderer == null || buildingsRenderer == null || maskCollider == null)
         {
             EditorUtility.DisplayDialog(
                 "Shadow Drop",
@@ -138,24 +150,28 @@ public static class ShadowDropMapSceneBuilder
         Undo.RecordObjects(
             new Object[]
             {
-                baseMap,
-                occlusion,
+                roadBase,
+                buildings,
                 collision,
-                baseRenderer,
-                occlusionRenderer,
+                roadRenderer,
+                buildingsRenderer,
                 maskCollider,
             },
-            "Apply Shadow Drop 2x Map"
+            "Apply Fresh Shadow Drop 2x Map"
         );
 
-        baseMap.localPosition = Vector3.zero;
-        baseMap.localScale = Vector3.one;
-        occlusion.localPosition = Vector3.zero;
-        occlusion.localScale = Vector3.one;
+        roadBase.name = "RoadBase";
+        buildings.name = "Buildings";
+        roadBase.localPosition = Vector3.zero;
+        roadBase.localScale = Vector3.one;
+        buildings.localPosition = Vector3.zero;
+        buildings.localScale = Vector3.one;
         collision.localPosition = Vector3.zero;
         collision.localScale = Vector3.one;
-        baseRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(basePath);
-        occlusionRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(occlusionPath);
+        roadRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(roadPath);
+        buildingsRenderer.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(buildingsPath);
+        roadRenderer.sortingOrder = 0;
+        buildingsRenderer.sortingOrder = 100;
 
         SerializedObject serialized = new SerializedObject(maskCollider);
         serialized.FindProperty("walkableMask").objectReferenceValue =
@@ -163,14 +179,17 @@ public static class ShadowDropMapSceneBuilder
         serialized.FindProperty("pixelsPerUnit").floatValue = PixelsPerUnit;
         serialized.FindProperty("cellSizePixels").intValue = 4;
         serialized.FindProperty("blockedThreshold").floatValue = 0.65f;
+        serialized.FindProperty("boundaryOnly").boolValue = true;
+        serialized.FindProperty("boundaryThicknessCells").intValue = 2;
         serialized.ApplyModifiedPropertiesWithoutUndo();
         maskCollider.RebuildColliders();
 
         EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
         SceneView.RepaintAll();
+        Debug.Log("Shadow Drop fresh 2x map applied to the current scene.");
         EditorUtility.DisplayDialog(
             "Shadow Drop",
-            "The current scene now uses the 2x map, rebuilt building mask, and matching colliders.",
+            "The current scene now uses the fresh 2x road base, aligned buildings, and matching road colliders.",
             "OK"
         );
     }
@@ -209,49 +228,6 @@ public static class ShadowDropMapSceneBuilder
         standaloneSettings.textureCompression = TextureImporterCompression.Uncompressed;
         importer.SetPlatformTextureSettings(standaloneSettings);
 
-        importer.SaveAndReimport();
-        EnsureFullTextureSprite(importer, assetPath);
-    }
-
-    private static void EnsureFullTextureSprite(TextureImporter importer, string assetPath)
-    {
-        Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(assetPath);
-        if (texture == null)
-        {
-            return;
-        }
-
-        SpriteDataProviderFactories factories = new SpriteDataProviderFactories();
-        factories.Init();
-        ISpriteEditorDataProvider dataProvider =
-            factories.GetSpriteEditorDataProviderFromObject(importer);
-        dataProvider.InitSpriteEditorDataProvider();
-
-        SpriteRect[] spriteRects = dataProvider.GetSpriteRects();
-        if (
-            spriteRects.Length == 1
-            && spriteRects[0].rect == new Rect(0f, 0f, texture.width, texture.height)
-        )
-        {
-            return;
-        }
-
-        SpriteRect fullRect = spriteRects.Length > 0
-            ? spriteRects[0]
-            : new SpriteRect { spriteID = GUID.Generate() };
-        fullRect.name = Path.GetFileNameWithoutExtension(assetPath);
-        fullRect.rect = new Rect(0f, 0f, texture.width, texture.height);
-        fullRect.alignment = SpriteAlignment.Center;
-        fullRect.pivot = new Vector2(0.5f, 0.5f);
-        fullRect.border = Vector4.zero;
-        dataProvider.SetSpriteRects(new[] { fullRect });
-
-        ISpriteNameFileIdDataProvider nameProvider =
-            dataProvider.GetDataProvider<ISpriteNameFileIdDataProvider>();
-        nameProvider.SetNameFileIdPairs(
-            new[] { new SpriteNameFileIdPair(fullRect.name, fullRect.spriteID) }
-        );
-        dataProvider.Apply();
         importer.SaveAndReimport();
     }
 }

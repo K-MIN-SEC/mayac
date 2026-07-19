@@ -6,18 +6,36 @@
   "height": 2172,
   "recommendedPixelsPerUnit": 18.285714285714285,
   "worldScaleComparedWithOriginal": 7,
-  "walkablePixels": 2078248,
-  "blockedPixels": 4211864,
-  "roadExpansionSourcePixels": 3,
-  "colliderCellSizePixels": 4,
-  "colliderBlockedThreshold": 0.65,
-  "colliderWalkableComponents": 3,
-  "largestColliderWalkableComponentCells": 125038,
+  "walkablePixels": 1904196,
+  "blockedPixels": 4385916,
+  "roadSourceComponentAreas": [
+    358629,
+    64708,
+    6962,
+    6924,
+    5128,
+    4180,
+    3727,
+    3629
+  ],
+  "buildingComponentCount": 35,
+  "largestBuildingComponentAreas": [
+    40232,
+    39846,
+    37559,
+    37306,
+    35164,
+    34682,
+    29242,
+    28121,
+    25634,
+    23671
+  ],
   "notes": [
-    "AI-assisted road-only segmentation followed by deterministic 2x Lanczos upscaling.",
-    "Road corridors are expanded by 3 source pixels to preserve player clearance and connectivity.",
-    "Visual occlusion keeps the original building and wall extraction boundary.",
-    "Generated road art is used below all blocked foreground pixels, including perimeter walls.",
-    "Keep Unity object scale at 1,1,1; 18.285714 PPU matches the previous 7x scene scale."
+    "Fresh rebuild using the supplied road-only image as the coordinate authority.",
+    "Road and building layers are both 2x and must use the same origin and PPU.",
+    "Walkability is deterministic asphalt color segmentation; no generated mask is used.",
+    "The baked checkerboard was removed before premultiplied-alpha upscaling.",
+    "Keep Unity transforms at scale 1,1,1."
   ]
 }

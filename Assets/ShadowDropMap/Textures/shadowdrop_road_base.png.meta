@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ea7f03a020806b74486bf7d43e0d2ca3
+guid: c1a13d8a6927547479df12bb6933faa7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2769114384080599271
-    second: shadowdrop_map_base_0
+      213: -6518930759237229654
+    second: shadowdrop_road_base_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: shadowdrop_map_base_0
+      name: shadowdrop_road_base_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1448
-        height: 1086
+        width: 2896
+        height: 2172
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 917837a93212299d0800000000000000
-      internalID: -2769114384080599271
+      spriteID: aa32c44630b1885a0800000000000000
+      internalID: -6518930759237229654
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      shadowdrop_map_base_0: -2769114384080599271
+      shadowdrop_road_base_0: -6518930759237229654
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
