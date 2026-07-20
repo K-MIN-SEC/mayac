@@ -8,10 +8,12 @@ public sealed class QuarterViewDepthSorter2D : MonoBehaviour
     [SerializeField, Min(1)] private int zPrecision = 1000;
 
     private SpriteRenderer spriteRenderer;
+    private bool isPlayer;
 
     private void OnEnable()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        isPlayer = CompareTag("Player");
         UpdateOrder();
     }
 
@@ -27,8 +29,20 @@ public sealed class QuarterViewDepthSorter2D : MonoBehaviour
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
-        spriteRenderer.sortingOrder = sortingOffset
-            - Mathf.RoundToInt(transform.position.y * precision)
-            - Mathf.RoundToInt(transform.position.z * zPrecision);
+        int sortingOrder = sortingOffset - Mathf.RoundToInt(transform.position.y * precision);
+        if (isPlayer)
+        {
+            sortingOrder = QuarterViewBuildingOccluder2D.ResolvePlayerSortingOrder(
+                transform.position,
+                spriteRenderer.bounds,
+                sortingOrder
+            );
+        }
+        else
+        {
+            sortingOrder -= Mathf.RoundToInt(transform.position.z * zPrecision);
+        }
+
+        spriteRenderer.sortingOrder = sortingOrder;
     }
 }
