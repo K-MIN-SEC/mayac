@@ -1,0 +1,1204 @@
+{
+  "pixelsPerUnit": 32.0,
+  "assetSizeScale": 0.75,
+  "buildings": [
+    {
+      "name": "apartment_red_tall",
+      "sourceRect": [
+        84,
+        63,
+        458,
+        649
+      ],
+      "width": 512,
+      "height": 963,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "apartment_gray_tall",
+      "sourceRect": [
+        543,
+        51,
+        938,
+        656
+      ],
+      "width": 542,
+      "height": 994,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "convenience_24",
+      "sourceRect": [
+        987,
+        295,
+        1380,
+        646
+      ],
+      "width": 538,
+      "height": 578,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "market_neighborhood",
+      "sourceRect": [
+        263,
+        656,
+        672,
+        1034
+      ],
+      "width": 560,
+      "height": 621,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "mixed_laundry_realty",
+      "sourceRect": [
+        781,
+        606,
+        1148,
+        1037
+      ],
+      "width": 502,
+      "height": 708,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "police_station",
+      "sourceRect": [
+        82,
+        102,
+        331,
+        357
+      ],
+      "width": 340,
+      "height": 418,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "house_red_tile",
+      "sourceRect": [
+        386,
+        70,
+        707,
+        365
+      ],
+      "width": 440,
+      "height": 484,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "villa_walled",
+      "sourceRect": [
+        750,
+        90,
+        1069,
+        370
+      ],
+      "width": 436,
+      "height": 460,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "convenience_awning",
+      "sourceRect": [
+        1140,
+        87,
+        1349,
+        350
+      ],
+      "width": 286,
+      "height": 432,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "market_large",
+      "sourceRect": [
+        102,
+        390,
+        470,
+        705
+      ],
+      "width": 504,
+      "height": 518,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "restaurant_corner",
+      "sourceRect": [
+        579,
+        384,
+        874,
+        690
+      ],
+      "width": 404,
+      "height": 502,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "laundromat_blue",
+      "sourceRect": [
+        1005,
+        421,
+        1297,
+        688
+      ],
+      "width": 400,
+      "height": 438,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "house_low_darkroof",
+      "sourceRect": [
+        158,
+        781,
+        424,
+        999
+      ],
+      "width": 364,
+      "height": 358,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "apartment_mid",
+      "sourceRect": [
+        528,
+        668,
+        794,
+        1014
+      ],
+      "width": 364,
+      "height": 568,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "clinic_neighborhood",
+      "sourceRect": [
+        978,
+        730,
+        1228,
+        1010
+      ],
+      "width": 342,
+      "height": 460,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    }
+  ],
+  "props": [
+    {
+      "name": "utility_pole_cross",
+      "sourceRect": [
+        83,
+        61,
+        203,
+        435
+      ],
+      "width": 165,
+      "height": 615,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "utility_pole_ladder",
+      "sourceRect": [
+        253,
+        64,
+        336,
+        434
+      ],
+      "width": 114,
+      "height": 608,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "utility_pole_lamp",
+      "sourceRect": [
+        428,
+        64,
+        549,
+        434
+      ],
+      "width": 165,
+      "height": 608,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "street_lamp_curve",
+      "sourceRect": [
+        593,
+        117,
+        718,
+        431
+      ],
+      "width": 171,
+      "height": 516,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "street_lamp_square",
+      "sourceRect": [
+        743,
+        94,
+        804,
+        432
+      ],
+      "width": 84,
+      "height": 555,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bus_stop_sign",
+      "sourceRect": [
+        845,
+        161,
+        907,
+        425
+      ],
+      "width": 86,
+      "height": 434,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bus_shelter",
+      "sourceRect": [
+        945,
+        194,
+        1119,
+        440
+      ],
+      "width": 238,
+      "height": 404,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "traffic_signal",
+      "sourceRect": [
+        1142,
+        82,
+        1378,
+        437
+      ],
+      "width": 322,
+      "height": 584,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "trash_metal",
+      "sourceRect": [
+        94,
+        498,
+        176,
+        609
+      ],
+      "width": 112,
+      "height": 183,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "trash_green",
+      "sourceRect": [
+        192,
+        499,
+        282,
+        617
+      ],
+      "width": 123,
+      "height": 194,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "recycle_station",
+      "sourceRect": [
+        329,
+        490,
+        478,
+        631
+      ],
+      "width": 204,
+      "height": 231,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "mailbox_red",
+      "sourceRect": [
+        529,
+        489,
+        627,
+        629
+      ],
+      "width": 134,
+      "height": 230,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bench_back",
+      "sourceRect": [
+        655,
+        485,
+        839,
+        640
+      ],
+      "width": 252,
+      "height": 255,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bench_simple",
+      "sourceRect": [
+        857,
+        526,
+        1036,
+        643
+      ],
+      "width": 244,
+      "height": 192,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bollard_short",
+      "sourceRect": [
+        1099,
+        519,
+        1144,
+        612
+      ],
+      "width": 62,
+      "height": 153,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bollard_tall",
+      "sourceRect": [
+        1167,
+        529,
+        1212,
+        623
+      ],
+      "width": 62,
+      "height": 154,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bollard_mid",
+      "sourceRect": [
+        1235,
+        540,
+        1280,
+        636
+      ],
+      "width": 62,
+      "height": 158,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "bollard_yellow",
+      "sourceRect": [
+        1302,
+        553,
+        1349,
+        647
+      ],
+      "width": 64,
+      "height": 154,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "planter_shrub",
+      "sourceRect": [
+        81,
+        698,
+        202,
+        842
+      ],
+      "width": 165,
+      "height": 237,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "planter_hedge",
+      "sourceRect": [
+        252,
+        721,
+        426,
+        853
+      ],
+      "width": 238,
+      "height": 218,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "planter_flower_round",
+      "sourceRect": [
+        467,
+        735,
+        604,
+        844
+      ],
+      "width": 188,
+      "height": 178,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "tree_square",
+      "sourceRect": [
+        664,
+        640,
+        814,
+        858
+      ],
+      "width": 206,
+      "height": 358,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "cypress_round",
+      "sourceRect": [
+        871,
+        664,
+        953,
+        849
+      ],
+      "width": 112,
+      "height": 304,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "cypress_double",
+      "sourceRect": [
+        1002,
+        695,
+        1171,
+        856
+      ],
+      "width": 231,
+      "height": 264,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "tree_small_square",
+      "sourceRect": [
+        1215,
+        680,
+        1345,
+        853
+      ],
+      "width": 178,
+      "height": 285,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "vending_blue",
+      "sourceRect": [
+        97,
+        862,
+        222,
+        1063
+      ],
+      "width": 171,
+      "height": 330,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "vending_gray",
+      "sourceRect": [
+        276,
+        873,
+        403,
+        1056
+      ],
+      "width": 174,
+      "height": 300,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "utility_box_green",
+      "sourceRect": [
+        455,
+        880,
+        616,
+        1062
+      ],
+      "width": 220,
+      "height": 298,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "utility_box_beige",
+      "sourceRect": [
+        660,
+        897,
+        764,
+        1058
+      ],
+      "width": 142,
+      "height": 264,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "utility_box_small",
+      "sourceRect": [
+        818,
+        929,
+        897,
+        1051
+      ],
+      "width": 108,
+      "height": 201,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "fire_hydrant",
+      "sourceRect": [
+        957,
+        938,
+        1039,
+        1055
+      ],
+      "width": 112,
+      "height": 192,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "call_box_bollard",
+      "sourceRect": [
+        1098,
+        899,
+        1153,
+        1050
+      ],
+      "width": 75,
+      "height": 248,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "name": "guardrail",
+      "sourceRect": [
+        1220,
+        945,
+        1332,
+        1059
+      ],
+      "width": 153,
+      "height": 188,
+      "pivot": [
+        0.5,
+        0.0
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "name": "apartment_red_tall",
+      "sourcePosition": [
+        888,
+        612
+      ],
+      "scale": 0.42
+    },
+    {
+      "name": "market_large",
+      "sourcePosition": [
+        1032,
+        612
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "apartment_gray_tall",
+      "sourcePosition": [
+        428,
+        308
+      ],
+      "scale": 0.4
+    },
+    {
+      "name": "convenience_24",
+      "sourcePosition": [
+        564,
+        308
+      ],
+      "scale": 0.5
+    },
+    {
+      "name": "apartment_mid",
+      "sourcePosition": [
+        656,
+        760
+      ],
+      "scale": 0.42
+    },
+    {
+      "name": "villa_walled",
+      "sourcePosition": [
+        772,
+        760
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "mixed_laundry_realty",
+      "sourcePosition": [
+        724,
+        412
+      ],
+      "scale": 0.46
+    },
+    {
+      "name": "restaurant_corner",
+      "sourcePosition": [
+        832,
+        412
+      ],
+      "scale": 0.5
+    },
+    {
+      "name": "police_station",
+      "sourcePosition": [
+        884,
+        880
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "house_red_tile",
+      "sourcePosition": [
+        1000,
+        880
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "clinic_neighborhood",
+      "sourcePosition": [
+        420,
+        604
+      ],
+      "scale": 0.47
+    },
+    {
+      "name": "laundromat_blue",
+      "sourcePosition": [
+        532,
+        604
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "house_low_darkroof",
+      "sourcePosition": [
+        700,
+        140
+      ],
+      "scale": 0.54
+    },
+    {
+      "name": "convenience_awning",
+      "sourcePosition": [
+        792,
+        140
+      ],
+      "scale": 0.52
+    },
+    {
+      "name": "market_neighborhood",
+      "sourcePosition": [
+        272,
+        448
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "apartment_red_tall",
+      "sourcePosition": [
+        1292,
+        496
+      ],
+      "scale": 0.42
+    },
+    {
+      "name": "market_large",
+      "sourcePosition": [
+        620,
+        492
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "apartment_gray_tall",
+      "sourcePosition": [
+        1072,
+        396
+      ],
+      "scale": 0.4
+    },
+    {
+      "name": "convenience_24",
+      "sourcePosition": [
+        964,
+        204
+      ],
+      "scale": 0.5
+    },
+    {
+      "name": "apartment_mid",
+      "sourcePosition": [
+        172,
+        284
+      ],
+      "scale": 0.42
+    },
+    {
+      "name": "villa_walled",
+      "sourcePosition": [
+        1232,
+        732
+      ],
+      "scale": 0.48
+    },
+    {
+      "name": "mixed_laundry_realty",
+      "sourcePosition": [
+        1276,
+        380
+      ],
+      "scale": 0.46
+    },
+    {
+      "name": "restaurant_corner",
+      "sourcePosition": [
+        1140,
+        288
+      ],
+      "scale": 0.5
+    }
+  ],
+  "propPlacements": [
+    {
+      "name": "utility_pole_cross",
+      "sourcePosition": [
+        836,
+        608
+      ],
+      "scale": 0.26
+    },
+    {
+      "name": "utility_pole_ladder",
+      "sourcePosition": [
+        960,
+        592
+      ],
+      "scale": 0.26
+    },
+    {
+      "name": "utility_pole_lamp",
+      "sourcePosition": [
+        1068,
+        584
+      ],
+      "scale": 0.26
+    },
+    {
+      "name": "street_lamp_curve",
+      "sourcePosition": [
+        380,
+        288
+      ],
+      "scale": 0.3
+    },
+    {
+      "name": "street_lamp_square",
+      "sourcePosition": [
+        496,
+        288
+      ],
+      "scale": 0.3
+    },
+    {
+      "name": "bus_stop_sign",
+      "sourcePosition": [
+        600,
+        276
+      ],
+      "scale": 0.32
+    },
+    {
+      "name": "bus_shelter",
+      "sourcePosition": [
+        628,
+        736
+      ],
+      "scale": 0.38
+    },
+    {
+      "name": "traffic_signal",
+      "sourcePosition": [
+        712,
+        744
+      ],
+      "scale": 0.25
+    },
+    {
+      "name": "trash_metal",
+      "sourcePosition": [
+        800,
+        736
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "trash_green",
+      "sourcePosition": [
+        688,
+        404
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "recycle_station",
+      "sourcePosition": [
+        776,
+        404
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "mailbox_red",
+      "sourcePosition": [
+        860,
+        384
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "bench_back",
+      "sourcePosition": [
+        856,
+        856
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "bench_simple",
+      "sourcePosition": [
+        944,
+        860
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "bollard_short",
+      "sourcePosition": [
+        1032,
+        860
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "bollard_tall",
+      "sourcePosition": [
+        396,
+        580
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "bollard_mid",
+      "sourcePosition": [
+        476,
+        588
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "bollard_yellow",
+      "sourcePosition": [
+        560,
+        580
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "planter_shrub",
+      "sourcePosition": [
+        676,
+        120
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "planter_hedge",
+      "sourcePosition": [
+        744,
+        120
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "planter_flower_round",
+      "sourcePosition": [
+        816,
+        116
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "tree_square",
+      "sourcePosition": [
+        228,
+        440
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "cypress_round",
+      "sourcePosition": [
+        320,
+        444
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "cypress_double",
+      "sourcePosition": [
+        1244,
+        496
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "tree_small_square",
+      "sourcePosition": [
+        1336,
+        496
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "vending_blue",
+      "sourcePosition": [
+        580,
+        488
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "vending_gray",
+      "sourcePosition": [
+        664,
+        488
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "utility_box_green",
+      "sourcePosition": [
+        1036,
+        352
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "utility_box_beige",
+      "sourcePosition": [
+        1120,
+        384
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "utility_box_small",
+      "sourcePosition": [
+        928,
+        200
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "fire_hydrant",
+      "sourcePosition": [
+        996,
+        208
+      ],
+      "scale": 0.36
+    },
+    {
+      "name": "call_box_bollard",
+      "sourcePosition": [
+        172,
+        256
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "guardrail",
+      "sourcePosition": [
+        1232,
+        708
+      ],
+      "scale": 0.34
+    },
+    {
+      "name": "utility_pole_cross",
+      "sourcePosition": [
+        1260,
+        344
+      ],
+      "scale": 0.26
+    },
+    {
+      "name": "utility_pole_ladder",
+      "sourcePosition": [
+        1160,
+        300
+      ],
+      "scale": 0.26
+    },
+    {
+      "name": "utility_pole_lamp",
+      "sourcePosition": [
+        1112,
+        688
+      ],
+      "scale": 0.26
+    }
+  ]
+}
