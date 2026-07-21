@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - InteractionIcon
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: InteractionIcon
+    uniqueID: 135791357
     locked: 0
   m_RenderingLayers:
   - Default

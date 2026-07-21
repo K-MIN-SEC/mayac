@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
@@ -9,6 +10,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     [SerializeField] private Transform mapTransform;
     [SerializeField] private Camera inputCamera;
     [SerializeField] private SpriteRenderer characterRenderer;
+    [SerializeField] private LayerMask interactionIconLayer;
     [SerializeField] private float pixelsPerUnit = 32f;
     [SerializeField, Min(4)] private int pathCellPixels = 8;
     [SerializeField, Range(0f, 1f)] private float mapAlphaCoverage = 0.12f;
@@ -41,11 +43,28 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
     private void Update()
     {
-        if (TryReadPointerDown(out Vector2 screenPosition))
+        if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
+            if (IsPointerOverUI(pointerId))
+            {
+                return;
+            }
+
             Vector3 world = inputCamera.ScreenToWorldPoint(
                 new Vector3(screenPosition.x, screenPosition.y, -inputCamera.transform.position.z)
             );
+
+            Collider2D iconHit = Physics2D.OverlapPoint(world, interactionIconLayer);
+            if (iconHit != null)
+            {
+                InteractionIcon2D icon = iconHit.GetComponentInParent<InteractionIcon2D>();
+                if (icon != null)
+                {
+                    icon.OnIconTapped();
+                    return;
+                }
+            }
+
             SetDestination(world);
         }
     }
@@ -401,7 +420,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
         return 10 * (dx + dy) - 6 * Mathf.Min(dx, dy);
     }
 
-    private static bool TryReadPointerDown(out Vector2 screenPosition)
+    private static bool TryReadPointerDown(out Vector2 screenPosition, out int pointerId)
     {
         if (Input.touchCount > 0)
         {
@@ -409,21 +428,37 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 screenPosition = touch.position;
+                pointerId = touch.fingerId;
                 return true;
             }
 
             screenPosition = default;
+            pointerId = -1;
             return false;
         }
 
         if (Input.GetMouseButtonDown(0))
         {
             screenPosition = Input.mousePosition;
+            pointerId = -1;
             return true;
         }
 
         screenPosition = default;
+        pointerId = -1;
         return false;
+    }
+
+    private static bool IsPointerOverUI(int pointerId)
+    {
+        if (EventSystem.current == null)
+        {
+            return false;
+        }
+
+        return pointerId >= 0
+            ? EventSystem.current.IsPointerOverGameObject(pointerId)
+            : EventSystem.current.IsPointerOverGameObject();
     }
 
     private sealed class MinHeap
