@@ -9,6 +9,7 @@ public class SimpleClickMove2D : MonoBehaviour
     [Header("참조")]
     public Camera mainCamera;
     public LayerMask interactableLayer; // 상호작용 가능한 오브젝트에 씌운 레이어
+    public LayerMask iconLayer;         // 떠있는 상호작용 아이콘(느낌표 등) 전용 레이어
 
     [Header("이동 속도")]
     public float moveSpeed = 5f;
@@ -59,6 +60,18 @@ public class SimpleClickMove2D : MonoBehaviour
     {
         Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = 0f;
+
+        // 0) 떠있는 상호작용 아이콘(느낌표 등)을 터치했는지 먼저 확인 - 아이콘 누르면 이동 없이 바로 상호작용
+        Collider2D iconHit = Physics2D.OverlapPoint(mouseWorld, iconLayer);
+        if (iconHit != null)
+        {
+            InteractionIcon2D icon = iconHit.GetComponent<InteractionIcon2D>();
+            if (icon != null)
+            {
+                icon.OnIconTapped();
+                return;
+            }
+        }
 
         // 상호작용 가능한 오브젝트를 클릭했는지 확인
         Collider2D hit = Physics2D.OverlapPoint(mouseWorld, interactableLayer);
