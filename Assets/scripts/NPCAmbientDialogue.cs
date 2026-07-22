@@ -1,55 +1,69 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
 public class NPCAmbientDialogue : MonoBehaviour
 {
     [Header("대사")]
     [TextArea]
-    public string dialogue;
+    public string[] dialogues;
+
+    [Header("UI")]
+    public GameObject bubble;
+    public TMP_Text dialogueText;
+    public RectTransform bubbleRect;
 
     [Header("설정")]
-    public GameObject dialogueObject;     // 머리 위 텍스트
-    public TMP_Text dialogueText;
+    public float showTime = 3f;
 
-    public float showTime = 2.5f;
+    bool showing = false;
 
-    private bool hasShown = false;
-
-    private void Start()
+    void Start()
     {
-        Debug.Log("NPC 시작");
-
-        dialogueObject.SetActive(true);
-
-        dialogueText.text = "테스트";
+        if (bubble != null)
+            bubble.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !hasShown)
-        {
-            StartCoroutine(ShowDialogue());
-        }
-    }
+        if (!other.CompareTag("Player"))
+            return;
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            hasShown = false;
-            dialogueObject.SetActive(false);
-        }
+        if (showing)
+            return;
+
+        StartCoroutine(ShowDialogue());
     }
 
     IEnumerator ShowDialogue()
     {
-        hasShown = true;
+        showing = true;
 
-        dialogueObject.SetActive(true);
+        bubble.SetActive(true);
+
+        // 랜덤 대사 출력
+        int randomIndex = Random.Range(0, dialogues.Length);
+        dialogueText.text = dialogues[randomIndex];
+
+        // 텍스트 크기 계산
+        ResizeBubble();
 
         yield return new WaitForSeconds(showTime);
 
-        dialogueObject.SetActive(false);
+        bubble.SetActive(false);
+
+        showing = false;
+    }
+
+    void ResizeBubble()
+    {
+        dialogueText.ForceMeshUpdate();
+
+        Vector2 size = dialogueText.GetRenderedValues(false);
+
+        float width = Mathf.Clamp(size.x + 40f, 120f, 350f);
+        float height = size.y + 30f;
+
+        bubbleRect.sizeDelta = new Vector2(width, height);
     }
 }

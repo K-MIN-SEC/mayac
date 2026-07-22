@@ -1,0 +1,572 @@
+fileFormatVersion: 2
+guid: 9774610e74061034ea9f1c2a4da6cf94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8422959616614181564
+    second: "\u2014Pngtree\u2014speech bubble_2329883_0"
+  - first:
+      213: 5778406954852086283
+    second: "\u2014Pngtree\u2014speech bubble_2329883_1"
+  - first:
+      213: 104870637371849379
+    second: "\u2014Pngtree\u2014speech bubble_2329883_2"
+  - first:
+      213: 2259436966606745496
+    second: "\u2014Pngtree\u2014speech bubble_2329883_3"
+  - first:
+      213: 2550339873882638146
+    second: "\u2014Pngtree\u2014speech bubble_2329883_4"
+  - first:
+      213: 214078711377280679
+    second: "\u2014Pngtree\u2014speech bubble_2329883_5"
+  - first:
+      213: -7598107721231126229
+    second: "\u2014Pngtree\u2014speech bubble_2329883_6"
+  - first:
+      213: 787391467354150610
+    second: "\u2014Pngtree\u2014speech bubble_2329883_7"
+  - first:
+      213: 8359276711896160257
+    second: "\u2014Pngtree\u2014speech bubble_2329883_8"
+  - first:
+      213: -4066436137813159837
+    second: "\u2014Pngtree\u2014speech bubble_2329883_9"
+  - first:
+      213: -1919612490951348929
+    second: "\u2014Pngtree\u2014speech bubble_2329883_10"
+  - first:
+      213: -3648258620664727840
+    second: "\u2014Pngtree\u2014speech bubble_2329883_11"
+  - first:
+      213: -2300188166786308337
+    second: "\u2014Pngtree\u2014speech bubble_2329883_12"
+  - first:
+      213: -3079141847300293752
+    second: "\u2014Pngtree\u2014speech bubble_2329883_13"
+  - first:
+      213: -2690591333462390555
+    second: "\u2014Pngtree\u2014speech bubble_2329883_14"
+  - first:
+      213: -2539797326687685279
+    second: "\u2014Pngtree\u2014speech bubble_2329883_15"
+  - first:
+      213: 4359150587109632450
+    second: "\u2014Pngtree\u2014speech bubble_2329883_16"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_0"
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 322
+        width: 528
+        height: 623
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 367, w: 496}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbaafb1052d54e470800000000000000
+      internalID: 8422959616614181564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_1"
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 46
+        width: 23
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02fa979286013050800000000000000
+      internalID: 5778406954852086283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_2"
+      rect:
+        serializedVersion: 2
+        x: 461
+        y: 46
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aafaeff943947100800000000000000
+      internalID: 104870637371849379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_3"
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 46
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f2bfa33f12b5f10800000000000000
+      internalID: 2259436966606745496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_4"
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 39
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2470a4f5a90a46320800000000000000
+      internalID: 2550339873882638146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_5"
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 46
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aebd99247f88f200800000000000000
+      internalID: 214078711377280679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_6"
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 46
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21bdd6b8491e8690800000000000000
+      internalID: -7598107721231126229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_7"
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 46
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d651d62e506dea00800000000000000
+      internalID: 787391467354150610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_8"
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 46
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10814cf41ed120470800000000000000
+      internalID: 8359276711896160257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_9"
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 39
+        width: 19
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 360d5d7a0ed1197c0800000000000000
+      internalID: -4066436137813159837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_10"
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 46
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d217a2c9a2c55e0800000000000000
+      internalID: -1919612490951348929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_11"
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 46
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e6b5822d18ce5dc0800000000000000
+      internalID: -3648258620664727840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_12"
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 39
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07252a9c071410e0800000000000000
+      internalID: -2300188166786308337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_13"
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 46
+        width: 12
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88b30aacdc0b445d0800000000000000
+      internalID: -3079141847300293752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_14"
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 46
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e8ca35007919aad0800000000000000
+      internalID: -2690591333462390555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_15"
+      rect:
+        serializedVersion: 2
+        x: 727
+        y: 46
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1653b4da9c3d0ccd0800000000000000
+      internalID: -2539797326687685279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u2014Pngtree\u2014speech bubble_2329883_16"
+      rect:
+        serializedVersion: 2
+        x: 747
+        y: 46
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c9ea1bfc50de7c30800000000000000
+      internalID: 4359150587109632450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e3483f24f4a019343b6be31224e50b2e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "\u2014Pngtree\u2014speech bubble_2329883_0": 8422959616614181564
+      "\u2014Pngtree\u2014speech bubble_2329883_1": 5778406954852086283
+      "\u2014Pngtree\u2014speech bubble_2329883_10": -1919612490951348929
+      "\u2014Pngtree\u2014speech bubble_2329883_11": -3648258620664727840
+      "\u2014Pngtree\u2014speech bubble_2329883_12": -2300188166786308337
+      "\u2014Pngtree\u2014speech bubble_2329883_13": -3079141847300293752
+      "\u2014Pngtree\u2014speech bubble_2329883_14": -2690591333462390555
+      "\u2014Pngtree\u2014speech bubble_2329883_15": -2539797326687685279
+      "\u2014Pngtree\u2014speech bubble_2329883_16": 4359150587109632450
+      "\u2014Pngtree\u2014speech bubble_2329883_2": 104870637371849379
+      "\u2014Pngtree\u2014speech bubble_2329883_3": 2259436966606745496
+      "\u2014Pngtree\u2014speech bubble_2329883_4": 2550339873882638146
+      "\u2014Pngtree\u2014speech bubble_2329883_5": 214078711377280679
+      "\u2014Pngtree\u2014speech bubble_2329883_6": -7598107721231126229
+      "\u2014Pngtree\u2014speech bubble_2329883_7": 787391467354150610
+      "\u2014Pngtree\u2014speech bubble_2329883_8": 8359276711896160257
+      "\u2014Pngtree\u2014speech bubble_2329883_9": -4066436137813159837
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
