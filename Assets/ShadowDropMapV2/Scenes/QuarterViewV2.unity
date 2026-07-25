@@ -24122,14 +24122,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 254949564}
   - {fileID: 535550156}
   - {fileID: 1622355176}
+  - {fileID: 254949564}
   m_Father: {fileID: 1394610023}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.085999, y: 20.323975}
+  m_AnchoredPosition: {x: 11.08606, y: 20.323975}
   m_SizeDelta: {x: -140.417, y: -195.845}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004461039
@@ -26330,6 +26330,64 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1001 &202607250001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_Name
+      value: NPC_AmbientDialogue_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.292643
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.098137
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+--- !u!1001 &202607250002
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_Name
+      value: NPC_AmbientDialogue_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.045392
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.31833
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -26343,3 +26401,5 @@ SceneRoots:
   - {fileID: 471627623}
   - {fileID: 811544278}
   - {fileID: 644782338}
+  - {fileID: 202607250001}
+  - {fileID: 202607250002}
