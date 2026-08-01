@@ -7,7 +7,7 @@ public sealed class QuarterViewDepthSorter2D : MonoBehaviour
     private const float BehindMargin = 0.1f;
     private static readonly List<QuarterViewDepthSorter2D> ActiveObstacles = new();
 
-    [SerializeField] private int sortingOffset = 10000;
+    [SerializeField] private int sortingOffset = 5000;
     [SerializeField, Min(1)] private int precision = 100;
     [SerializeField, Min(1)] private int zPrecision = 1000;
 
