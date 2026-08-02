@@ -2872,7 +2872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.085999, y: -20.323975}
+  m_AnchoredPosition: {x: -11.08606, y: -20.323975}
   m_SizeDelta: {x: 140.41699, y: 195.84497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254949565
@@ -26376,8 +26376,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: dialogueInterval
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: useSequentialDialogue
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: sequentialDialogues.Array.size
@@ -26390,10 +26394,6 @@ PrefabInstance:
     - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: 'sequentialDialogues.Array.data[1]'
       value: "\uC624\uB298\uB3C4 \uC870\uC2EC\uD788 \uB2E4\uB2C8\uC138\uC694."
-      objectReference: {fileID: 0}
-    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
-      propertyPath: dialogueInterval
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_Name
@@ -26426,7 +26426,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: dialogues.Array.size
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: useSequentialDialogue
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: 'dialogues.Array.data[0]'
@@ -26444,17 +26448,29 @@ PrefabInstance:
       propertyPath: 'dialogues.Array.data[3]'
       value: "\uC8FC\uBCC0\uC744 \uC880 \uB354 \uC0B4\uD3B4\uBD10\uC57C\uACA0\uC5B4."
       objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: sequentialDialogues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'sequentialDialogues.Array.data[0]'
+      value: "\uACBD\uCC30\uC11C \uC55E\uC774 \uC65C \uC774\uB807\uAC8C \uC18C\uB780\uC2A4\uB7FD\uC9C0?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'sequentialDialogues.Array.data[1]'
+      value: "\uC8FC\uBCC0\uC744 \uC880 \uB354 \uC0B4\uD3B4\uBD10\uC57C\uACA0\uC5B4."
+      objectReference: {fileID: 0}
     - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_Name
       value: NPC_RandomDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6905146
+      value: 2.4940233
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -21.860271
+      value: -23.431427
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
