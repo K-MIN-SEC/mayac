@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 6260020441779465015}
   - component: {fileID: 6700237433871134624}
   - component: {fileID: 748741262766958878}
+  - component: {fileID: 7366583005491655679}
   m_Layer: 5
   m_Name: ChatListItem
   m_TagString: Untagged
@@ -335,6 +336,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7366583005491655679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568722696541473939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ca059d61d2dfe4b84c184279fe2eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChatListItemUI
+  nameText: {fileID: 5772224975459746059}
+  previewText: {fileID: 2225288780358449467}
+  unreadDot: {fileID: 183523609214964836}
+  button: {fileID: 748741262766958878}
 --- !u!1 &9164134624349993623
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,15 +419,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bd094f9374c33794999e22628e7dfd50, type: 2}
+  m_sharedMaterial: {fileID: 4103082099148992930, guid: bd094f9374c33794999e22628e7dfd50, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

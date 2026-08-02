@@ -10,6 +10,9 @@ public class MissionMessageSender : MonoBehaviour
     [TextArea] public string messageText = "여기다가 숨겨주세용~";
     public Sprite photo;
 
+    [Header("답장 선택지 (플레이어가 고를 수 있는 답장, 비워두면 답장 버튼 안 뜸)")]
+    public string[] replyOptions = new string[] { "네, 할게요", "싫어요" };
+
     [Header("이 메시지가 오면 같이 켤 미션 타겟")]
     public GameObject missionTarget;
 
@@ -35,7 +38,7 @@ public class MissionMessageSender : MonoBehaviour
             return;
 
         if (MessengerAppUI.Instance != null)
-            MessengerAppUI.Instance.ReceiveMessage(contactName, messageText, photo);
+            MessengerAppUI.Instance.ReceiveMessage(contactName, messageText, photo, replyOptions);
 
         if (missionTarget != null)
             missionTarget.SetActive(true);
