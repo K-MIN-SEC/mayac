@@ -26338,9 +26338,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: dialogues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'dialogues.Array.data[0]'
+      value: "\uC548\uB155\uD558\uC138\uC694."
+      objectReference: {fileID: 0}
     - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_Name
-      value: NPC_AmbientDialogue_01
+      value: NPC_SingleDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26367,9 +26375,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: useSequentialDialogue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: sequentialDialogues.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'sequentialDialogues.Array.data[0]'
+      value: "\uBC18\uAC11\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'sequentialDialogues.Array.data[1]'
+      value: "\uC624\uB298\uB3C4 \uC870\uC2EC\uD788 \uB2E4\uB2C8\uC138\uC694."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: dialogueInterval
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_Name
-      value: NPC_AmbientDialogue_02
+      value: NPC_SequentialDialogue
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26378,6 +26406,55 @@ PrefabInstance:
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
       value: -16.31833
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+--- !u!1001 &202608020003
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: dialogues.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'dialogues.Array.data[0]'
+      value: "\uC624\uB298\uC740 \uC18C\uB780\uC2A4\uB7EC\uC6B4 \uC77C\uC774 \uC5C6\uB124."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'dialogues.Array.data[1]'
+      value: "\uB0A0\uC528\uAC00 \uCC38 \uC88B\uB124\uC694."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'dialogues.Array.data[2]'
+      value: "\uACBD\uCC30\uC11C \uC55E\uC774 \uC65C \uC774\uB807\uAC8C \uC18C\uB780\uC2A4\uB7FD\uC9C0?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370721226370498539, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: 'dialogues.Array.data[3]'
+      value: "\uC8FC\uBCC0\uC744 \uC880 \uB354 \uC0B4\uD3B4\uBD10\uC57C\uACA0\uC5B4."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2107103198720577262, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_Name
+      value: NPC_RandomDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.6905146
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.860271
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26403,3 +26480,4 @@ SceneRoots:
   - {fileID: 644782338}
   - {fileID: 202607250001}
   - {fileID: 202607250002}
+  - {fileID: 202608020003}
