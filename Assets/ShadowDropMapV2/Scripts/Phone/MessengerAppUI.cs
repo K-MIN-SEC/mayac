@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 
 // 스마트폰 - 메신저 앱. 대화방 목록과 대화 내용을 보여줌.
+// 메시지가 오면 폰을 흔들고(진동) 배지를 켜며, 상대 메시지에 답장 선택지가 있으면 버튼으로 보여줌.
 public class MessengerAppUI : MonoBehaviour
 {
     public static MessengerAppUI Instance { get; private set; }
@@ -33,9 +34,17 @@ public class MessengerAppUI : MonoBehaviour
     public TMP_Text chatDetailTitle;
     public ScrollRect chatDetailScrollRect;
 
+    [Header("답장 선택지 UI")]
+    public Transform replyOptionsContent;      // 답장 버튼들이 들어갈 부모 (보통 ChatDetailView 하단)
+    public GameObject replyOptionButtonPrefab; // 버튼 하나(안에 TMP 텍스트 포함) 프리팹
+
     [Header("알림 배지 (안읽은 메시지가 있으면 켜짐)")]
     public GameObject appIconBadge;
     public GameObject phoneButtonBadge;
+
+    [Header("메시지가 오면 진동시킬 대상 (phone 버튼 등)")]
+    public UIShaker phoneShaker;
+    public UIShaker appIconShaker;
 
     private ChatThread openThread;
 
@@ -50,7 +59,8 @@ public class MessengerAppUI : MonoBehaviour
         RefreshUnreadBadges();
     }
 
-    public void ReceiveMessage(string contactName, string text, Sprite photo = null)
+    // ---------- 메시지 수신 (다른 시스템에서 호출) ----------
+    public void ReceiveMessage(string contactName, string text, Sprite photo = null, string[] replyOptions = null)
     {
         ChatThread thread = threads.Find(t => t.contactName == contactName);
         if (thread == null)
@@ -63,11 +73,15 @@ public class MessengerAppUI : MonoBehaviour
         {
             text = text,
             photo = photo,
-            isFromMe = false
+            isFromMe = false,
+            replyOptions = replyOptions
         });
         thread.hasUnread = true;
 
         RefreshUnreadBadges();
+
+        if (phoneShaker != null) phoneShaker.Shake();
+        if (appIconShaker != null) appIconShaker.Shake();
 
         if (chatListView != null && chatListView.activeSelf)
             RebuildChatList();
@@ -76,6 +90,7 @@ public class MessengerAppUI : MonoBehaviour
             RebuildChatDetail();
     }
 
+    // ---------- 목록 화면 ----------
     public void OpenChatList()
     {
         chatDetailView.SetActive(false);
@@ -108,6 +123,7 @@ public class MessengerAppUI : MonoBehaviour
         }
     }
 
+    // ---------- 상세 화면 ----------
     public void OpenChatDetail(ChatThread thread)
     {
         openThread = thread;
@@ -139,6 +155,51 @@ public class MessengerAppUI : MonoBehaviour
         Canvas.ForceUpdateCanvases();
         if (chatDetailScrollRect != null)
             chatDetailScrollRect.verticalNormalizedPosition = 0f;
+
+        RebuildReplyOptions();
+    }
+
+    // 마지막 메시지가 상대방 메시지이고 답장 선택지가 있으면 버튼으로 보여줌
+    void RebuildReplyOptions()
+    {
+        if (replyOptionsContent == null) return;
+
+        foreach (Transform child in replyOptionsContent)
+            Destroy(child.gameObject);
+
+        if (openThread.messages.Count == 0) return;
+
+        MessengerMessageData lastMsg = openThread.messages[openThread.messages.Count - 1];
+        bool hasOptions = !lastMsg.isFromMe && lastMsg.replyOptions != null && lastMsg.replyOptions.Length > 0;
+
+        replyOptionsContent.gameObject.SetActive(hasOptions);
+        if (!hasOptions) return;
+
+        foreach (string option in lastMsg.replyOptions)
+        {
+            GameObject btnObj = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
+            TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
+            if (label != null) label.text = option;
+
+            Button btn = btnObj.GetComponent<Button>();
+            string capturedOption = option;
+            if (btn != null)
+                btn.onClick.AddListener(() => SendReply(capturedOption));
+        }
+    }
+
+    // 플레이어가 답장 선택지를 골랐을 때 호출됨
+    public void SendReply(string text)
+    {
+        if (openThread == null) return;
+
+        openThread.messages.Add(new MessengerMessageData
+        {
+            text = text,
+            isFromMe = true
+        });
+
+        RebuildChatDetail(); // 답장 버튼은 이 안에서 다시 사라짐 (마지막 메시지가 내 메시지가 되었으니까)
     }
 
     void RefreshUnreadBadges()
