@@ -3563,7 +3563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &254949564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3894,8 +3894,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -222.7, y: 86.70001}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -588, y: 144.2}
+  m_SizeDelta: {x: 160, y: 164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295861852
 MonoBehaviour:
@@ -6764,8 +6764,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 265.1, y: 77.2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 480, y: 149}
+  m_SizeDelta: {x: 160, y: 133.955}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &467410248
 MonoBehaviour:
@@ -7974,7 +7974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9678,7 +9678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a171f1b68ed47c94382ba895e84d839f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsAppUI
-  volumeSlider: {fileID: 891072246}
 --- !u!1 &664043263
 GameObject:
   m_ObjectHideFlags: 0
@@ -14019,8 +14018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52005a84368e054419bb8b45b8a822fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SchedulerWidgetUI
-  objectiveText: {fileID: 111307062}
-  defaultText: "\uC624\uB298 \uD560 \uC77C\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."
 --- !u!4 &900944401
 Transform:
   m_ObjectHideFlags: 0
@@ -15539,8 +15536,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.1, y: 67.7}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -23, y: 149}
+  m_SizeDelta: {x: 160, y: 159.367}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997794882
 MonoBehaviour:
@@ -18300,19 +18297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342888eac4d15844695819b6dd640941, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MessengerAppUI
-  threads: []
-  chatListView: {fileID: 493894460}
-  chatListContent: {fileID: 395526198}
-  chatListItemPrefab: {fileID: 4568722696541473939, guid: 936286e5aa9ca0f4f9a3ad78e3203067, type: 3}
-  emptyStateText: {fileID: 1375362991}
-  chatDetailView: {fileID: 1516258176}
-  chatDetailContent: {fileID: 1236082099}
-  bubbleMePrefab: {fileID: 1069524006462305490, guid: 4317904a86f5ff24ba9873d50fd337e7, type: 3}
-  bubbleOtherPrefab: {fileID: 1069524006462305490, guid: 72ff2f85c277dfe47893d320c4ca9888, type: 3}
-  chatDetailTitle: {fileID: 2063700449}
-  chatDetailScrollRect: {fileID: 1646497984}
-  appIconBadge: {fileID: 664043263}
-  phoneButtonBadge: {fileID: 74571635}
 --- !u!4 &1220562859
 Transform:
   m_ObjectHideFlags: 0
@@ -21243,7 +21227,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: 'Back
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23866,8 +23852,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 752, y: 437}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 738, y: 440}
+  m_SizeDelta: {x: 201.582, y: 50.791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1622355177
 MonoBehaviour:
@@ -28924,7 +28910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2004461038
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30119,15 +30105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4438f7d5dfa471749b541825231df6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SmartphoneUIManager
-  phoneButton: {fileID: 1008539315}
-  phonePanel: {fileID: 4830399}
-  homeScreen: {fileID: 78528851}
-  messengerScreen: {fileID: 1522853126}
-  settingsScreen: {fileID: 662479326}
-  messengerAppIcon: {fileID: 1693861666}
-  settingsAppIcon: {fileID: 854215265}
-  closeButton: {fileID: 0}
-  backButton: {fileID: 0}
 --- !u!4 &2060162020
 Transform:
   m_ObjectHideFlags: 0
