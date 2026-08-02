@@ -4,28 +4,38 @@ using UnityEngine;
 
 public class NPCAmbientDialogue : MonoBehaviour
 {
-    [Header("대사")]
+    [Header("Random or single dialogue")]
     [TextArea]
     public string[] dialogues;
+
+    [Header("Sequential dialogue")]
+    [Tooltip("When enabled, random dialogue is ignored and sequentialDialogues are shown in order.")]
+    public bool useSequentialDialogue;
+
+    [TextArea]
+    public string[] sequentialDialogues;
+
+    [Min(0f)]
+    public float dialogueInterval = 2f;
 
     [Header("UI")]
     public GameObject bubble;
     public TMP_Text dialogueText;
     public RectTransform bubbleRect;
 
-    [Header("설정")]
+    [Header("Timing")]
+    [Min(0f)]
     public float showTime = 3f;
 
-    bool showing;
-    Coroutine dialogueRoutine;
+    private bool showing;
+    private Coroutine dialogueRoutine;
 
-    void Start()
+    private void Start()
     {
-        if (bubble != null)
-            bubble.SetActive(false);
+        HideBubble();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         if (dialogueRoutine != null)
         {
@@ -33,60 +43,82 @@ public class NPCAmbientDialogue : MonoBehaviour
             dialogueRoutine = null;
         }
 
-        if (bubble != null)
-            bubble.SetActive(false);
-
+        HideBubble();
         showing = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Player"))
-            return;
-
-        if (showing)
-            return;
-
-        if (dialogues == null || dialogues.Length == 0 || bubble == null || dialogueText == null)
+        if (!other.CompareTag("Player") || showing || !CanShowDialogue())
             return;
 
         dialogueRoutine = StartCoroutine(ShowDialogue());
     }
 
-    IEnumerator ShowDialogue()
+    private bool CanShowDialogue()
+    {
+        if (bubble == null || dialogueText == null)
+            return false;
+
+        string[] activeDialogues = useSequentialDialogue ? sequentialDialogues : dialogues;
+        return activeDialogues != null && activeDialogues.Length > 0;
+    }
+
+    private IEnumerator ShowDialogue()
     {
         showing = true;
-
         bubble.SetActive(true);
 
-        // 랜덤 대사 출력
-        int randomIndex = Random.Range(0, dialogues.Length);
-        dialogueText.text = dialogues[randomIndex];
+        if (useSequentialDialogue)
+        {
+            yield return ShowSequentialDialogue();
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, dialogues.Length);
+            SetDialogue(dialogues[randomIndex]);
+            yield return new WaitForSeconds(showTime);
+        }
 
-        // 텍스트 크기 계산
-        ResizeBubble();
-
-        yield return new WaitForSeconds(showTime);
-
-        if (bubble != null)
-            bubble.SetActive(false);
-
+        HideBubble();
         showing = false;
         dialogueRoutine = null;
     }
 
-    void ResizeBubble()
+    private IEnumerator ShowSequentialDialogue()
+    {
+        for (int index = 0; index < sequentialDialogues.Length; index++)
+        {
+            SetDialogue(sequentialDialogues[index]);
+
+            bool isLastDialogue = index == sequentialDialogues.Length - 1;
+            float waitTime = isLastDialogue ? showTime : dialogueInterval;
+            yield return new WaitForSeconds(waitTime);
+        }
+    }
+
+    private void SetDialogue(string text)
+    {
+        dialogueText.text = text ?? string.Empty;
+        ResizeBubble();
+    }
+
+    private void HideBubble()
+    {
+        if (bubble != null)
+            bubble.SetActive(false);
+    }
+
+    private void ResizeBubble()
     {
         if (dialogueText == null || bubbleRect == null)
             return;
 
         dialogueText.ForceMeshUpdate();
-
         Vector2 size = dialogueText.GetRenderedValues(false);
 
         float width = Mathf.Clamp(size.x + 40f, 120f, 350f);
         float height = size.y + 30f;
-
         bubbleRect.sizeDelta = new Vector2(width, height);
     }
 }
