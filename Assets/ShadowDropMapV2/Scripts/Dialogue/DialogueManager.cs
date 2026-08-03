@@ -5,6 +5,17 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 
+[System.Serializable]
+public class Dialogue
+{
+    public string name;
+    public string text;
+
+    public bool isOption;
+    public string OptionA;
+    public string OptionB;
+}
+
 
 public class DialogueManager : MonoBehaviour
 {
