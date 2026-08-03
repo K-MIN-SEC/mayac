@@ -79,8 +79,7 @@ public class MessengerAppUI : MonoBehaviour
             text = text,
             photo = photo,
             isFromMe = false,
-            replyOptions = replyOptions,
-            time = FormatTime(System.DateTime.Now)
+            replyOptions = replyOptions
         });
         thread.hasUnread = true;
         thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
@@ -160,7 +159,7 @@ public class MessengerAppUI : MonoBehaviour
 
             ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
             if (bubbleUI != null)
-                bubbleUI.Set(msg.text, msg.photo, msg.time);
+                bubbleUI.Set(msg.text, msg.photo);
 
             RectTransform bubbleRect = bubble.GetComponent<RectTransform>();
             if (bubbleRect != null)
@@ -233,8 +232,7 @@ public class MessengerAppUI : MonoBehaviour
         openThread.messages.Add(new MessengerMessageData
         {
             text = text,
-            isFromMe = true,
-            time = FormatTime(System.DateTime.Now)
+            isFromMe = true
         });
 
         RebuildChatDetail(); // 답장 버튼은 이 안에서 다시 사라짐 (마지막 메시지가 내 메시지가 되었으니까)
@@ -246,14 +244,5 @@ public class MessengerAppUI : MonoBehaviour
 
         if (appIconBadge != null) appIconBadge.SetActive(anyUnread);
         if (phoneButtonBadge != null) phoneButtonBadge.SetActive(anyUnread);
-    }
-
-    // "오후 3:30" 같은 한국어 오전/오후 시간 표기로 변환
-    string FormatTime(System.DateTime dt)
-    {
-        string period = dt.Hour < 12 ? "오전" : "오후";
-        int hour12 = dt.Hour % 12;
-        if (hour12 == 0) hour12 = 12;
-        return period + " " + hour12 + ":" + dt.Minute.ToString("D2");
     }
 }
