@@ -79,7 +79,8 @@ public class MessengerAppUI : MonoBehaviour
             text = text,
             photo = photo,
             isFromMe = false,
-            replyOptions = replyOptions
+            replyOptions = replyOptions,
+            time = FormatTime(System.DateTime.Now)
         });
         thread.hasUnread = true;
         thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
@@ -149,6 +150,9 @@ public class MessengerAppUI : MonoBehaviour
         foreach (Transform child in chatDetailContent)
             Destroy(child.gameObject);
 
+        float bubbleSpacing = 10f;
+        float yCursor = 0f; // 위에서부터 차례로 쌓아나감
+
         foreach (MessengerMessageData msg in openThread.messages)
         {
             GameObject prefab = msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab;
@@ -156,7 +160,26 @@ public class MessengerAppUI : MonoBehaviour
 
             ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
             if (bubbleUI != null)
-                bubbleUI.Set(msg.text, msg.photo);
+                bubbleUI.Set(msg.text, msg.photo, msg.time);
+
+            RectTransform bubbleRect = bubble.GetComponent<RectTransform>();
+            if (bubbleRect != null)
+            {
+                // 말풍선 프리팹 자체의 anchor(왼쪽/오른쪽)는 그대로 두고, 세로 위치만 코드로 내려줌
+                Vector2 pos = bubbleRect.anchoredPosition;
+                pos.y = -yCursor;
+                bubbleRect.anchoredPosition = pos;
+
+                yCursor += bubbleRect.sizeDelta.y + bubbleSpacing;
+            }
+        }
+
+        RectTransform contentRect = chatDetailContent as RectTransform;
+        if (contentRect != null)
+        {
+            Vector2 size = contentRect.sizeDelta;
+            size.y = yCursor;
+            contentRect.sizeDelta = size;
         }
 
         Canvas.ForceUpdateCanvases();
@@ -166,7 +189,6 @@ public class MessengerAppUI : MonoBehaviour
             RectTransform viewport = chatDetailScrollRect.viewport;
 
             // 대화 내용이 스크롤 창보다 길 때만 맨 아래(최신 메시지)로 이동시킴
-            // (내용이 짧으면 억지로 아래로 안 내려서 위쪽에 빈 여백이 안 생기게 함)
             if (content != null && viewport != null && content.rect.height > viewport.rect.height)
                 chatDetailScrollRect.verticalNormalizedPosition = 0f;
         }
@@ -211,7 +233,8 @@ public class MessengerAppUI : MonoBehaviour
         openThread.messages.Add(new MessengerMessageData
         {
             text = text,
-            isFromMe = true
+            isFromMe = true,
+            time = FormatTime(System.DateTime.Now)
         });
 
         RebuildChatDetail(); // 답장 버튼은 이 안에서 다시 사라짐 (마지막 메시지가 내 메시지가 되었으니까)
@@ -223,5 +246,14 @@ public class MessengerAppUI : MonoBehaviour
 
         if (appIconBadge != null) appIconBadge.SetActive(anyUnread);
         if (phoneButtonBadge != null) phoneButtonBadge.SetActive(anyUnread);
+    }
+
+    // "오후 3:30" 같은 한국어 오전/오후 시간 표기로 변환
+    string FormatTime(System.DateTime dt)
+    {
+        string period = dt.Hour < 12 ? "오전" : "오후";
+        int hour12 = dt.Hour % 12;
+        if (hour12 == 0) hour12 = 12;
+        return period + " " + hour12 + ":" + dt.Minute.ToString("D2");
     }
 }
