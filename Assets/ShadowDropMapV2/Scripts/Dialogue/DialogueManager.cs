@@ -4,10 +4,12 @@ using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class Dialogue
 {
+    public int index;
     public string name;
     public string text;
 
@@ -19,8 +21,8 @@ public class Dialogue
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] Image panel;
-
+     public static DialogueManager instance { get; private set; }
+    
     [Header("Dialogue")]
     [SerializeField] Image textBar;
     [SerializeField] Image nameBar;
@@ -29,11 +31,27 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] GameObject focusUI;
     private string tempText;
     [SerializeField] float typingTime;
+    [SerializeField] Queue<Dialogue> dialogueBox = new();
+
     WaitForSeconds waitTime;
     [HideInInspector] public bool isTyping;
     [HideInInspector] public bool panelState;
+
     [HideInInspector] public bool isEnd;
     bool isSkip;
+
+    void Start()
+    {
+       Init();
+    }
+
+    public void Init()
+    {
+        instance = this;
+        text.text = null;
+        nameText.text = null;
+        waitTime = new WaitForSeconds(typingTime);
+    }
 
     private void Update()
     {
@@ -63,6 +81,16 @@ public class DialogueManager : MonoBehaviour
         isSkip = !isSkip;
     }
 
+    public void InputDialogue(Dialogue dialogue)
+    {
+        Debug.Log($"test");
+        nameText.rectTransform.anchoredPosition = new Vector2(0, nameText.rectTransform.anchoredPosition.y);
+        nameText.text = dialogue.name;
+        tempText = dialogue.text;
+
+        StartCoroutine(TypingText());
+    }
+
 
     public IEnumerator TypingText()
     {
@@ -89,6 +117,5 @@ public class DialogueManager : MonoBehaviour
         isEnd = true;
         isTyping = true;
         isSkip = true;
-        panel.rectTransform.DOSizeDelta(Vector2.zero, 0.5f);
     }
 }

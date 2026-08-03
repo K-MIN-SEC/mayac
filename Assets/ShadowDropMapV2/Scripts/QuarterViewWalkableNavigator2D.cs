@@ -30,6 +30,10 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     private readonly List<Vector2> path = new List<Vector2>();
     private int waypointIndex;
 
+    //임시 다이얼로그 변수
+    public bool isStop;
+    public Queue<Dialogue> dialogueBox = new();
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -41,8 +45,33 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
         BuildGrid();
     }
 
+    //임시 다이얼로그 실행용
+    void Dialogue()
+    {
+        if(dialogueBox.Count > 0 && !DialogueManager.instance.isEnd)
+        {
+            DialogueManager.instance.OnOffDialogue(true);
+        }
+        if (dialogueBox.Count == 0 && !DialogueManager.instance.isTyping || DialogueManager.instance.isEnd)
+        {
+            DialogueManager.instance.OnOffDialogue(false);
+            isStop = false;
+        }
+        else if (!DialogueManager.instance.isTyping)
+        {
+            DialogueManager.instance.InputDialogue(dialogueBox.Dequeue());
+        }
+        else StartCoroutine(DialogueManager.instance.TypingText());
+    }
+
     private void Update()
     {
+        //임시 실행용
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Dialogue();
+        }
+
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
             if (IsPointerOverUI(pointerId))

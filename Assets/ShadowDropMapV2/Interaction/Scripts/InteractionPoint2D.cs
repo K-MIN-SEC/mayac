@@ -5,13 +5,7 @@ using UnityEngine.Events;
 public sealed class InteractionPoint2D : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject iconObject;
-    [SerializeField] private UnityEvent onInteract;
-
-    private void Reset()
-    {
-        Collider2D trigger = GetComponent<Collider2D>();
-        trigger.isTrigger = true;
-    }
+    [SerializeField] public UnityEvent onInteract = new UnityEvent();
 
     private void Awake()
     {
