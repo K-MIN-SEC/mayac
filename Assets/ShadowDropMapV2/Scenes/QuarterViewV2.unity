@@ -19243,8 +19243,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236082099}
-  - component: {fileID: 1236082101}
-  - component: {fileID: 1236082100}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -19271,46 +19269,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1236082100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236082098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
---- !u!114 &1236082101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1236082098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 20
-    m_Bottom: 0
-  m_ChildAlignment: 1
-  m_Spacing: 10
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &1238396686
 GameObject:
   m_ObjectHideFlags: 0
@@ -30893,11 +30851,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MissionMessageSender
   contactName: ???
   messageText: "\uC5EC\uAE30\uB2E4\uAC00 \uC228\uACA8\uC8FC\uC138\uC6A9~"
-  photo: {fileID: 0}
+  photo: {fileID: 21300000, guid: ad1cb5bfdd818bf44b39f2a11784bc5b, type: 3}
   replyOptions:
   - "\uB124, \uD560\uAC8C\uC694"
   - "\uC2EB\uC5B4\uC694"
-  missionTarget: {fileID: 0}
+  missionTarget: {fileID: 457229234}
   sendOnlyOnce: 1
   triggerOnPlayerEnter: 1
   playerTag: Player
@@ -30910,7 +30868,7 @@ Transform:
   m_GameObject: {fileID: 2023721480}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.16, y: -5.47, z: 0}
+  m_LocalPosition: {x: -13.5, y: -16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
