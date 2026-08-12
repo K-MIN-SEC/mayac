@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8d894af0e245629552539063c551ae, type: 3}
+  m_Name: Point2
+  m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
+  locationName: Point 2
+  background: {fileID: -4178046375966092550, guid: e2e8c0f5924f3be4e94b4b507ccaabad, type: 3}
+  spotSprites:
+  - {fileID: -855298285791758126, guid: fa66f3819953a4e4eb738807680354cf, type: 3}
+  - {fileID: 6937817954938267909, guid: 759271dff3e1b5549bc9fc165c901e48, type: 3}
+  - {fileID: -6470460504253458178, guid: 3f1df49e2102aa740819743f21600a12, type: 3}
+  spotNames: [Entrance, Mailboxes, Door frame]

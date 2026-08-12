@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8d894af0e245629552539063c551ae, type: 3}
+  m_Name: Point1
+  m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
+  locationName: Point 1
+  background: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
+  spotSprites:
+  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
+  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
+  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
+  - {fileID: -4178046375966092550, guid: d2426d0766dd4164089a98660fcd8537, type: 3}
+  spotNames: [Stairway, Utility box, Window ledge, Side door]

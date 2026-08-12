@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8d894af0e245629552539063c551ae, type: 3}
+  m_Name: Point4
+  m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
+  locationName: Point 4
+  background: {fileID: -4178046375966092550, guid: 6c6e6cef87488f041bc666f79aad105b, type: 3}
+  spotSprites:
+  - {fileID: -855298285791758126, guid: 8483f924504a52144b378cc464afcfab, type: 3}
+  - {fileID: 6937817954938267909, guid: 66446149d9bb3e844a9a993b67100766, type: 3}
+  - {fileID: -6470460504253458178, guid: c9908286c84a6f94a8fc1dc161fbfd21, type: 3}
+  spotNames: [Building corner, Alley shadow, Wall fixture]
