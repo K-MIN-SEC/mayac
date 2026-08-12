@@ -27,6 +27,9 @@ public class NPCAmbientDialogue : MonoBehaviour
     [Min(0f)]
     public float showTime = 3f;
 
+    [Min(0f)]
+    public float dialogueDelay = 1f;
+
     private bool showing;
     private Coroutine dialogueRoutine;
 
@@ -60,13 +63,19 @@ public class NPCAmbientDialogue : MonoBehaviour
         if (bubble == null || dialogueText == null)
             return false;
 
-        string[] activeDialogues = useSequentialDialogue ? sequentialDialogues : dialogues;
+        string[] activeDialogues =
+            useSequentialDialogue ? sequentialDialogues : dialogues;
+
         return activeDialogues != null && activeDialogues.Length > 0;
     }
 
     private IEnumerator ShowDialogue()
     {
         showing = true;
+
+        // 말풍선이 나타나기 전 대기
+        yield return new WaitForSeconds(dialogueDelay);
+
         bubble.SetActive(true);
 
         if (useSequentialDialogue)
@@ -76,7 +85,9 @@ public class NPCAmbientDialogue : MonoBehaviour
         else
         {
             int randomIndex = Random.Range(0, dialogues.Length);
+
             SetDialogue(dialogues[randomIndex]);
+
             yield return new WaitForSeconds(showTime);
         }
 
@@ -91,8 +102,12 @@ public class NPCAmbientDialogue : MonoBehaviour
         {
             SetDialogue(sequentialDialogues[index]);
 
-            bool isLastDialogue = index == sequentialDialogues.Length - 1;
-            float waitTime = isLastDialogue ? showTime : dialogueInterval;
+            bool isLastDialogue =
+                index == sequentialDialogues.Length - 1;
+
+            float waitTime =
+                isLastDialogue ? showTime : dialogueInterval;
+
             yield return new WaitForSeconds(waitTime);
         }
     }
@@ -115,10 +130,12 @@ public class NPCAmbientDialogue : MonoBehaviour
             return;
 
         dialogueText.ForceMeshUpdate();
+
         Vector2 size = dialogueText.GetRenderedValues(false);
 
         float width = Mathf.Clamp(size.x + 40f, 120f, 350f);
         float height = size.y + 30f;
+
         bubbleRect.sizeDelta = new Vector2(width, height);
     }
 }
