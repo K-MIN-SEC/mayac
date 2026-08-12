@@ -21,28 +21,36 @@ public class Dialogue
 
 public class DialogueManager : MonoBehaviour
 {
-     public static DialogueManager instance { get; private set; }
-    
+    public static DialogueManager instance { get; private set; }
+
     [Header("Dialogue")]
     [SerializeField] Image textBar;
     [SerializeField] Image nameBar;
     [SerializeField] TMP_Text text;
     [SerializeField] TMP_Text nameText;
+
     [SerializeField] GameObject focusUI;
+    [SerializeField] GameObject optionUI;
+    [SerializeField] TMP_Text optionAText;
+    [SerializeField] TMP_Text optionBText;
+
     private string tempText;
     [SerializeField] float typingTime;
-    [SerializeField] Queue<Dialogue> dialogueBox = new();
 
+    public Queue<Dialogue> dialogueBox = new();
+    [SerializeField] Dialogue curDialogue;
     WaitForSeconds waitTime;
     [HideInInspector] public bool isTyping;
     [HideInInspector] public bool panelState;
 
     [HideInInspector] public bool isEnd;
-    bool isSkip;
+    bool isSkip = true;
+    bool isOption = false;
+    bool isOptionA = false;
 
     void Start()
     {
-       Init();
+        Init();
     }
 
     public void Init()
@@ -53,14 +61,34 @@ public class DialogueManager : MonoBehaviour
         waitTime = new WaitForSeconds(typingTime);
     }
 
-    private void Update()
+    public void InitDialogue(Queue<Dialogue> dialogueBox)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnOffDialogue(isSkip);
-        }
+        QuarterViewWalkableNavigator2D.instance.isDialogue = true;
+        this.dialogueBox = dialogueBox;
+        OnOffDialogue(true);
+        InputDialogue(dialogueBox.Dequeue());
     }
-    
+
+    public bool TriggerDialogue()
+    {
+        if (dialogueBox.Count == 0 && !isTyping || isEnd)
+        {
+            OnOffDialogue(false);
+            return false;
+        }
+        else if (!isTyping)
+        {
+            if (!isOptionA) dialogueBox.Dequeue();
+            InputDialogue(dialogueBox.Dequeue());
+            if (isOption) dialogueBox.Dequeue();
+        }
+        else if (!isOption)
+        {
+            StartCoroutine(TypingText());
+        }
+        return true;
+    }
+
     public void OnOffDialogue(bool isOn)
     {
         if (isOn)
@@ -69,24 +97,41 @@ public class DialogueManager : MonoBehaviour
             nameText.text = null;
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-660, 0.5f);
-            focusUI.SetActive(true);
         }
         else
         {
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
-            focusUI.SetActive(false);
         }
+        focusUI.SetActive(false);
+        QuarterViewWalkableNavigator2D.instance.isDialogue = false;
         textBar.rectTransform.DOSizeDelta(isOn ? new(1920, 300) : Vector2.zero, 0.5f);
         isSkip = !isSkip;
     }
 
+    void OnOption()
+    {
+        optionAText.text = curDialogue.OptionA;
+        optionBText.text = curDialogue.OptionB;
+        optionUI.SetActive(true);
+    }
+
+    public void ChooseOption(bool isA)
+    {
+        Debug.Log("Choose");
+        isOptionA = isA;
+        isOption = false;
+        isTyping = false;
+        optionUI.SetActive(false);
+    }
+
     public void InputDialogue(Dialogue dialogue)
     {
-        Debug.Log($"test");
+        curDialogue = dialogue;
+        Debug.Log($"[Dialogue] {curDialogue.name} : {curDialogue.text}\nOptionA : {curDialogue.OptionA} OptionB : {curDialogue.OptionB}");
         nameText.rectTransform.anchoredPosition = new Vector2(0, nameText.rectTransform.anchoredPosition.y);
-        nameText.text = dialogue.name;
-        tempText = dialogue.text;
+        nameText.text = curDialogue.name;
+        tempText = curDialogue.text;
 
         StartCoroutine(TypingText());
     }
@@ -102,14 +147,17 @@ public class DialogueManager : MonoBehaviour
             if (isSkip)
             {
                 text.text = tempText;
-                isTyping = false;
                 isSkip = false;
-                yield break;
+                break;
             }
             text.text += tempText[i];
             yield return waitTime;
         }
-        isTyping = false;
+        if (curDialogue.isOption)
+        {
+            isOption = true;
+            OnOption();
+        }else isTyping = false;
     }
 
     public void Skip()

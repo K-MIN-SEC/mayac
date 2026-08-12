@@ -1,9 +1,9 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DialogueObj : MonoBehaviour
 {
     [SerializeField] private TextAsset dialogue;
-    [SerializeField] private QuarterViewWalkableNavigator2D navigator;
     [SerializeField] private int index; 
 
     void Start()
@@ -17,7 +17,7 @@ public class DialogueObj : MonoBehaviour
     }
     public void Trigger()
     {
-        navigator.dialogueBox = DataManager.instance.ParseDialogueData(dialogue.text, index);
+        DialogueManager.instance.InitDialogue(DataManager.instance.ParseDialogueData(dialogue.text, index));
         index++;
     }
 }

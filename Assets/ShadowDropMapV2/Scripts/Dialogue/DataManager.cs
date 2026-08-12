@@ -29,13 +29,14 @@ public class DataManager : MonoBehaviour
             if(columns.Length == 0) continue;
             if(columns[0] == "") continue;
             if(index != int.Parse(columns[0])) continue;
-            Debug.Log($"[Dialogue] {columns[0]} {columns[1]} {columns[2]}");
+            //Debug.Log($"[Dialogue] {columns[0]} {columns[1]} {columns[2]}");
+            Debug.Log($"{rows[i]}");
             var newText = new Dialogue()
             {
                 name = columns[1],
                 text = columns[2],
             };
-            if (columns.Length > 3)
+            if (columns[3] != "")
             {
                 newText.isOption = true;
                 newText.OptionA = columns[3];

@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 {
+    public static QuarterViewWalkableNavigator2D instance { get; private set; }
+
     [SerializeField] private Texture2D walkableMask;
     [SerializeField] private Transform mapTransform;
     [SerializeField] private Camera inputCamera;
@@ -31,12 +33,14 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     private int waypointIndex;
 
     //임시 다이얼로그 변수
+    public bool isDialogue;
     public bool isStop;
     public Queue<Dialogue> dialogueBox = new();
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        instance = this;
         if (inputCamera == null)
         {
             inputCamera = Camera.main;
@@ -45,33 +49,8 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
         BuildGrid();
     }
 
-    //임시 다이얼로그 실행용
-    void Dialogue()
-    {
-        if(dialogueBox.Count > 0 && !DialogueManager.instance.isEnd)
-        {
-            DialogueManager.instance.OnOffDialogue(true);
-        }
-        if (dialogueBox.Count == 0 && !DialogueManager.instance.isTyping || DialogueManager.instance.isEnd)
-        {
-            DialogueManager.instance.OnOffDialogue(false);
-            isStop = false;
-        }
-        else if (!DialogueManager.instance.isTyping)
-        {
-            DialogueManager.instance.InputDialogue(dialogueBox.Dequeue());
-        }
-        else StartCoroutine(DialogueManager.instance.TypingText());
-    }
-
     private void Update()
     {
-        //임시 실행용
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Dialogue();
-        }
-
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
             if (IsPointerOverUI(pointerId))
@@ -79,9 +58,15 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
                 return;
             }
 
+            if(isDialogue)
+            {
+                isStop = DialogueManager.instance.TriggerDialogue();
+                return;
+            }
+
             Vector3 world = inputCamera.ScreenToWorldPoint(
                 new Vector3(screenPosition.x, screenPosition.y, -inputCamera.transform.position.z)
-            );
+            ); 
 
             Collider2D iconHit = Physics2D.OverlapPoint(world, interactionIconLayer);
             if (iconHit != null)
@@ -100,7 +85,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (waypointIndex >= path.Count)
+        if (waypointIndex >= path.Count || isDialogue)
         {
             return;
         }
