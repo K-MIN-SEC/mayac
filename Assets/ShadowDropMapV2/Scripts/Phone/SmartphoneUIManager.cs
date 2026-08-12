@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// 씬에 하나만 존재. 우측 하단 폰 버튼 -> 스마트폰 패널 열기/닫기 및 화면(홈/메신저/설정) 전환 관리
+// 씬에 하나만 존재. 우측 하단 폰 버튼 -> 스마트폰 패널 열기/닫기 및 화면(홈/메신저/설정/탐색기) 전환 관리
 public class SmartphoneUIManager : MonoBehaviour
 {
     public static SmartphoneUIManager Instance { get; private set; }
@@ -14,10 +14,12 @@ public class SmartphoneUIManager : MonoBehaviour
     public GameObject homeScreen;      // 앱 아이콘 + 위젯이 있는 홈 화면
     public GameObject messengerScreen; // 메신저 앱 화면 (목록+상세를 담는 부모)
     public GameObject settingsScreen;  // 설정 앱 화면
+    public GameObject detectorScreen;  // 탐색기 앱 화면
 
     [Header("홈 화면 버튼")]
     public Button messengerAppIcon;
     public Button settingsAppIcon;
+    public Button detectorAppIcon;
     public Button closeButton;         // 패널 완전히 닫기
     public Button backButton;          // 앱 화면 -> 뒤로가기 (메신저 상세면 목록으로, 아니면 홈으로)
 
@@ -41,6 +43,7 @@ public class SmartphoneUIManager : MonoBehaviour
         if (backButton != null) backButton.onClick.AddListener(OnBackPressed);
         if (messengerAppIcon != null) messengerAppIcon.onClick.AddListener(OpenMessenger);
         if (settingsAppIcon != null) settingsAppIcon.onClick.AddListener(OpenSettings);
+        if (detectorAppIcon != null) detectorAppIcon.onClick.AddListener(OpenDetector);
 
         // 하단 내비게이션 바 연결: 홈 버튼은 홈 화면으로, 뒤로가기 버튼은 backButton과 동일하게 동작
         if (navHomeButton != null) navHomeButton.onClick.AddListener(GoHome);
@@ -70,6 +73,8 @@ public class SmartphoneUIManager : MonoBehaviour
     {
         phonePanel.SetActive(false);
 
+        if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
+
         if (phoneButton != null)
         {
             phoneButton.interactable = true;
@@ -94,6 +99,9 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(true);
         messengerScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        if (detectorScreen != null) detectorScreen.SetActive(false);
+
+        if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
     }
 
     public void OpenMessenger()
@@ -101,6 +109,9 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(false);
         messengerScreen.SetActive(true);
         settingsScreen.SetActive(false);
+        if (detectorScreen != null) detectorScreen.SetActive(false);
+
+        if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
 
         if (MessengerAppUI.Instance != null)
             MessengerAppUI.Instance.OpenChatList();
@@ -111,6 +122,19 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(false);
         messengerScreen.SetActive(false);
         settingsScreen.SetActive(true);
+        if (detectorScreen != null) detectorScreen.SetActive(false);
+
+        if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
+    }
+
+    public void OpenDetector()
+    {
+        homeScreen.SetActive(false);
+        messengerScreen.SetActive(false);
+        settingsScreen.SetActive(false);
+        if (detectorScreen != null) detectorScreen.SetActive(true);
+
+        if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenOpened();
     }
 
     // 뒤로가기 버튼 하나로 "상세 -> 목록 -> 홈 -> 패널 닫기" 순서로 자연스럽게 빠지도록 처리
@@ -126,9 +150,10 @@ public class SmartphoneUIManager : MonoBehaviour
             // 메신저 대화 상세 화면 -> 대화 목록으로
             MessengerAppUI.Instance.OpenChatList();
         }
-        else if (messengerScreen.activeSelf || settingsScreen.activeSelf)
+        else if (messengerScreen.activeSelf || settingsScreen.activeSelf
+                 || (detectorScreen != null && detectorScreen.activeSelf))
         {
-            // 메신저 목록 또는 설정 화면 -> 홈 화면으로 (패널은 그대로 유지)
+            // 메신저/설정/탐색기 화면 -> 홈 화면으로 (패널은 그대로 유지)
             GoHome();
         }
         else

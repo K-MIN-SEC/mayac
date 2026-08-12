@@ -5,6 +5,7 @@ using TMPro;
 
 // 스마트폰 - 메신저 앱. 대화방 목록과 대화 내용을 보여줌.
 // 메시지가 오면 폰을 흔들고(진동) 배지를 켜며, 상대 메시지에 답장 선택지가 있으면 버튼으로 보여줌.
+// 대화방마다 아바타/마지막 메시지 날짜도 같이 관리함.
 public class MessengerAppUI : MonoBehaviour
 {
     public static MessengerAppUI Instance { get; private set; }
@@ -13,8 +14,10 @@ public class MessengerAppUI : MonoBehaviour
     public class ChatThread
     {
         public string contactName = "???";
+        public Sprite avatarSprite;                  // 목록에 보일 원형 아바타 (비워두면 프리팹 기본 이미지 사용)
         public List<MessengerMessageData> messages = new List<MessengerMessageData>();
         [HideInInspector] public bool hasUnread;
+        [HideInInspector] public string lastMessageDate = ""; // 예: "7월 24일"
     }
 
     [Header("데이터 (인스펙터에서 미리 채워도 되고, 코드로 ReceiveMessage 호출해도 됨)")]
@@ -31,7 +34,9 @@ public class MessengerAppUI : MonoBehaviour
     public Transform chatDetailContent;
     public GameObject bubbleMePrefab;
     public GameObject bubbleOtherPrefab;
+    public GameObject systemBoxPrefab; // 가운데 정렬된 알림 상자 (예: "임무 수락: 수리의 마음")
     public TMP_Text chatDetailTitle;
+    public Image chatDetailAvatar; // 대화 상세 화면 상단에 보일 상대방 아바타
     public ScrollRect chatDetailScrollRect;
 
     [Header("답장 선택지 UI")]
@@ -60,12 +65,13 @@ public class MessengerAppUI : MonoBehaviour
     }
 
     // ---------- 메시지 수신 (다른 시스템에서 호출) ----------
-    public void ReceiveMessage(string contactName, string text, Sprite photo = null, string[] replyOptions = null)
+    // avatarSprite: 대화방이 처음 생성될 때만 사용 (이미 있는 대화방이면 기존 아바타 유지)
+    public void ReceiveMessage(string contactName, string text, Sprite photo = null, string[] replyOptions = null, Sprite avatarSprite = null)
     {
         ChatThread thread = threads.Find(t => t.contactName == contactName);
         if (thread == null)
         {
-            thread = new ChatThread { contactName = contactName };
+            thread = new ChatThread { contactName = contactName, avatarSprite = avatarSprite };
             threads.Add(thread);
         }
 
@@ -77,6 +83,7 @@ public class MessengerAppUI : MonoBehaviour
             replyOptions = replyOptions
         });
         thread.hasUnread = true;
+        thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
 
         RefreshUnreadBadges();
 
@@ -115,7 +122,7 @@ public class MessengerAppUI : MonoBehaviour
                 string preview = thread.messages.Count > 0
                     ? thread.messages[thread.messages.Count - 1].text
                     : "";
-                itemUI.Set(thread.contactName, preview, thread.hasUnread);
+                itemUI.Set(thread.contactName, preview, thread.hasUnread, thread.lastMessageDate, thread.avatarSprite);
 
                 ChatThread capturedThread = thread;
                 itemUI.onClick = () => OpenChatDetail(capturedThread);
@@ -133,6 +140,7 @@ public class MessengerAppUI : MonoBehaviour
         chatListView.SetActive(false);
         chatDetailView.SetActive(true);
         if (chatDetailTitle != null) chatDetailTitle.text = thread.contactName;
+        if (chatDetailAvatar != null && thread.avatarSprite != null) chatDetailAvatar.sprite = thread.avatarSprite;
 
         RebuildChatDetail();
     }
@@ -142,19 +150,48 @@ public class MessengerAppUI : MonoBehaviour
         foreach (Transform child in chatDetailContent)
             Destroy(child.gameObject);
 
+        float bubbleSpacing = 10f;
+        float yCursor = 0f; // 위에서부터 차례로 쌓아나감
+
         foreach (MessengerMessageData msg in openThread.messages)
         {
-            GameObject prefab = msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab;
+            GameObject prefab = msg.isSystemBox ? systemBoxPrefab : (msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
             GameObject bubble = Instantiate(prefab, chatDetailContent);
 
             ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
             if (bubbleUI != null)
                 bubbleUI.Set(msg.text, msg.photo);
+
+            RectTransform bubbleRect = bubble.GetComponent<RectTransform>();
+            if (bubbleRect != null)
+            {
+                // 말풍선 프리팹 자체의 anchor(왼쪽/오른쪽)는 그대로 두고, 세로 위치만 코드로 내려줌
+                Vector2 pos = bubbleRect.anchoredPosition;
+                pos.y = -yCursor;
+                bubbleRect.anchoredPosition = pos;
+
+                yCursor += bubbleRect.sizeDelta.y + bubbleSpacing;
+            }
+        }
+
+        RectTransform contentRect = chatDetailContent as RectTransform;
+        if (contentRect != null)
+        {
+            Vector2 size = contentRect.sizeDelta;
+            size.y = yCursor;
+            contentRect.sizeDelta = size;
         }
 
         Canvas.ForceUpdateCanvases();
         if (chatDetailScrollRect != null)
-            chatDetailScrollRect.verticalNormalizedPosition = 0f;
+        {
+            RectTransform content = chatDetailScrollRect.content;
+            RectTransform viewport = chatDetailScrollRect.viewport;
+
+            // 대화 내용이 스크롤 창보다 길 때만 맨 아래(최신 메시지)로 이동시킴
+            if (content != null && viewport != null && content.rect.height > viewport.rect.height)
+                chatDetailScrollRect.verticalNormalizedPosition = 0f;
+        }
 
         RebuildReplyOptions();
     }
@@ -198,6 +235,23 @@ public class MessengerAppUI : MonoBehaviour
             text = text,
             isFromMe = true
         });
+
+        // "네, 할게요"로 답장하면 홈 화면 탐색기 아이콘에 빨간 알림 테두리 표시 + 대화 목록에 임무 수락 상자 추가
+        if (text == "네, 할게요")
+        {
+            if (DetectorAppUI.Instance != null)
+                DetectorAppUI.Instance.ShowAlertBorder();
+
+            if (MissionMessageSender.LastSent != null && !string.IsNullOrEmpty(MissionMessageSender.LastSent.missionTitle))
+            {
+                openThread.messages.Add(new MessengerMessageData
+                {
+                    text = "다음 임무:\n" + MissionMessageSender.LastSent.missionTitle,
+                    isFromMe = false,
+                    isSystemBox = true
+                });
+            }
+        }
 
         RebuildChatDetail(); // 답장 버튼은 이 안에서 다시 사라짐 (마지막 메시지가 내 메시지가 되었으니까)
     }
