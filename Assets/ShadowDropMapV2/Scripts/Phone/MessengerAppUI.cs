@@ -34,6 +34,7 @@ public class MessengerAppUI : MonoBehaviour
     public Transform chatDetailContent;
     public GameObject bubbleMePrefab;
     public GameObject bubbleOtherPrefab;
+    public GameObject systemBoxPrefab; // 가운데 정렬된 알림 상자 (예: "임무 수락: 수리의 마음")
     public TMP_Text chatDetailTitle;
     public Image chatDetailAvatar; // 대화 상세 화면 상단에 보일 상대방 아바타
     public ScrollRect chatDetailScrollRect;
@@ -154,7 +155,7 @@ public class MessengerAppUI : MonoBehaviour
 
         foreach (MessengerMessageData msg in openThread.messages)
         {
-            GameObject prefab = msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab;
+            GameObject prefab = msg.isSystemBox ? systemBoxPrefab : (msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
             GameObject bubble = Instantiate(prefab, chatDetailContent);
 
             ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
@@ -234,6 +235,23 @@ public class MessengerAppUI : MonoBehaviour
             text = text,
             isFromMe = true
         });
+
+        // "네, 할게요"로 답장하면 홈 화면 탐색기 아이콘에 빨간 알림 테두리 표시 + 대화 목록에 임무 수락 상자 추가
+        if (text == "네, 할게요")
+        {
+            if (DetectorAppUI.Instance != null)
+                DetectorAppUI.Instance.ShowAlertBorder();
+
+            if (MissionMessageSender.LastSent != null && !string.IsNullOrEmpty(MissionMessageSender.LastSent.missionTitle))
+            {
+                openThread.messages.Add(new MessengerMessageData
+                {
+                    text = "다음 임무:\n" + MissionMessageSender.LastSent.missionTitle,
+                    isFromMe = false,
+                    isSystemBox = true
+                });
+            }
+        }
 
         RebuildChatDetail(); // 답장 버튼은 이 안에서 다시 사라짐 (마지막 메시지가 내 메시지가 되었으니까)
     }
