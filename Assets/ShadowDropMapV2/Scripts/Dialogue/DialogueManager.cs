@@ -63,7 +63,7 @@ public class DialogueManager : MonoBehaviour
 
     public void InitDialogue(Queue<Dialogue> dialogueBox)
     {
-        QuarterViewWalkableNavigator2D.instance.isDialogue = true;
+        //QuarterViewWalkableNavigator2D.instance.isDialogue = true;
         this.dialogueBox = dialogueBox;
         OnOffDialogue(true);
         InputDialogue(dialogueBox.Dequeue());
@@ -78,9 +78,9 @@ public class DialogueManager : MonoBehaviour
         }
         else if (!isTyping)
         {
-            if (!isOptionA) dialogueBox.Dequeue();
+            if (isOption && !isOptionA) {dialogueBox.Dequeue(); isOption = false;}
             InputDialogue(dialogueBox.Dequeue());
-            if (isOption) dialogueBox.Dequeue();
+            if (isOption && isOptionA) {dialogueBox.Dequeue(); isOption = false;}
         }
         else if (!isOption)
         {
@@ -103,8 +103,8 @@ public class DialogueManager : MonoBehaviour
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
         }
-        focusUI.SetActive(false);
-        QuarterViewWalkableNavigator2D.instance.isDialogue = false;
+        focusUI.SetActive(isOn);
+        QuarterViewWalkableNavigator2D.instance.isDialogue = isOn;
         textBar.rectTransform.DOSizeDelta(isOn ? new(1920, 300) : Vector2.zero, 0.5f);
         isSkip = !isSkip;
     }
@@ -120,9 +120,9 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Choose");
         isOptionA = isA;
-        isOption = false;
         isTyping = false;
         optionUI.SetActive(false);
+        TriggerDialogue();
     }
 
     public void InputDialogue(Dialogue dialogue)

@@ -53,14 +53,14 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     {
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
-            if (IsPointerOverUI(pointerId))
-            {
-                return;
-            }
-
             if(isDialogue)
             {
                 isStop = DialogueManager.instance.TriggerDialogue();
+                return;
+            }
+
+            if (IsPointerOverUI(pointerId))
+            {
                 return;
             }
 
