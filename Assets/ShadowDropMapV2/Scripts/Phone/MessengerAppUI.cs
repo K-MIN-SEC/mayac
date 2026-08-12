@@ -1,11 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-// Ω∫∏∂∆Æ∆˘ - ∏ﬁΩ≈¿˙ æ€. ¥Î»≠πÊ ∏Ò∑œ∞˙ ¥Î»≠ ≥ªøÎ¿ª ∫∏ø©¡‹.
-// ∏ﬁΩ√¡ˆ∞° ø¿∏È ∆˘¿ª »ÁµÈ∞Ì(¡¯µø) πË¡ˆ∏¶ ƒ—∏Á, ªÛ¥Î ∏ﬁΩ√¡ˆø° ¥‰¿Â º±≈√¡ˆ∞° ¿÷¿∏∏È πˆ∆∞¿∏∑Œ ∫∏ø©¡‹.
-// ¥Î»≠πÊ∏∂¥Ÿ æ∆πŸ≈∏/∏∂¡ˆ∏∑ ∏ﬁΩ√¡ˆ ≥Ø¬•µµ ∞∞¿Ã ∞¸∏Æ«‘.
 public class MessengerAppUI : MonoBehaviour
 {
     public static MessengerAppUI Instance { get; private set; }
@@ -14,61 +11,65 @@ public class MessengerAppUI : MonoBehaviour
     public class ChatThread
     {
         public string contactName = "???";
-        public Sprite avatarSprite;                  // ∏Ò∑œø° ∫∏¿œ ø¯«¸ æ∆πŸ≈∏ (∫ÒøˆµŒ∏È «¡∏Æ∆’ ±‚∫ª ¿ÃπÃ¡ˆ ªÁøÎ)
+        public Sprite avatarSprite;
         public List<MessengerMessageData> messages = new List<MessengerMessageData>();
         [HideInInspector] public bool hasUnread;
-        [HideInInspector] public string lastMessageDate = ""; // øπ: "7ø˘ 24¿œ"
+        [HideInInspector] public string lastMessageDate = "";
     }
 
-    [Header("µ•¿Ã≈Õ (¿ŒΩ∫∆Â≈Õø°º≠ πÃ∏Æ √§øˆµµ µ«∞Ì, ƒ⁄µÂ∑Œ ReceiveMessage »£√‚«ÿµµ µ )")]
+    [Header("Data")]
     public List<ChatThread> threads = new List<ChatThread>();
 
-    [Header("¥Î»≠ ∏Ò∑œ »≠∏È")]
+    [Header("Chat list")]
     public GameObject chatListView;
     public Transform chatListContent;
     public GameObject chatListItemPrefab;
-    public GameObject emptyStateText; // "ø¿¥√ «“ ¿œ¿Ã æ¯Ω¿¥œ¥Ÿ" ∞∞¿∫ ∫Û ªÛ≈¬ πÆ±∏ ø¿∫Í¡ß∆Æ
+    public GameObject emptyStateText;
 
-    [Header("¥Î»≠ ªÛºº »≠∏È")]
+    [Header("Chat detail")]
     public GameObject chatDetailView;
     public Transform chatDetailContent;
     public GameObject bubbleMePrefab;
     public GameObject bubbleOtherPrefab;
-    public GameObject systemBoxPrefab; // ∞°øÓµ• ¡§∑ƒµ» æÀ∏≤ ªÛ¿⁄ (øπ: "¿”π´ ºˆ∂Ù: ºˆ∏Æ¿« ∏∂¿Ω")
+    public GameObject systemBoxPrefab;
     public TMP_Text chatDetailTitle;
-    public Image chatDetailAvatar; // ¥Î»≠ ªÛºº »≠∏È ªÛ¥‹ø° ∫∏¿œ ªÛ¥ÎπÊ æ∆πŸ≈∏
+    public Image chatDetailAvatar;
     public ScrollRect chatDetailScrollRect;
 
-    [Header("¥‰¿Â º±≈√¡ˆ UI")]
-    public Transform replyOptionsContent;      // ¥‰¿Â πˆ∆∞µÈ¿Ã µÈæÓ∞• ∫Œ∏ (∫∏≈Î ChatDetailView «œ¥‹)
-    public GameObject replyOptionButtonPrefab; // πˆ∆∞ «œ≥™(æ»ø° TMP ≈ÿΩ∫∆Æ ∆˜«‘) «¡∏Æ∆’
+    [Header("Reply options")]
+    public Transform replyOptionsContent;
+    public GameObject replyOptionButtonPrefab;
 
-    [Header("æÀ∏≤ πË¡ˆ (æ»¿–¿∫ ∏ﬁΩ√¡ˆ∞° ¿÷¿∏∏È ƒ—¡¸)")]
+    [Header("Notifications")]
     public GameObject appIconBadge;
     public GameObject phoneButtonBadge;
-
-    [Header("∏ﬁΩ√¡ˆ∞° ø¿∏È ¡¯µøΩ√≈≥ ¥ÎªÛ (phone πˆ∆∞ µÓ)")]
     public UIShaker phoneShaker;
     public UIShaker appIconShaker;
+    public AudioSource notificationSound;
 
     private ChatThread openThread;
 
-    void Awake()
+    private void Awake()
     {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        EnsureNotificationSound();
     }
 
-    void Start()
+    private void Start()
     {
         RefreshUnreadBadges();
     }
 
-    // ---------- ∏ﬁΩ√¡ˆ ºˆΩ≈ (¥Ÿ∏• Ω√Ω∫≈€ø°º≠ »£√‚) ----------
-    // avatarSprite: ¥Î»≠πÊ¿Ã √≥¿Ω ª˝º∫µ… ∂ß∏∏ ªÁøÎ (¿ÃπÃ ¿÷¥¬ ¥Î»≠πÊ¿Ã∏È ±‚¡∏ æ∆πŸ≈∏ ¿Ø¡ˆ)
-    public void ReceiveMessage(string contactName, string text, Sprite photo = null, string[] replyOptions = null, Sprite avatarSprite = null)
+    public void ReceiveMessage(string contactName, string text, Sprite photo = null,
+        string[] replyOptions = null, Sprite avatarSprite = null)
     {
-        ChatThread thread = threads.Find(t => t.contactName == contactName);
+        ChatThread thread = threads.Find(item => item.contactName == contactName);
         if (thread == null)
         {
             thread = new ChatThread { contactName = contactName, avatarSprite = avatarSprite };
@@ -83,95 +84,90 @@ public class MessengerAppUI : MonoBehaviour
             replyOptions = replyOptions
         });
         thread.hasUnread = true;
-        thread.lastMessageDate = System.DateTime.Now.ToString("Mø˘ d¿œ");
+        thread.lastMessageDate = System.DateTime.Now.ToString("MÏõî dÏùº");
 
         RefreshUnreadBadges();
+        phoneShaker?.Shake();
+        appIconShaker?.Shake();
+        notificationSound?.Play();
 
-        if (phoneShaker != null) phoneShaker.Shake();
-        if (appIconShaker != null) appIconShaker.Shake();
-
-        if (chatListView != null && chatListView.activeSelf)
-            RebuildChatList();
-
+        if (chatListView != null && chatListView.activeSelf) RebuildChatList();
         if (openThread == thread && chatDetailView != null && chatDetailView.activeSelf)
             RebuildChatDetail();
     }
 
-    // ---------- ∏Ò∑œ »≠∏È ----------
     public void OpenChatList()
     {
-        chatDetailView.SetActive(false);
-        chatListView.SetActive(true);
+        if (chatDetailView != null) chatDetailView.SetActive(false);
+        if (chatListView != null) chatListView.SetActive(true);
         RebuildChatList();
     }
 
-    void RebuildChatList()
+    private void RebuildChatList()
     {
-        foreach (Transform child in chatListContent)
-            Destroy(child.gameObject);
+        if (chatListContent == null || chatListItemPrefab == null) return;
 
-        if (emptyStateText != null)
-            emptyStateText.SetActive(threads.Count == 0);
+        foreach (Transform child in chatListContent) Destroy(child.gameObject);
+        if (emptyStateText != null) emptyStateText.SetActive(threads.Count == 0);
 
         foreach (ChatThread thread in threads)
         {
             GameObject item = Instantiate(chatListItemPrefab, chatListContent);
             ChatListItemUI itemUI = item.GetComponent<ChatListItemUI>();
-            if (itemUI != null)
-            {
-                string preview = thread.messages.Count > 0
-                    ? thread.messages[thread.messages.Count - 1].text
-                    : "";
-                itemUI.Set(thread.contactName, preview, thread.hasUnread, thread.lastMessageDate, thread.avatarSprite);
+            if (itemUI == null) continue;
 
-                ChatThread capturedThread = thread;
-                itemUI.onClick = () => OpenChatDetail(capturedThread);
-            }
+            string preview = thread.messages.Count > 0
+                ? thread.messages[thread.messages.Count - 1].text
+                : "";
+            itemUI.Set(thread.contactName, preview, thread.hasUnread,
+                thread.lastMessageDate, thread.avatarSprite);
+
+            ChatThread capturedThread = thread;
+            itemUI.onClick = () => OpenChatDetail(capturedThread);
         }
     }
 
-    // ---------- ªÛºº »≠∏È ----------
     public void OpenChatDetail(ChatThread thread)
     {
+        if (thread == null) return;
+
         openThread = thread;
         thread.hasUnread = false;
         RefreshUnreadBadges();
 
-        chatListView.SetActive(false);
-        chatDetailView.SetActive(true);
+        if (chatListView != null) chatListView.SetActive(false);
+        if (chatDetailView != null) chatDetailView.SetActive(true);
         if (chatDetailTitle != null) chatDetailTitle.text = thread.contactName;
-        if (chatDetailAvatar != null && thread.avatarSprite != null) chatDetailAvatar.sprite = thread.avatarSprite;
-
+        if (chatDetailAvatar != null && thread.avatarSprite != null)
+            chatDetailAvatar.sprite = thread.avatarSprite;
         RebuildChatDetail();
     }
 
-    void RebuildChatDetail()
+    private void RebuildChatDetail()
     {
-        foreach (Transform child in chatDetailContent)
-            Destroy(child.gameObject);
+        if (openThread == null || chatDetailContent == null) return;
 
-        float bubbleSpacing = 10f;
-        float yCursor = 0f; // ¿ßø°º≠∫Œ≈Õ ¬˜∑ ∑Œ Ω◊æ∆≥™∞®
+        foreach (Transform child in chatDetailContent) Destroy(child.gameObject);
 
-        foreach (MessengerMessageData msg in openThread.messages)
+        const float bubbleSpacing = 10f;
+        float yCursor = 0f;
+        foreach (MessengerMessageData message in openThread.messages)
         {
-            GameObject prefab = msg.isSystemBox ? systemBoxPrefab : (msg.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
-            GameObject bubble = Instantiate(prefab, chatDetailContent);
+            GameObject prefab = message.isSystemBox
+                ? systemBoxPrefab
+                : (message.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
+            if (prefab == null) continue;
 
+            GameObject bubble = Instantiate(prefab, chatDetailContent);
             ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
-            if (bubbleUI != null)
-                bubbleUI.Set(msg.text, msg.photo);
+            if (bubbleUI != null) bubbleUI.Set(message.text, message.photo);
 
             RectTransform bubbleRect = bubble.GetComponent<RectTransform>();
-            if (bubbleRect != null)
-            {
-                // ∏ª«≥º± «¡∏Æ∆’ ¿⁄√º¿« anchor(øﬁ¬ /ø¿∏•¬ )¥¬ ±◊¥Î∑Œ µŒ∞Ì, ºº∑Œ ¿ßƒ°∏∏ ƒ⁄µÂ∑Œ ≥ª∑¡¡‹
-                Vector2 pos = bubbleRect.anchoredPosition;
-                pos.y = -yCursor;
-                bubbleRect.anchoredPosition = pos;
-
-                yCursor += bubbleRect.sizeDelta.y + bubbleSpacing;
-            }
+            if (bubbleRect == null) continue;
+            Vector2 position = bubbleRect.anchoredPosition;
+            position.y = -yCursor;
+            bubbleRect.anchoredPosition = position;
+            yCursor += bubbleRect.sizeDelta.y + bubbleSpacing;
         }
 
         RectTransform contentRect = chatDetailContent as RectTransform;
@@ -183,84 +179,91 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         Canvas.ForceUpdateCanvases();
-        if (chatDetailScrollRect != null)
-        {
-            RectTransform content = chatDetailScrollRect.content;
-            RectTransform viewport = chatDetailScrollRect.viewport;
-
-            // ¥Î»≠ ≥ªøÎ¿Ã Ω∫≈©∑— √¢∫∏¥Ÿ ±Ê ∂ß∏∏ ∏« æ∆∑°(√÷Ω≈ ∏ﬁΩ√¡ˆ)∑Œ ¿ÃµøΩ√≈¥
-            if (content != null && viewport != null && content.rect.height > viewport.rect.height)
-                chatDetailScrollRect.verticalNormalizedPosition = 0f;
-        }
+        if (chatDetailScrollRect != null && chatDetailScrollRect.content != null
+            && chatDetailScrollRect.viewport != null
+            && chatDetailScrollRect.content.rect.height > chatDetailScrollRect.viewport.rect.height)
+            chatDetailScrollRect.verticalNormalizedPosition = 0f;
 
         RebuildReplyOptions();
     }
 
-    // ∏∂¡ˆ∏∑ ∏ﬁΩ√¡ˆ∞° ªÛ¥ÎπÊ ∏ﬁΩ√¡ˆ¿Ã∞Ì ¥‰¿Â º±≈√¡ˆ∞° ¿÷¿∏∏È πˆ∆∞¿∏∑Œ ∫∏ø©¡‹
-    void RebuildReplyOptions()
+    private void RebuildReplyOptions()
     {
         if (replyOptionsContent == null) return;
 
-        foreach (Transform child in replyOptionsContent)
-            Destroy(child.gameObject);
+        foreach (Transform child in replyOptionsContent) Destroy(child.gameObject);
+        if (openThread == null || openThread.messages.Count == 0) return;
 
-        if (openThread.messages.Count == 0) return;
-
-        MessengerMessageData lastMsg = openThread.messages[openThread.messages.Count - 1];
-        bool hasOptions = !lastMsg.isFromMe && lastMsg.replyOptions != null && lastMsg.replyOptions.Length > 0;
-
+        MessengerMessageData lastMessage = openThread.messages[openThread.messages.Count - 1];
+        bool hasOptions = !lastMessage.isFromMe
+            && lastMessage.replyOptions != null
+            && lastMessage.replyOptions.Length > 0;
         replyOptionsContent.gameObject.SetActive(hasOptions);
-        if (!hasOptions) return;
+        if (!hasOptions || replyOptionButtonPrefab == null) return;
 
-        foreach (string option in lastMsg.replyOptions)
+        foreach (string option in lastMessage.replyOptions)
         {
-            GameObject btnObj = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
-            TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
+            GameObject buttonObject = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
+            TMP_Text label = buttonObject.GetComponentInChildren<TMP_Text>();
             if (label != null) label.text = option;
 
-            Button btn = btnObj.GetComponent<Button>();
+            Button button = buttonObject.GetComponent<Button>();
             string capturedOption = option;
-            if (btn != null)
-                btn.onClick.AddListener(() => SendReply(capturedOption));
+            if (button != null) button.onClick.AddListener(() => SendReply(capturedOption));
         }
     }
 
-    // «√∑π¿ÃæÓ∞° ¥‰¿Â º±≈√¡ˆ∏¶ ∞Ò∂˙¿ª ∂ß »£√‚µ 
     public void SendReply(string text)
     {
         if (openThread == null) return;
 
-        openThread.messages.Add(new MessengerMessageData
-        {
-            text = text,
-            isFromMe = true
-        });
+        openThread.messages.Add(new MessengerMessageData { text = text, isFromMe = true });
 
-        // "≥◊, «“∞‘ø‰"∑Œ ¥‰¿Â«œ∏È »® »≠∏È ≈Ωªˆ±‚ æ∆¿Ãƒ‹ø° ª°∞£ æÀ∏≤ ≈◊µŒ∏Æ «•Ω√ + ¥Î»≠ ∏Ò∑œø° ¿”π´ ºˆ∂Ù ªÛ¿⁄ √ﬂ∞°
-        if (text == "≥◊, «“∞‘ø‰")
+        if (text == "ÎÑ§, Ìï†Í≤åÏöî")
         {
-            if (DetectorAppUI.Instance != null)
-                DetectorAppUI.Instance.ShowAlertBorder();
-
-            if (MissionMessageSender.LastSent != null && !string.IsNullOrEmpty(MissionMessageSender.LastSent.missionTitle))
+            if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.ShowAlertBorder();
+            MissionMessageSender mission = MissionMessageSender.LastSent;
+            if (mission != null && !string.IsNullOrEmpty(mission.missionTitle))
             {
                 openThread.messages.Add(new MessengerMessageData
                 {
-                    text = "¥Ÿ¿Ω ¿”π´:\n" + MissionMessageSender.LastSent.missionTitle,
+                    text = "Îã§Ïùå ÏûÑÎ¨¥:\n" + mission.missionTitle,
                     isFromMe = false,
                     isSystemBox = true
                 });
             }
         }
 
-        RebuildChatDetail(); // ¥‰¿Â πˆ∆∞¿∫ ¿Ã æ»ø°º≠ ¥ŸΩ√ ªÁ∂Û¡¸ (∏∂¡ˆ∏∑ ∏ﬁΩ√¡ˆ∞° ≥ª ∏ﬁΩ√¡ˆ∞° µ«æ˙¿∏¥œ±Ó)
+        RebuildChatDetail();
     }
 
-    void RefreshUnreadBadges()
+    private void RefreshUnreadBadges()
     {
-        bool anyUnread = threads.Exists(t => t.hasUnread);
+        bool hasUnread = threads.Exists(thread => thread.hasUnread);
+        if (appIconBadge != null) appIconBadge.SetActive(hasUnread);
+        if (phoneButtonBadge != null) phoneButtonBadge.SetActive(hasUnread);
+    }
 
-        if (appIconBadge != null) appIconBadge.SetActive(anyUnread);
-        if (phoneButtonBadge != null) phoneButtonBadge.SetActive(anyUnread);
+    private void EnsureNotificationSound()
+    {
+        if (notificationSound == null)
+            notificationSound = GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
+        if (notificationSound.clip != null) return;
+
+        const int sampleRate = 22050;
+        const float duration = 0.16f;
+        int sampleCount = Mathf.CeilToInt(sampleRate * duration);
+        float[] samples = new float[sampleCount];
+        for (int index = 0; index < sampleCount; index++)
+        {
+            float time = (float)index / sampleRate;
+            float fade = 1f - (float)index / sampleCount;
+            samples[index] = Mathf.Sin(2f * Mathf.PI * 880f * time) * fade * 0.18f;
+        }
+
+        AudioClip clip = AudioClip.Create("MessageNotification", sampleCount, 1, sampleRate, false);
+        clip.SetData(samples, 0);
+        notificationSound.playOnAwake = false;
+        notificationSound.clip = clip;
     }
 }

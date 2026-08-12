@@ -1,14 +1,25 @@
 using UnityEngine;
 
-// 돋보기 상호작용 지점(InteractionPoint2D)이 붙은 오브젝트에 같이 부착
-// InteractionPoint2D의 On Interact 이벤트에 이 스크립트의 Open()을 연결하면 됨
 public class ExamineTrigger : MonoBehaviour
 {
-    [Header("이 지점에서 보여줄 사진")]
+    [Header("Reusable location data")]
+    public HidingLocationData location;
+
+    [Header("Location background")]
     public Sprite photo;
+
+    [Header("Selectable hiding spots")]
+    public Sprite[] spotSprites;
+    public string[] spotNames;
 
     public void Open()
     {
-        HidingPanelManager.Instance.OpenExaminePanel(photo);
+        if (HidingPanelManager.Instance == null)
+            return;
+
+        if (location != null)
+            HidingPanelManager.Instance.OpenExaminePanel(location.background, location.spotSprites, location.spotNames);
+        else
+            HidingPanelManager.Instance.OpenExaminePanel(photo, spotSprites, spotNames);
     }
 }
