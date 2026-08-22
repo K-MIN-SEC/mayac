@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
-[System.Serializable]
+[Serializable]
 public class Dialogue
 {
     public int index;
@@ -16,6 +17,11 @@ public class Dialogue
     public bool isOption;
     public string OptionA;
     public string OptionB;
+
+    public string startEventName;
+    public string endEventName;
+
+    public bool isSound;
 }
 
 
@@ -39,16 +45,19 @@ public class DialogueManager : MonoBehaviour
 
     public Queue<Dialogue> dialogueBox = new();
     [SerializeField] Dialogue curDialogue;
-    WaitForSeconds waitTime;
+
     [HideInInspector] public bool isTyping;
     [HideInInspector] public bool panelState;
-
     [HideInInspector] public bool isEnd;
     bool isSkip = true;
     bool isOption = false;
     bool isOptionA = false;
 
-    void Start()
+    public Action onDialogueEnd;
+
+    WaitForSeconds waitTime;
+
+    void Awake()
     {
         Init();
     }
@@ -63,10 +72,13 @@ public class DialogueManager : MonoBehaviour
 
     public void InitDialogue(Queue<Dialogue> dialogueBox)
     {
-        //QuarterViewWalkableNavigator2D.instance.isDialogue = true;
+        
         this.dialogueBox = dialogueBox;
         OnOffDialogue(true);
-        InputDialogue(dialogueBox.Dequeue());
+        if (dialogueBox.Count > 0)
+        {
+            InputText(dialogueBox.Dequeue());
+        }
     }
 
     public bool TriggerDialogue()
@@ -79,7 +91,7 @@ public class DialogueManager : MonoBehaviour
         else if (!isTyping)
         {
             if (isOption && !isOptionA) {dialogueBox.Dequeue(); isOption = false;}
-            InputDialogue(dialogueBox.Dequeue());
+            InputText(dialogueBox.Dequeue());
             if (isOption && isOptionA) {dialogueBox.Dequeue(); isOption = false;}
         }
         else if (!isOption)
@@ -102,9 +114,10 @@ public class DialogueManager : MonoBehaviour
         {
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
+            onDialogueEnd?.Invoke();
         }
         focusUI.SetActive(isOn);
-        QuarterViewWalkableNavigator2D.instance.isDialogue = isOn;
+        if(QuarterViewWalkableNavigator2D.instance != null) QuarterViewWalkableNavigator2D.instance.isDialogue = isOn;
         textBar.rectTransform.DOSizeDelta(isOn ? new(1920, 300) : Vector2.zero, 0.5f);
         isSkip = !isSkip;
     }
@@ -125,13 +138,16 @@ public class DialogueManager : MonoBehaviour
         TriggerDialogue();
     }
 
-    public void InputDialogue(Dialogue dialogue)
+    public void InputText(Dialogue dialogue)
     {
+        Debug.Log($"[Dialogue] {dialogue.name} : {dialogue.text}");
         curDialogue = dialogue;
-        Debug.Log($"[Dialogue] {curDialogue.name} : {curDialogue.text}\nOptionA : {curDialogue.OptionA} OptionB : {curDialogue.OptionB}");
         nameText.rectTransform.anchoredPosition = new Vector2(0, nameText.rectTransform.anchoredPosition.y);
         nameText.text = curDialogue.name;
         tempText = curDialogue.text;
+        tempText = tempText.Replace("\\", "\n");
+        tempText = tempText.Replace("|", ",");
+        GlobalEvent.Event(curDialogue.startEventName, false);
 
         StartCoroutine(TypingText());
     }
@@ -158,6 +174,7 @@ public class DialogueManager : MonoBehaviour
             isOption = true;
             OnOption();
         }else isTyping = false;
+        GlobalEvent.Event(curDialogue.endEventName, true);
     }
 
     public void Skip()

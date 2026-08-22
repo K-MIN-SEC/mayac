@@ -144,7 +144,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4830399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -155,11 +155,11 @@ RectTransform:
   - {fileID: 662479327}
   - {fileID: 1395693314}
   - {fileID: 555334345}
-  m_Father: {fileID: 1394610023}
+  m_Father: {fileID: 1776170958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 130, y: 20}
+  m_AnchoredPosition: {x: 1040.1487, y: -529.90686}
   m_SizeDelta: {x: 650, y: 700}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &4830401
@@ -4010,7 +4010,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -11.08606, y: -20.323975}
+  m_AnchoredPosition: {x: -11.0859375, y: -20.323975}
   m_SizeDelta: {x: 140.41699, y: 195.84497}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &254949565
@@ -6903,37 +6903,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &408019388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 408019389}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &408019389
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408019388}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.838867, y: 1.8087299, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &411723584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7478,8 +7447,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7487,7 +7456,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.3
 --- !u!222 &439758652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11037,106 +11006,18 @@ Transform:
   m_LocalPosition: {x: -14.5, y: -14.8125, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1441852281}
   m_Father: {fileID: 1250732309}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &650256920
-AudioSource:
+--- !u!81 &650256920
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650256916}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &662479326
 GameObject:
   m_ObjectHideFlags: 0
@@ -12263,63 +12144,6 @@ PolygonCollider2D:
       - {x: -0.8457249, y: 6.255354}
       - {x: -5.284935, y: 3.5636888}
   m_UseDelaunayMesh: 1
---- !u!1 &737712894
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 737712896}
-  - component: {fileID: 737712895}
-  m_Layer: 0
-  m_Name: DetectorAppUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &737712895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737712894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f63ae2ac87f6a842a2117f37824bb4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DetectorAppUI
-  inactiveMessage: {fileID: 1506791260}
-  activeContent: {fileID: 220784468}
-  player: {fileID: 0}
-  needle: {fileID: 486820613}
-  detectorIcon: {fileID: 353756993}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  alertColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  shaker: {fileID: 1008539318}
-  appIconBadgeDetector: {fileID: 477507410}
-  detectRadius: 15
-  closeRadius: 1.5
-  slowestPingInterval: 1.2
-  fastestPingInterval: 0.15
---- !u!4 &737712896
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 737712894}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65062, y: -9.95032, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742903241
 GameObject:
   m_ObjectHideFlags: 0
@@ -18069,7 +17893,7 @@ GameObject:
   - component: {fileID: 1008539315}
   - component: {fileID: 1008539318}
   m_Layer: 5
-  m_Name: phone
+  m_Name: PhoneIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18082,18 +17906,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008539313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1238396687}
   - {fileID: 74571636}
-  m_Father: {fileID: 1394610023}
+  m_Father: {fileID: 1776170958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 20, y: 20}
+  m_AnchoredPosition: {x: 930.14874, y: -529.90686}
   m_SizeDelta: {x: 190, y: 150}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1008539315
@@ -20580,70 +20404,6 @@ PolygonCollider2D:
       - {x: -1.2592937, y: 9.314291}
       - {x: -7.869326, y: 5.3063717}
   m_UseDelaunayMesh: 1
---- !u!1 &1220562857
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1220562859}
-  - component: {fileID: 1220562858}
-  m_Layer: 0
-  m_Name: MessengerAppUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1220562858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220562857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 342888eac4d15844695819b6dd640941, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MessengerAppUI
-  threads: []
-  chatListView: {fileID: 493894460}
-  chatListContent: {fileID: 395526198}
-  chatListItemPrefab: {fileID: 4568722696541473939, guid: 936286e5aa9ca0f4f9a3ad78e3203067, type: 3}
-  emptyStateText: {fileID: 1375362991}
-  chatDetailView: {fileID: 1516258176}
-  chatDetailContent: {fileID: 1236082099}
-  bubbleMePrefab: {fileID: 1069524006462305490, guid: 4317904a86f5ff24ba9873d50fd337e7, type: 3}
-  bubbleOtherPrefab: {fileID: 1069524006462305490, guid: 72ff2f85c277dfe47893d320c4ca9888, type: 3}
-  systemBoxPrefab: {fileID: 1069524006462305490, guid: ad5e0f51a5fdd7f42ba6c34dc5be2b37, type: 3}
-  chatDetailTitle: {fileID: 2063700449}
-  chatDetailAvatar: {fileID: 2002298064}
-  chatDetailScrollRect: {fileID: 1646497984}
-  replyOptionsContent: {fileID: 1858397497}
-  replyOptionButtonPrefab: {fileID: 6891017499590821800, guid: a24b70116060aa44dbe67b7df51f6c43, type: 3}
-  appIconBadge: {fileID: 664043263}
-  phoneButtonBadge: {fileID: 74571635}
-  phoneShaker: {fileID: 1008539318}
-  appIconShaker: {fileID: 1693861669}
-  notificationSound: {fileID: 650256920}
---- !u!4 &1220562859
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220562857}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65062, y: -9.95032, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1221760920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23413,10 +23173,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2004461038}
-  - {fileID: 1008539314}
   - {fileID: 1914940606}
-  - {fileID: 4830400}
   - {fileID: 1996411728}
+  - {fileID: 1776170958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -24015,8 +23774,137 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c668ccee6468e47addf31faae532c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueObj
-  dialogue: {fileID: 4900000, guid: 0d34acfc0c4ae1c438c7c285f6eb2348, type: 3}
+  dialogue: {fileID: 4900000, guid: f46c9e4f554c53d4b8f6b646a4a34e98, type: 3}
   index: 0
+--- !u!1 &1441852279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1441852281}
+  - component: {fileID: 1441852280}
+  m_Layer: 0
+  m_Name: Temp Sound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1441852280
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441852279}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1441852281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441852279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 650256919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1442325559
 GameObject:
   m_ObjectHideFlags: 0
@@ -30206,6 +30094,129 @@ PolygonCollider2D:
       - {x: 0, y: 1.8913125}
       - {x: -1.9125, y: 1.0792031}
   m_UseDelaunayMesh: 1
+--- !u!1 &1776170957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776170958}
+  - component: {fileID: 1776170959}
+  - component: {fileID: 1776170961}
+  - component: {fileID: 1776170960}
+  m_Layer: 5
+  m_Name: Phone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1776170958
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776170957}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1008539314}
+  - {fileID: 4830400}
+  m_Father: {fileID: 1394610023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1776170959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776170957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4438f7d5dfa471749b541825231df6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmartphoneUIManager
+  phoneButton: {fileID: 1008539315}
+  phonePanel: {fileID: 4830399}
+  homeScreen: {fileID: 78528851}
+  messengerScreen: {fileID: 1522853126}
+  settingsScreen: {fileID: 662479326}
+  detectorScreen: {fileID: 1747193808}
+  messengerAppIcon: {fileID: 1693861666}
+  settingsAppIcon: {fileID: 854215265}
+  detectorAppIcon: {fileID: 1586535498}
+  closeButton: {fileID: 0}
+  backButton: {fileID: 0}
+  navHomeButton: {fileID: 1034919633}
+  navBackButton: {fileID: 1901343669}
+  navRecentsButton: {fileID: 1825869208}
+--- !u!114 &1776170960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776170957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f63ae2ac87f6a842a2117f37824bb4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DetectorAppUI
+  inactiveMessage: {fileID: 1506791260}
+  activeContent: {fileID: 220784468}
+  player: {fileID: 0}
+  needle: {fileID: 486820613}
+  detectorIcon: {fileID: 353756993}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  alertColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  shaker: {fileID: 1008539318}
+  appIconBadgeDetector: {fileID: 477507410}
+  detectRadius: 15
+  closeRadius: 1.5
+  slowestPingInterval: 1.2
+  fastestPingInterval: 0.15
+--- !u!114 &1776170961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776170957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 342888eac4d15844695819b6dd640941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessengerAppUI
+  threads: []
+  chatListView: {fileID: 493894460}
+  chatListContent: {fileID: 395526198}
+  chatListItemPrefab: {fileID: 4568722696541473939, guid: 936286e5aa9ca0f4f9a3ad78e3203067, type: 3}
+  emptyStateText: {fileID: 1375362991}
+  chatDetailView: {fileID: 1516258176}
+  chatDetailContent: {fileID: 1236082099}
+  bubbleMePrefab: {fileID: 1069524006462305490, guid: 4317904a86f5ff24ba9873d50fd337e7, type: 3}
+  bubbleOtherPrefab: {fileID: 1069524006462305490, guid: 72ff2f85c277dfe47893d320c4ca9888, type: 3}
+  systemBoxPrefab: {fileID: 1069524006462305490, guid: ad5e0f51a5fdd7f42ba6c34dc5be2b37, type: 3}
+  chatDetailTitle: {fileID: 2063700449}
+  chatDetailAvatar: {fileID: 2002298064}
+  chatDetailScrollRect: {fileID: 1646497984}
+  replyOptionsContent: {fileID: 1858397497}
+  replyOptionButtonPrefab: {fileID: 6891017499590821800, guid: a24b70116060aa44dbe67b7df51f6c43, type: 3}
+  appIconBadge: {fileID: 664043263}
+  phoneButtonBadge: {fileID: 74571635}
+  phoneShaker: {fileID: 1008539318}
+  appIconShaker: {fileID: 1693861669}
+  notificationSound: {fileID: 1441852280}
 --- !u!1001 &1783648311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33216,7 +33227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 11.08606, y: 20.323975}
+  m_AnchoredPosition: {x: 11.0859375, y: 20.323975}
   m_SizeDelta: {x: -140.417, y: -195.845}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2004461039
@@ -34541,64 +34552,6 @@ PolygonCollider2D:
       - {x: -0.785316, y: 5.8085427}
       - {x: -4.907439, y: 3.3091395}
   m_UseDelaunayMesh: 1
---- !u!1 &2060162018
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2060162020}
-  - component: {fileID: 2060162019}
-  m_Layer: 0
-  m_Name: SmartphoneUIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2060162019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060162018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4438f7d5dfa471749b541825231df6de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmartphoneUIManager
-  phoneButton: {fileID: 1008539315}
-  phonePanel: {fileID: 4830399}
-  homeScreen: {fileID: 78528851}
-  messengerScreen: {fileID: 1522853126}
-  settingsScreen: {fileID: 662479326}
-  detectorScreen: {fileID: 1747193808}
-  messengerAppIcon: {fileID: 1693861666}
-  settingsAppIcon: {fileID: 854215265}
-  detectorAppIcon: {fileID: 1586535498}
-  closeButton: {fileID: 0}
-  backButton: {fileID: 0}
-  navHomeButton: {fileID: 1034919633}
-  navBackButton: {fileID: 1901343669}
-  navRecentsButton: {fileID: 1825869208}
---- !u!4 &2060162020
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060162018}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.65062, y: -9.95032, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2062066028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36290,7 +36243,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1250732309}
-  - {fileID: 408019389}
   - {fileID: 524602333}
   - {fileID: 1394610023}
   - {fileID: 403525587}
@@ -36315,9 +36267,6 @@ SceneRoots:
   - {fileID: 779095554}
   - {fileID: 1271962873}
   - {fileID: 202608020003}
-  - {fileID: 2060162020}
-  - {fileID: 737712896}
-  - {fileID: 1220562859}
   - {fileID: 900944401}
   - {fileID: 23298880}
   - {fileID: 2023721483}

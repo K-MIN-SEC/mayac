@@ -29,8 +29,7 @@ public class DataManager : MonoBehaviour
             if(columns.Length == 0) continue;
             if(columns[0] == "") continue;
             if(index != int.Parse(columns[0])) continue;
-            //Debug.Log($"[Dialogue] {columns[0]} {columns[1]} {columns[2]}");
-            Debug.Log($"{rows[i]}");
+            //Debug.Log($"{rows[i]}");
             var newText = new Dialogue()
             {
                 name = columns[1],
@@ -42,6 +41,9 @@ public class DataManager : MonoBehaviour
                 newText.OptionA = columns[3];
                 newText.OptionB = columns[4];
             }
+            newText.startEventName = columns[5];
+            newText.endEventName = columns[6];
+            
             dialogBox.Enqueue(newText);
         }
         return dialogBox;

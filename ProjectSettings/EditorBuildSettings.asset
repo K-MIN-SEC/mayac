@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/ShadowDropMapV2/Scenes/TitleScene.unity
+    guid: 092f6f9db5955b24cb4ccde0a65da29e
+  - enabled: 1
+    path: Assets/ShadowDropMapV2/Scenes/IntroScene.unity
+    guid: b2656536a4a3723468a8d997b4144057
+  - enabled: 1
     path: Assets/ShadowDropMapV2/Scenes/QuarterViewV2.unity
     guid: d472423cb84667548b239213e71b8aef
   m_configObjects:
