@@ -17,39 +17,20 @@ public class MissionMessageSender : MonoBehaviour
     [Header("답장 선택지 (플레이어가 고를 수 있는 답장, 비워두면 답장 버튼 안 뜸)")]
     public string[] replyOptions = new string[] { "네, 할게요", "싫어요" };
 
-    [Header("수락 시 뜨는 임무 토스트에 표시할 제목 (예: '수리의 마음')")]
+    [Header("수락 시 뜨는 임무 토스트에 표시할 제목")]
     public string missionTitle = "";
 
-    [Header("이 메시지가 오면 같이 켤 미션 타겟 (기존 시스템, 건드리지 않음)")]
+    [Header("이 메시지가 오면 같이 켤 미션 타겟")]
     public GameObject missionTarget;
 
-    [Header("탐색기 앱 연동 (이 메시지가 탐색기를 켜야 하는 메시지라면 체크)")]
+    [Header("탐색기 앱 연동")]
     public bool activatesDetectorApp = false;
-    public Transform detectorTarget; // 탐색기가 반짝이며 안내할 목표 (보통 돋보기/조사 지점)
-
-    [Header("한 번만 보내고 다시는 안 보내려면 체크")]
-    public bool sendOnlyOnce = true;
-
-    private bool alreadySent = false;
-
-    [Header("플레이어가 이 지점에 들어오면 자동 발동 (Collider2D의 Is Trigger 체크 필요)")]
-    public bool triggerOnPlayerEnter = true;
-    public string playerTag = "Player";
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!triggerOnPlayerEnter) return;
-        if (!other.CompareTag(playerTag)) return;
-        SendMissionMessage();
-    }
+    public Transform detectorTarget;
 
     public void SendMissionMessage()
     {
-        if (sendOnlyOnce && alreadySent)
-            return;
-
-        if (MessengerAppUI.Instance != null)
-            MessengerAppUI.Instance.ReceiveMessage(contactName, messageText, photo, replyOptions);
+        // if (MessengerAppUI.Instance != null)
+        //     MessengerAppUI.Instance.ReceiveMessage(contactName, messageText, replyOptions, photo);
 
         if (missionTarget != null)
             missionTarget.SetActive(true);
@@ -58,6 +39,10 @@ public class MissionMessageSender : MonoBehaviour
             DetectorAppUI.Instance.Activate(detectorTarget);
 
         LastSent = this;
-        alreadySent = true;
     }
+
+    // void Update()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.E)) SendMissionMessage();
+    // }
 }

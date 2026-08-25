@@ -14,6 +14,8 @@ public class Dialogue
     public string name;
     public string text;
 
+    public string triggerType;
+
     public bool isOption;
     public string OptionA;
     public string OptionB;
@@ -70,10 +72,10 @@ public class DialogueManager : MonoBehaviour
         waitTime = new WaitForSeconds(typingTime);
     }
 
-    public void InitDialogue(Queue<Dialogue> dialogueBox)
+    public void InitDialogue(Queue<Dialogue> InputDialogue)
     {
         
-        this.dialogueBox = dialogueBox;
+        dialogueBox = InputDialogue;
         OnOffDialogue(true);
         if (dialogueBox.Count > 0)
         {
@@ -117,6 +119,7 @@ public class DialogueManager : MonoBehaviour
             onDialogueEnd?.Invoke();
         }
         focusUI.SetActive(isOn);
+        //임시 행동 정지
         if(QuarterViewWalkableNavigator2D.instance != null) QuarterViewWalkableNavigator2D.instance.isDialogue = isOn;
         textBar.rectTransform.DOSizeDelta(isOn ? new(1920, 300) : Vector2.zero, 0.5f);
         isSkip = !isSkip;
@@ -147,7 +150,9 @@ public class DialogueManager : MonoBehaviour
         tempText = curDialogue.text;
         tempText = tempText.Replace("\\", "\n");
         tempText = tempText.Replace("|", ",");
-        GlobalEvent.Event(curDialogue.startEventName, false);
+        StoryManager.instance.Event(curDialogue.startEventName, false);
+        StoryManager.instance.triggerId = curDialogue.triggerType;
+        isSkip = false;
 
         StartCoroutine(TypingText());
     }
@@ -174,7 +179,7 @@ public class DialogueManager : MonoBehaviour
             isOption = true;
             OnOption();
         }else isTyping = false;
-        GlobalEvent.Event(curDialogue.endEventName, true);
+        StoryManager.instance.Event(curDialogue.endEventName, true);
     }
 
     public void Skip()

@@ -25,27 +25,60 @@ public class DataManager : MonoBehaviour
         string[] rows = data.Split('\n');
         for (int i = 1; i < rows.Length; i++)
         {
+            if (string.IsNullOrWhiteSpace(rows[i])) continue;
+
             string[] columns = rows[i].Split(',');
-            if(columns.Length == 0) continue;
-            if(columns[0] == "") continue;
-            if(index != int.Parse(columns[0])) continue;
-            //Debug.Log($"{rows[i]}");
+            if (columns.Length < 8) continue;
+            if (string.IsNullOrEmpty(columns[0])) continue;
+            if (index != int.Parse(columns[0])) continue;
+
             var newText = new Dialogue()
+            {
+                index = index,
+                name = columns[1].Trim(),
+                text = columns[2].Trim(),
+                triggerType = columns[3].Trim()
+            };
+
+            if (!string.IsNullOrEmpty(columns[4]))
+            {
+                newText.isOption = true;
+                newText.OptionA = columns[4].Trim();
+                newText.OptionB = columns[5].Trim();
+            }
+
+            newText.startEventName = columns[6].Trim();
+            newText.endEventName = columns[7].Trim();
+
+            dialogBox.Enqueue(newText);
+        }
+        return dialogBox;
+    }
+
+    public List<MessengerMessageData> ParseMessageData(string data, int index)
+    {
+        List<MessengerMessageData> messageBox = new();
+        string[] rows = data.Split('\n');
+        for (int i = 1; i < rows.Length; i++)
+        {
+            string[] columns = rows[i].Split(',');
+            if (columns.Length == 0) continue;
+            if (columns[0] == "") continue;
+            if (index != int.Parse(columns[0])) continue;
+
+            MessengerMessageData message = new()
             {
                 name = columns[1],
                 text = columns[2],
             };
-            if (columns[3] != "")
-            {
-                newText.isOption = true;
-                newText.OptionA = columns[3];
-                newText.OptionB = columns[4];
-            }
-            newText.startEventName = columns[5];
-            newText.endEventName = columns[6];
-            
-            dialogBox.Enqueue(newText);
+            if (columns[3] != "") message.replyOptions = columns[3].Split(']');
+
+            //리소스 연결
+            //if(columns[4] != "") message.photo = columns[4];
+
+
+            messageBox.Add(message);
         }
-        return dialogBox;
+        return messageBox;
     }
 }

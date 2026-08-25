@@ -8,9 +8,7 @@ public class DialogueObj : MonoBehaviour
 
     void Start()
     {
-        TryGetComponent<InteractionPoint2D>(out var interactionPoint);
-        Debug.Log(interactionPoint == null);
-        if (interactionPoint != null)
+        if (TryGetComponent<InteractionPoint2D>(out var interactionPoint))
         {
             interactionPoint.onInteract.AddListener(() => Trigger());
         }

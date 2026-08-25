@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class MessengerMessageData
 {
+    public string name;
     [TextArea] public string text;
     public Sprite photo;
     public bool isFromMe = false;

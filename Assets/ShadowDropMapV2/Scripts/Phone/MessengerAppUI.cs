@@ -66,23 +66,17 @@ public class MessengerAppUI : MonoBehaviour
         RefreshUnreadBadges();
     }
 
-    public void ReceiveMessage(string contactName, string text, Sprite photo = null,
-        string[] replyOptions = null, Sprite avatarSprite = null)
+    public void ReceiveMessage(MessengerMessageData data, Sprite avatarSprite = null)
     {
-        ChatThread thread = threads.Find(item => item.contactName == contactName);
+        ChatThread thread = threads.Find(item => item.contactName == data.name);
         if (thread == null)
         {
-            thread = new ChatThread { contactName = contactName, avatarSprite = avatarSprite };
+            thread = new ChatThread { contactName = data.name, avatarSprite = avatarSprite };
             threads.Add(thread);
         }
 
-        thread.messages.Add(new MessengerMessageData
-        {
-            text = text,
-            photo = photo,
-            isFromMe = false,
-            replyOptions = replyOptions
-        });
+        data.isFromMe = false;
+        thread.messages.Add(data);
         thread.hasUnread = true;
         thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
 
@@ -219,20 +213,24 @@ public class MessengerAppUI : MonoBehaviour
 
         openThread.messages.Add(new MessengerMessageData { text = text, isFromMe = true });
 
-        if (text == "네, 할게요")
+        if (TryGetComponent(out StoryTarget storyTarget))
         {
-            if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.ShowAlertBorder();
-            MissionMessageSender mission = MissionMessageSender.LastSent;
-            if (mission != null && !string.IsNullOrEmpty(mission.missionTitle))
-            {
-                openThread.messages.Add(new MessengerMessageData
-                {
-                    text = "다음 임무:\n" + mission.missionTitle,
-                    isFromMe = false,
-                    isSystemBox = true
-                });
-            }
+            StoryManager.instance.TryPlayStory(storyTarget.targetId);
         }
+        // if (text == "네, 할게요")
+        // {
+        //     if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.ShowAlertBorder();
+        //     MissionMessageSender mission = MissionMessageSender.LastSent;
+        //     // if (mission != null && !string.IsNullOrEmpty(mission.missionTitle))
+        //     // {
+        //     //     openThread.messages.Add(new MessengerMessageData
+        //     //     {
+        //     //         text = "다음 임무:\n" + mission.missionTitle,
+        //     //         isFromMe = false,
+        //     //         isSystemBox = true
+        //     //     });
+        //     // }
+        // }
 
         RebuildChatDetail();
     }

@@ -8,7 +8,7 @@ public class Intro : MonoBehaviour
 {
     [SerializeField] private TextAsset dialogue;
     [SerializeField] private int index;
-    [SerializeField] private Image img;
+    [SerializeField] private Image fade;
     private bool isDialogue;
     bool isEnd;
 
@@ -29,7 +29,7 @@ public class Intro : MonoBehaviour
     {
         var temp = DataManager.instance.ParseDialogueData(dialogue.text, index);
         if(temp.Count != 0) return;
-        img.DOFade(1, 1f).OnComplete(() =>
+        fade.DOFade(1, 0.5f).OnComplete(() =>
                 {
                     Debug.Log($"[Intro] Load Scene");
                     SceneManager.LoadScene(2);
