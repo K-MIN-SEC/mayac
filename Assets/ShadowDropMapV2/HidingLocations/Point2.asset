@@ -18,4 +18,12 @@ MonoBehaviour:
   - {fileID: -855298285791758126, guid: fa66f3819953a4e4eb738807680354cf, type: 3}
   - {fileID: 6937817954938267909, guid: 759271dff3e1b5549bc9fc165c901e48, type: 3}
   - {fileID: -6470460504253458178, guid: 3f1df49e2102aa740819743f21600a12, type: 3}
-  spotNames: [Entrance, Mailboxes, Door frame]
+  spotNames:
+  - "\uD654\uBD84"
+  - "\uC0C1\uC790"
+  - "\uBD09\uC9C0"
+  correctSpotIndex: 2
+  spotPositions:
+  - {x: -51, y: -307}
+  - {x: 310, y: -399}
+  - {x: -667, y: -302}

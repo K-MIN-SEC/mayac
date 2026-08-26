@@ -19,4 +19,14 @@ MonoBehaviour:
   - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
   - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
   - {fileID: -4178046375966092550, guid: d2426d0766dd4164089a98660fcd8537, type: 3}
-  spotNames: [Stairway, Utility box, Window ledge, Side door]
+  spotNames:
+  - "\uD658\uD48D\uAD6C"
+  - "\uBD09\uC9C0"
+  - "\uD3EC\uC2A4\uD130"
+  - "\uC950\uAD6C\uBA4D"
+  correctSpotIndex: 3
+  spotPositions:
+  - {x: -784, y: -5}
+  - {x: -485, y: -413}
+  - {x: -297, y: -134}
+  - {x: 714, y: -360}

@@ -18,4 +18,12 @@ MonoBehaviour:
   - {fileID: -855298285791758126, guid: dd7b659265cef514d823a4cfb35da0e6, type: 3}
   - {fileID: 6937817954938267909, guid: 58799e23c96b8ec4bb6b8fe8fbafc416, type: 3}
   - {fileID: -6470460504253458178, guid: a7c9fce10169fc44ba617a964b664cbb, type: 3}
-  spotNames: [Pipe, Wall recess, Service door]
+  spotNames:
+  - "\uD1B5"
+  - "\uC0C1\uC790"
+  - "\uBD09\uC9C0"
+  correctSpotIndex: 0
+  spotPositions:
+  - {x: -492, y: -437}
+  - {x: 668, y: -278}
+  - {x: -57, y: -248}

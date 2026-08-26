@@ -18,4 +18,12 @@ MonoBehaviour:
   - {fileID: -855298285791758126, guid: 8483f924504a52144b378cc464afcfab, type: 3}
   - {fileID: 6937817954938267909, guid: 66446149d9bb3e844a9a993b67100766, type: 3}
   - {fileID: -6470460504253458178, guid: c9908286c84a6f94a8fc1dc161fbfd21, type: 3}
-  spotNames: [Building corner, Alley shadow, Wall fixture]
+  spotNames:
+  - "\uD654\uBD84"
+  - "\uB098\uBB34 \uB458"
+  - "\uB465\uADFC"
+  correctSpotIndex: 2
+  spotPositions:
+  - {x: -396, y: -229}
+  - {x: 659, y: -84}
+  - {x: 308, y: -336}

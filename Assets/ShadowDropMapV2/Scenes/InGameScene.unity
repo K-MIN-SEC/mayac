@@ -4007,7 +4007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &254949564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4568,6 +4568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 1
+  isCorrectSpot: 0
   spotImage: {fileID: 0}
 --- !u!114 &295861853
 MonoBehaviour:
@@ -7761,6 +7762,8 @@ MonoBehaviour:
   - Stairway
   - Utility box
   - Window ledge
+  correctSpotIndex: -1
+  spotPositions: []
 --- !u!4 &457229238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
@@ -7955,6 +7958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 3
+  isCorrectSpot: 0
   spotImage: {fileID: 0}
 --- !u!114 &467410249
 MonoBehaviour:
@@ -8081,7 +8085,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HidingPanelManager
   examinePanel: {fileID: 2004461037}
   photoImage: {fileID: 535550158}
-  hotspotButtons: []
+  hotspotButtons:
+  - {fileID: 295861852}
+  - {fileID: 997794882}
+  - {fileID: 467410248}
   confirmDialog: {fileID: 254949563}
   confirmText: {fileID: 1323844471}
 --- !u!4 &471627623
@@ -9031,7 +9038,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_Name
-      value: Stroy_GetItem
+      value: InteractionPoint_Question
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15071,10 +15078,10 @@ RectTransform:
   - {fileID: 1341880948}
   m_Father: {fileID: 1871396737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 140, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &854215265
 MonoBehaviour:
@@ -17762,6 +17769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 2
+  isCorrectSpot: 0
   spotImage: {fileID: 0}
 --- !u!114 &997794883
 MonoBehaviour:
@@ -23431,6 +23439,8 @@ MonoBehaviour:
   - Stairway
   - Utility box
   - Window ledge
+  correctSpotIndex: -1
+  spotPositions: []
 --- !u!1001 &1384598056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24123,6 +24133,8 @@ MonoBehaviour:
   - Stairway
   - Utility box
   - Window ledge
+  correctSpotIndex: -1
+  spotPositions: []
 --- !u!1 &1420255205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
@@ -26982,10 +26994,10 @@ RectTransform:
   - {fileID: 477507411}
   m_Father: {fileID: 1871396737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 70, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1586535498
 MonoBehaviour:
@@ -27096,6 +27108,8 @@ MonoBehaviour:
   - Stairway
   - Utility box
   - Window ledge
+  correctSpotIndex: -1
+  spotPositions: []
 --- !u!1 &1602290176
 GameObject:
   m_ObjectHideFlags: 0
@@ -27975,7 +27989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
   m_Content: {fileID: 1236082099}
-  m_Horizontal: 0
+  m_Horizontal: 1
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -28692,10 +28706,10 @@ RectTransform:
   - {fileID: 664043264}
   m_Father: {fileID: 1871396737}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1693861666
 MonoBehaviour:
@@ -29219,6 +29233,8 @@ MonoBehaviour:
   - Stairway
   - Utility box
   - Window ledge
+  correctSpotIndex: -1
+  spotPositions: []
 --- !u!1001 &1715151363
 PrefabInstance:
   m_ObjectHideFlags: 0

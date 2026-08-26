@@ -19,4 +19,14 @@ MonoBehaviour:
   - {fileID: 6937817954938267909, guid: b426654f3bf1d3341b82d683e5b1db3f, type: 3}
   - {fileID: -6470460504253458178, guid: a9c85d9350d6aa64e95e29083eff5756, type: 3}
   - {fileID: -4178046375966092550, guid: 4b56f2ce985ec39459f7b4e5e879a43b, type: 3}
-  spotNames: [Drainpipe, Utility cover, Plant pot, Sidewalk edge]
+  spotNames:
+  - "\uC0C1\uC790"
+  - "\uD1B5"
+  - "\uBCBD\uB3CC"
+  - "\uD654\uBD84"
+  correctSpotIndex: 0
+  spotPositions:
+  - {x: -620, y: -326}
+  - {x: 576, y: 265}
+  - {x: 38, y: 165}
+  - {x: -216, y: -144}
