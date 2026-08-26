@@ -28,7 +28,7 @@ public class MessengerAppUI : MonoBehaviour
 
     [Header("Chat detail")]
     public GameObject chatDetailView;
-    public Transform chatDetailContent;
+    public Transform chatDetailContent; // 💡 여기에 VerticalLayoutGroup과 ContentSizeFitter를 꼭 추가하세요!
     public GameObject bubbleMePrefab;
     public GameObject bubbleOtherPrefab;
     public GameObject systemBoxPrefab;
@@ -56,9 +56,7 @@ public class MessengerAppUI : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
         Instance = this;
-        EnsureNotificationSound();
     }
 
     private void Start()
@@ -66,6 +64,28 @@ public class MessengerAppUI : MonoBehaviour
         RefreshUnreadBadges();
     }
 
+    // 💡 메시지를 추가하는 핵심 공통 함수
+    private void AddMessageToThread(ChatThread thread, MessengerMessageData data)
+    {
+        thread.messages.Add(data);
+        thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
+
+        // 내가 보낸 게 아니라면 알림 처리
+        if (!data.isFromMe)
+        {
+            thread.hasUnread = true;
+            RefreshUnreadBadges();
+            phoneShaker?.Shake();
+            appIconShaker?.Shake();
+            notificationSound?.Play();
+        }
+
+        // 현재 켜져있는 화면 갱신
+        if (chatListView != null && chatListView.activeSelf) RebuildChatList();
+        if (openThread == thread && chatDetailView != null && chatDetailView.activeSelf) RebuildChatDetail();
+    }
+
+    // 외부에서 NPC 메시지 수신할 때 호출
     public void ReceiveMessage(MessengerMessageData data, Sprite avatarSprite = null)
     {
         ChatThread thread = threads.Find(item => item.contactName == data.name);
@@ -76,24 +96,28 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         data.isFromMe = false;
-        thread.messages.Add(data);
-        thread.hasUnread = true;
-        thread.lastMessageDate = System.DateTime.Now.ToString("M월 d일");
+        AddMessageToThread(thread, data);
+    }
 
-        RefreshUnreadBadges();
-        phoneShaker?.Shake();
-        appIconShaker?.Shake();
-        notificationSound?.Play();
+    // 유저가 답장 버튼을 눌렀을 때 호출
+    public void SendReply(string text)
+    {
+        if (openThread == null) return;
 
-        if (chatListView != null && chatListView.activeSelf) RebuildChatList();
-        if (openThread == thread && chatDetailView != null && chatDetailView.activeSelf)
-            RebuildChatDetail();
+        var myMessage = new MessengerMessageData { text = text, isFromMe = true };
+        AddMessageToThread(openThread, myMessage);
+
+        // 스토리에 트리거 전달
+        if (TryGetComponent(out StoryTarget storyTarget))
+        {
+            StoryManager.instance.TryPlayStory(storyTarget.targetId);
+        }
     }
 
     public void OpenChatList()
     {
-        if (chatDetailView != null) chatDetailView.SetActive(false);
-        if (chatListView != null) chatListView.SetActive(true);
+        chatDetailView?.SetActive(false);
+        chatListView?.SetActive(true);
         RebuildChatList();
     }
 
@@ -102,22 +126,19 @@ public class MessengerAppUI : MonoBehaviour
         if (chatListContent == null || chatListItemPrefab == null) return;
 
         foreach (Transform child in chatListContent) Destroy(child.gameObject);
-        if (emptyStateText != null) emptyStateText.SetActive(threads.Count == 0);
+        emptyStateText?.SetActive(threads.Count == 0);
 
         foreach (ChatThread thread in threads)
         {
             GameObject item = Instantiate(chatListItemPrefab, chatListContent);
-            ChatListItemUI itemUI = item.GetComponent<ChatListItemUI>();
-            if (itemUI == null) continue;
-
-            string preview = thread.messages.Count > 0
-                ? thread.messages[thread.messages.Count - 1].text
-                : "";
-            itemUI.Set(thread.contactName, preview, thread.hasUnread,
-                thread.lastMessageDate, thread.avatarSprite);
-
-            ChatThread capturedThread = thread;
-            itemUI.onClick = () => OpenChatDetail(capturedThread);
+            if (item.TryGetComponent(out ChatListItemUI itemUI))
+            {
+                string preview = thread.messages.Count > 0 ? thread.messages[^1].text : "";
+                itemUI.Set(thread.contactName, preview, thread.hasUnread, thread.lastMessageDate, thread.avatarSprite);
+                
+                ChatThread capturedThread = thread;
+                itemUI.onClick = () => OpenChatDetail(capturedThread);
+            }
         }
     }
 
@@ -129,11 +150,12 @@ public class MessengerAppUI : MonoBehaviour
         thread.hasUnread = false;
         RefreshUnreadBadges();
 
-        if (chatListView != null) chatListView.SetActive(false);
-        if (chatDetailView != null) chatDetailView.SetActive(true);
+        chatListView?.SetActive(false);
+        chatDetailView?.SetActive(true);
+        
         if (chatDetailTitle != null) chatDetailTitle.text = thread.contactName;
-        if (chatDetailAvatar != null && thread.avatarSprite != null)
-            chatDetailAvatar.sprite = thread.avatarSprite;
+        if (chatDetailAvatar != null && thread.avatarSprite != null) chatDetailAvatar.sprite = thread.avatarSprite;
+        
         RebuildChatDetail();
     }
 
@@ -141,42 +163,24 @@ public class MessengerAppUI : MonoBehaviour
     {
         if (openThread == null || chatDetailContent == null) return;
 
+        // 💡 수동 좌표 계산 로직 삭제. VerticalLayoutGroup이 알아서 해줌.
         foreach (Transform child in chatDetailContent) Destroy(child.gameObject);
 
-        const float bubbleSpacing = 10f;
-        float yCursor = 0f;
         foreach (MessengerMessageData message in openThread.messages)
         {
-            GameObject prefab = message.isSystemBox
-                ? systemBoxPrefab
-                : (message.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
+            GameObject prefab = message.isSystemBox ? systemBoxPrefab : (message.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
             if (prefab == null) continue;
 
             GameObject bubble = Instantiate(prefab, chatDetailContent);
-            ChatBubbleUI bubbleUI = bubble.GetComponent<ChatBubbleUI>();
-            if (bubbleUI != null) bubbleUI.Set(message.text, message.photo);
-
-            RectTransform bubbleRect = bubble.GetComponent<RectTransform>();
-            if (bubbleRect == null) continue;
-            Vector2 position = bubbleRect.anchoredPosition;
-            position.y = -yCursor;
-            bubbleRect.anchoredPosition = position;
-            yCursor += bubbleRect.sizeDelta.y + bubbleSpacing;
+            if (bubble.TryGetComponent(out ChatBubbleUI bubbleUI))
+            {
+                bubbleUI.Set(message.text, message.photo);
+            }
         }
 
-        RectTransform contentRect = chatDetailContent as RectTransform;
-        if (contentRect != null)
-        {
-            Vector2 size = contentRect.sizeDelta;
-            size.y = yCursor;
-            contentRect.sizeDelta = size;
-        }
-
+        // 스크롤 맨 아래로 내리기 (레이아웃 갱신 후 실행되도록 딜레이 적용 필요할 수 있음)
         Canvas.ForceUpdateCanvases();
-        if (chatDetailScrollRect != null && chatDetailScrollRect.content != null
-            && chatDetailScrollRect.viewport != null
-            && chatDetailScrollRect.content.rect.height > chatDetailScrollRect.viewport.rect.height)
-            chatDetailScrollRect.verticalNormalizedPosition = 0f;
+        if (chatDetailScrollRect != null) chatDetailScrollRect.verticalNormalizedPosition = 0f;
 
         RebuildReplyOptions();
     }
@@ -188,80 +192,28 @@ public class MessengerAppUI : MonoBehaviour
         foreach (Transform child in replyOptionsContent) Destroy(child.gameObject);
         if (openThread == null || openThread.messages.Count == 0) return;
 
-        MessengerMessageData lastMessage = openThread.messages[openThread.messages.Count - 1];
-        bool hasOptions = !lastMessage.isFromMe
-            && lastMessage.replyOptions != null
-            && lastMessage.replyOptions.Length > 0;
+        MessengerMessageData lastMessage = openThread.messages[^1];
+        
+        // 마지막 메시지가 상대방이 보낸 것이고, 선택지가 존재할 때만 띄움
+        bool hasOptions = !lastMessage.isFromMe && lastMessage.replyOptions != null && lastMessage.replyOptions.Length > 0;
         replyOptionsContent.gameObject.SetActive(hasOptions);
+        
         if (!hasOptions || replyOptionButtonPrefab == null) return;
 
         foreach (string option in lastMessage.replyOptions)
         {
             GameObject buttonObject = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
-            TMP_Text label = buttonObject.GetComponentInChildren<TMP_Text>();
-            if (label != null) label.text = option;
+            buttonObject.GetComponentInChildren<TMP_Text>().text = option;
 
-            Button button = buttonObject.GetComponent<Button>();
             string capturedOption = option;
-            if (button != null) button.onClick.AddListener(() => SendReply(capturedOption));
+            buttonObject.GetComponent<Button>().onClick.AddListener(() => SendReply(capturedOption));
         }
-    }
-
-    public void SendReply(string text)
-    {
-        if (openThread == null) return;
-
-        openThread.messages.Add(new MessengerMessageData { text = text, isFromMe = true });
-
-        if (TryGetComponent(out StoryTarget storyTarget))
-        {
-            StoryManager.instance.TryPlayStory(storyTarget.targetId);
-        }
-        // if (text == "네, 할게요")
-        // {
-        //     if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.ShowAlertBorder();
-        //     MissionMessageSender mission = MissionMessageSender.LastSent;
-        //     // if (mission != null && !string.IsNullOrEmpty(mission.missionTitle))
-        //     // {
-        //     //     openThread.messages.Add(new MessengerMessageData
-        //     //     {
-        //     //         text = "다음 임무:\n" + mission.missionTitle,
-        //     //         isFromMe = false,
-        //     //         isSystemBox = true
-        //     //     });
-        //     // }
-        // }
-
-        RebuildChatDetail();
     }
 
     private void RefreshUnreadBadges()
     {
         bool hasUnread = threads.Exists(thread => thread.hasUnread);
-        if (appIconBadge != null) appIconBadge.SetActive(hasUnread);
-        if (phoneButtonBadge != null) phoneButtonBadge.SetActive(hasUnread);
-    }
-
-    private void EnsureNotificationSound()
-    {
-        if (notificationSound == null)
-            notificationSound = GetComponent<AudioSource>() ?? gameObject.AddComponent<AudioSource>();
-        if (notificationSound.clip != null) return;
-
-        const int sampleRate = 22050;
-        const float duration = 0.16f;
-        int sampleCount = Mathf.CeilToInt(sampleRate * duration);
-        float[] samples = new float[sampleCount];
-        for (int index = 0; index < sampleCount; index++)
-        {
-            float time = (float)index / sampleRate;
-            float fade = 1f - (float)index / sampleCount;
-            samples[index] = Mathf.Sin(2f * Mathf.PI * 880f * time) * fade * 0.18f;
-        }
-
-        AudioClip clip = AudioClip.Create("MessageNotification", sampleCount, 1, sampleRate, false);
-        clip.SetData(samples, 0);
-        notificationSound.playOnAwake = false;
-        notificationSound.clip = clip;
+        appIconBadge?.SetActive(hasUnread);
+        phoneButtonBadge?.SetActive(hasUnread);
     }
 }

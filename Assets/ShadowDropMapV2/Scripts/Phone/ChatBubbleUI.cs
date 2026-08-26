@@ -2,126 +2,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ¸Þ½ÅÀú ´ëÈ­ »ó¼¼ È­¸éÀÇ ¸»Ç³¼± ÇÏ³ª(ÇÁ¸®ÆÕ¿¡ ºÎÂø). ÅØ½ºÆ®¸¸ ÀÖÀ» ¼öµµ, »çÁøÀÌ °°ÀÌ ÀÖÀ» ¼öµµ ÀÖÀ½
-// ±¸Á¶: BubbleXXX(·çÆ®, ¹è°æ ¾øÀ½) - PhotoContainer(»çÁø), TextBackground(µÕ±Ù ¹è°æ) - MessageText(±× ÀÚ½Ä)
-// MessageText´Â TextBackground ¾È¿¡¼­ Stretch(¿©¹é¸¸ °íÁ¤)·Î ¾ÉÇôµÎ¸é ÄÚµå°¡ À§Ä¡¸¦ ¾È °Çµå·Áµµ µÊ
 public class ChatBubbleUI : MonoBehaviour
 {
     public TMP_Text messageText;
-    public RectTransform textBackground; // ÅØ½ºÆ®¸¦ °¨½Î´Â µÕ±Ù ¹è°æ (MessageTextÀÇ ºÎ¸ð)
+    public GameObject textBackground; // í˜• ë³€í™˜: RectTransform -> GameObjectë¡œ ë³€ê²½
     public Image photoImage;
-    public GameObject photoContainer;    // »çÁø ºÎ¸ð ¿ÀºêÁ§Æ® (¹è°æ ¾øÀÌ »çÁø¸¸ º¸¿©ÁÜ)
-
-    [Header("¸»Ç³¼± ³Êºñ (ÅØ½ºÆ® ±æÀÌ¿¡ µû¶ó ÀÌ ¹üÀ§ ¾È¿¡¼­ ÀÚµ¿ Á¶ÀýµÊ)")]
-    public float minWidth = 60f;
-    public float maxWidth = 250f;
-    public float horizontalPadding = 24f; // ÅØ½ºÆ® ¹è°æ ÁÂ¿ì ¿©¹é ÇÕ (MessageText Stretch ¸¶Áø°ú ¸ÂÃç¾ß ÇÔ)
-    public float verticalPadding = 16f;   // ÅØ½ºÆ® ¹è°æ »óÇÏ ¿©¹é ÇÕ
-
-    [Header("»çÁøÀÌ °°ÀÌ ÀÖÀ» ¶§")]
-    public float photoWidth = 200f;
-    public float maxPhotoHeight = 150f;
-    public float photoTextSpacing = 8f;
-
-    private RectTransform rootRect;
-    private RectTransform photoContainerRect;
-
-    void Awake()
-    {
-        rootRect = GetComponent<RectTransform>();
-        if (photoContainer != null) photoContainerRect = photoContainer.GetComponent<RectTransform>();
-    }
+    public GameObject photoContainer;
 
     public void Set(string text, Sprite photo)
     {
         bool hasText = !string.IsNullOrEmpty(text);
         bool hasPhoto = photo != null;
 
-        if (messageText != null)
-            messageText.text = text;
+        if (messageText != null) messageText.text = text;
+        if (textBackground != null) textBackground.SetActive(hasText);
 
-        if (textBackground != null)
-            textBackground.gameObject.SetActive(hasText);
-
-        if (photoContainer != null)
-            photoContainer.SetActive(hasPhoto);
-
-        if (photoImage != null && hasPhoto)
-            photoImage.sprite = photo;
-
-        Layout(hasText, hasPhoto, photo);
-    }
-
-    void Layout(bool hasText, bool hasPhoto, Sprite photo)
-    {
-        float contentWidth = minWidth - horizontalPadding;
-        float textHeight = 0f;
-        float photoHeight = 0f;
-        float actualPhotoWidth = photoWidth;
-
-        // 1) »çÁø Å©±â °è»ê (¿øº» ºñÀ² À¯Áö, ¼¼·Î ÃÖ´ëÄ¡ ³ÑÀ¸¸é Æøµµ °°ÀÌ Ãà¼Ò)
-        if (hasPhoto && photo != null && photo.rect.width > 0)
-        {
-            photoHeight = actualPhotoWidth * (photo.rect.height / photo.rect.width);
-            if (photoHeight > maxPhotoHeight)
-            {
-                float scale = maxPhotoHeight / photoHeight;
-                photoHeight = maxPhotoHeight;
-                actualPhotoWidth *= scale;
-            }
-        }
-
-        // 2) ÅØ½ºÆ® Æø/³ôÀÌ °è»ê (MessageText ÀÚÃ¼´Â ¾È °Çµå¸² - Stretch°¡ ¾Ë¾Æ¼­ Ã¤¿ò)
-        if (hasText && messageText != null)
-        {
-            Vector2 unwrapped = messageText.GetPreferredValues(messageText.text, 5000f, 0f);
-            float textWidth = Mathf.Clamp(unwrapped.x, minWidth - horizontalPadding, maxWidth - horizontalPadding);
-            contentWidth = Mathf.Max(contentWidth, textWidth);
-
-            Vector2 wrapped = messageText.GetPreferredValues(messageText.text, contentWidth, 0f);
-            textHeight = wrapped.y;
-        }
-
-        // 3) À§¿¡¼­ºÎÅÍ »çÁø ¡æ ÅØ½ºÆ®¹è°æ ¼ø¼­·Î ¼¼·Î À§Ä¡ ¹èÄ¡
-        float yCursor = 0f;
-
-        if (hasPhoto && photoContainerRect != null)
-        {
-            Vector2 pSize = photoContainerRect.sizeDelta;
-            pSize.x = actualPhotoWidth;
-            pSize.y = photoHeight;
-            photoContainerRect.sizeDelta = pSize;
-
-            Vector2 pPos = photoContainerRect.anchoredPosition;
-            pPos.y = -yCursor;
-            photoContainerRect.anchoredPosition = pPos;
-
-            yCursor += photoHeight;
-            if (hasText) yCursor += photoTextSpacing;
-        }
-
-        if (hasText && textBackground != null)
-        {
-            Vector2 bgSize = textBackground.sizeDelta;
-            bgSize.x = contentWidth + horizontalPadding;
-            bgSize.y = textHeight + verticalPadding;
-            textBackground.sizeDelta = bgSize;
-
-            Vector2 bgPos = textBackground.anchoredPosition;
-            bgPos.y = -yCursor;
-            textBackground.anchoredPosition = bgPos;
-
-            yCursor += bgSize.y;
-        }
-
-        // 4) ·çÆ®(ÀüÃ¼ ·¹ÀÌ¾Æ¿ô ¿µ¿ª) Å©±â = »çÁø + ÅØ½ºÆ®¹è°æ ÇÕÄ£ Å©±â
-        float rootWidth = Mathf.Max(hasPhoto ? actualPhotoWidth : 0f, hasText ? contentWidth + horizontalPadding : 0f);
-        if (rootRect != null)
-        {
-            Vector2 rSize = rootRect.sizeDelta;
-            rSize.x = rootWidth;
-            rSize.y = yCursor;
-            rootRect.sizeDelta = rSize;
-        }
+        if (photoImage != null && hasPhoto) photoImage.sprite = photo;
+        if (photoContainer != null) photoContainer.SetActive(hasPhoto);
+        
+        LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
     }
 }
