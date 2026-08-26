@@ -1,0 +1,7 @@
+﻿idnex,name,text,Trigger,OptionA,OptionB,StartEvent,EndEvent
+0,민우,지원하자마자 바로 연락이 올 줄은 몰랐네\ 하라는대로만 하면 되겠지?,Reply,,,SendMessage,
+1,민우,버스정류장에 물건이 있다고?,,,,,
+1,민우,왜 직접 만나서 안주고…아니다\우선 물건 먼저 가져오자,Interact,,,,
+2,민우,생각보다 엄청 묵직하네…?,,,,,
+2,민우,뭐...\ 방송 소품이라고 하니까 시키는 대로만 하자. 200만 원이 눈앞인데,,,,,
+2,민우,우선 픽업했다고 말해줘야겠다,Reply,,,ReplyMessage,

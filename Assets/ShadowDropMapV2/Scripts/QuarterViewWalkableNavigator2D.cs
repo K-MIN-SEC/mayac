@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody2D))]
 public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 {
+    public static QuarterViewWalkableNavigator2D instance { get; private set; }
+
     [SerializeField] private Texture2D walkableMask;
     [SerializeField] private Transform mapTransform;
     [SerializeField] private Camera inputCamera;
@@ -30,9 +32,14 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     private readonly List<Vector2> path = new List<Vector2>();
     private int waypointIndex;
 
+    //임시 다이얼로그 변수
+    public bool isDialogue;
+    public bool isStop;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        instance = this;
         if (inputCamera == null)
         {
             inputCamera = Camera.main;
@@ -45,6 +52,12 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     {
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
+            if(isDialogue)
+            {
+                isStop = DialogueManager.instance.TriggerDialogue();
+                return;
+            }
+
             if (IsPointerOverUI(pointerId))
             {
                 return;
@@ -52,7 +65,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
             Vector3 world = inputCamera.ScreenToWorldPoint(
                 new Vector3(screenPosition.x, screenPosition.y, -inputCamera.transform.position.z)
-            );
+            ); 
 
             Collider2D iconHit = Physics2D.OverlapPoint(world, interactionIconLayer);
             if (iconHit != null)
@@ -71,7 +84,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (waypointIndex >= path.Count)
+        if (waypointIndex >= path.Count || isDialogue)
         {
             return;
         }

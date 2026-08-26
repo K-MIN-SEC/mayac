@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8d894af0e245629552539063c551ae, type: 3}
+  m_Name: Point3
+  m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
+  locationName: Point 3
+  background: {fileID: -4178046375966092550, guid: 094137b5deb8dd244bf825400a117804, type: 3}
+  spotSprites:
+  - {fileID: -855298285791758126, guid: dd7b659265cef514d823a4cfb35da0e6, type: 3}
+  - {fileID: 6937817954938267909, guid: 58799e23c96b8ec4bb6b8fe8fbafc416, type: 3}
+  - {fileID: -6470460504253458178, guid: a7c9fce10169fc44ba617a964b664cbb, type: 3}
+  spotNames: [Pipe, Wall recess, Service door]
