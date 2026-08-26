@@ -9031,7 +9031,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_Name
-      value: InteractionPoint_Question
+      value: Stroy_GetItem
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20578,9 +20578,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InGame
   dialogue: {fileID: 4900000, guid: 63e6e75c15d809f4ba39819f8643e107, type: 3}
-  index: 0
   screenFilterImage: {fileID: 1042614284}
   isDialogue: 0
+  index: 0
   isNext: 1
   triggerId: 
 --- !u!4 &1211206269
@@ -27975,7 +27975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ScrollRect
   m_Content: {fileID: 1236082099}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
@@ -33480,7 +33480,6 @@ MonoBehaviour:
     endEventName: 
     isSound: 0
   isTyping: 0
-  panelState: 0
   isEnd: 0
 --- !u!1001 &1998860901
 PrefabInstance:
