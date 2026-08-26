@@ -5,17 +5,18 @@ using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
 
+[Serializable]
 public class PhotoData
 {
-    public string photoId; // 예: "MissionPhoto_1"
-    public Sprite photoSprite; // Assets 하위 아무 폴더에 있는 이미지나 드래그 앤 드롭 가능
+    public string photoId;
+    public Sprite photoSprite;
 }
 
 public class MessengerTrigger : Trigger
 {
     [SerializeField] TextAsset message;
-    public List<PhotoData> photoList = new List<PhotoData>();
-    private Dictionary<string, Sprite> photoDict = new Dictionary<string, Sprite>();
+    public List<PhotoData> photoList = new();
+    private Dictionary<string, Sprite> photoDict = new();
 
     public int index;
 
@@ -51,18 +52,13 @@ public class MessengerTrigger : Trigger
 
         for (int i = 0; i < textData.Count; i++)
         {
-            if (!textData[i].isFromMe)
-            {
-                Debug.Log("ERROR");
-                return;
-            }
+            if (!textData[i].isFromMe) return;
             MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
         }
     }
 
-    void Awake()
+    void Start()
     {
-        // 런타임에 빠르게 찾을 수 있도록 딕셔너리로 변환
         foreach (var data in photoList)
         {
             photoDict.Add(data.photoId, data.photoSprite);

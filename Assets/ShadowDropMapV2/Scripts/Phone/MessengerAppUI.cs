@@ -208,7 +208,6 @@ public class MessengerAppUI : MonoBehaviour
             GameObject buttonObject = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
             buttonObject.GetComponentInChildren<TMP_Text>().text = option;
 
-            Debug.Log($"{option}");
             string capturedOption = option;
             buttonObject.GetComponent<Button>().onClick.AddListener(() =>
             {

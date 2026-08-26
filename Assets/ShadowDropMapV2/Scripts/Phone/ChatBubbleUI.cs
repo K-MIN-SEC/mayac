@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ChatBubbleUI : MonoBehaviour
 {
     public TMP_Text messageText;
-    public GameObject textBackground; // 형 변환: RectTransform -> GameObject로 변경
+    public GameObject textBackground; 
     public Image photoImage;
     public GameObject photoContainer;
 
@@ -17,7 +17,16 @@ public class ChatBubbleUI : MonoBehaviour
         if (messageText != null) messageText.text = text;
         if (textBackground != null) textBackground.SetActive(hasText);
 
-        if (photoImage != null && hasPhoto) photoImage.sprite = photo;
+        if (photoImage != null && hasPhoto) 
+        {
+            photoImage.sprite = photo;
+            
+            if (photoImage.TryGetComponent<AspectRatioFitter>(out var fitter))
+            {
+                fitter.aspectRatio = photo.rect.width / photo.rect.height;
+            }
+        }
+        
         if (photoContainer != null) photoContainer.SetActive(hasPhoto);
         
         LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
