@@ -19,6 +19,7 @@ public class HidingPanelManager : MonoBehaviour
     public TMP_Text confirmText;
 
     private string pendingSpotName;
+    private bool pendingIsCorrect;
 
     private void Awake()
     {
@@ -35,10 +36,21 @@ public class HidingPanelManager : MonoBehaviour
 
     public void OpenExaminePanel(Sprite photo)
     {
-        OpenExaminePanel(photo, null, null);
+        OpenExaminePanel(photo, null, null, -1, null);
     }
 
     public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames)
+    {
+        OpenExaminePanel(photo, spotSprites, spotNames, -1, null);
+    }
+
+    public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames, int correctSpotIndex)
+    {
+        OpenExaminePanel(photo, spotSprites, spotNames, correctSpotIndex, null);
+    }
+
+    // spotPositions: 각 지점을 사진 속 어디에 배치할지 (없으면 null, 그러면 위치는 그대로 둠)
+    public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames, int correctSpotIndex, Vector2[] spotPositions)
     {
         if (photoImage != null)
         {
@@ -48,10 +60,10 @@ public class HidingPanelManager : MonoBehaviour
 
         if (examinePanel != null) examinePanel.SetActive(true);
         if (confirmDialog != null) confirmDialog.SetActive(false);
-        ConfigureHotspots(spotSprites, spotNames);
+        ConfigureHotspots(spotSprites, spotNames, correctSpotIndex, spotPositions);
     }
 
-    private void ConfigureHotspots(Sprite[] spotSprites, string[] spotNames)
+    private void ConfigureHotspots(Sprite[] spotSprites, string[] spotNames, int correctSpotIndex, Vector2[] spotPositions)
     {
         if ((hotspotButtons == null || hotspotButtons.Length == 0) && examinePanel != null)
             hotspotButtons = examinePanel.GetComponentsInChildren<HideSpotHotspot>(true);
@@ -78,7 +90,13 @@ public class HidingPanelManager : MonoBehaviour
             string spotName = spotNames != null && index < spotNames.Length
                 ? spotNames[index]
                 : $"Spot {index + 1}";
-            hotspotButtons[index].Configure(spotName, spotSprites[index]);
+            bool isCorrect = index == correctSpotIndex;
+
+            Vector2? position = null;
+            if (spotPositions != null && index < spotPositions.Length)
+                position = spotPositions[index];
+
+            hotspotButtons[index].Configure(spotName, spotSprites[index], isCorrect, position);
         }
     }
 
@@ -108,14 +126,22 @@ public class HidingPanelManager : MonoBehaviour
 
     public void RequestHide(string spotName)
     {
+        RequestHide(spotName, false);
+    }
+
+    public void RequestHide(string spotName, bool isCorrectSpot)
+    {
         pendingSpotName = spotName;
+        pendingIsCorrect = isCorrectSpot;
         if (confirmText != null) confirmText.text = $"Hide in {spotName}?";
         if (confirmDialog != null) confirmDialog.SetActive(true);
     }
 
     public void ConfirmYes()
     {
-        Debug.Log($"Hidden at {pendingSpotName}.");
+        string correctText = pendingIsCorrect ? "정답!" : "오답";
+        Debug.Log($"Hidden at {pendingSpotName}. ({correctText})");
+        HidingRecord.Add(pendingSpotName, pendingIsCorrect);
         CloseExaminePanel();
     }
 
