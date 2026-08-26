@@ -14,9 +14,9 @@ public abstract class StoryManager : MonoBehaviour
     }
 
     [SerializeField] protected TextAsset dialogue;
-    [SerializeField] protected int index;
     [SerializeField] protected Image screenFilterImage;
     [SerializeField] protected bool isDialogue;
+    [SerializeField] public int index;
     public bool isNext;
     public string triggerId = "";
 

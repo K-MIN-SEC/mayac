@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +29,7 @@ public class MessengerAppUI : MonoBehaviour
 
     [Header("Chat detail")]
     public GameObject chatDetailView;
-    public Transform chatDetailContent; // 💡 여기에 VerticalLayoutGroup과 ContentSizeFitter를 꼭 추가하세요!
+    public Transform chatDetailContent;
     public GameObject bubbleMePrefab;
     public GameObject bubbleOtherPrefab;
     public GameObject systemBoxPrefab;
@@ -96,6 +97,15 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         data.isFromMe = false;
+        if(data.replyOptions != null && data.replyOptions.Length > 0)
+        {  
+            Debug.Log(data.replyOptions.Length);
+            if(data.replyOptions.Length > 0)
+            {
+                Debug.Log($"{data.replyOptions[0]} {data.text}");
+            }
+            ShowReplyOptions(data.replyOptions);
+        }
         AddMessageToThread(thread, data);
     }
 
@@ -108,10 +118,7 @@ public class MessengerAppUI : MonoBehaviour
         AddMessageToThread(openThread, myMessage);
 
         // 스토리에 트리거 전달
-        if (TryGetComponent(out StoryTarget storyTarget))
-        {
-            StoryManager.instance.TryPlayStory(storyTarget.targetId);
-        }
+        StoryManager.instance.TryPlayStory("Reply");
     }
 
     public void OpenChatList()
@@ -135,7 +142,7 @@ public class MessengerAppUI : MonoBehaviour
             {
                 string preview = thread.messages.Count > 0 ? thread.messages[^1].text : "";
                 itemUI.Set(thread.contactName, preview, thread.hasUnread, thread.lastMessageDate, thread.avatarSprite);
-                
+
                 ChatThread capturedThread = thread;
                 itemUI.onClick = () => OpenChatDetail(capturedThread);
             }
@@ -152,10 +159,10 @@ public class MessengerAppUI : MonoBehaviour
 
         chatListView?.SetActive(false);
         chatDetailView?.SetActive(true);
-        
+
         if (chatDetailTitle != null) chatDetailTitle.text = thread.contactName;
         if (chatDetailAvatar != null && thread.avatarSprite != null) chatDetailAvatar.sprite = thread.avatarSprite;
-        
+
         RebuildChatDetail();
     }
 
@@ -163,7 +170,7 @@ public class MessengerAppUI : MonoBehaviour
     {
         if (openThread == null || chatDetailContent == null) return;
 
-        // 💡 수동 좌표 계산 로직 삭제. VerticalLayoutGroup이 알아서 해줌.
+        // 수동 좌표 계산 로직 삭제. VerticalLayoutGroup이 알아서 해줌.
         foreach (Transform child in chatDetailContent) Destroy(child.gameObject);
 
         foreach (MessengerMessageData message in openThread.messages)
@@ -181,35 +188,36 @@ public class MessengerAppUI : MonoBehaviour
         // 스크롤 맨 아래로 내리기 (레이아웃 갱신 후 실행되도록 딜레이 적용 필요할 수 있음)
         Canvas.ForceUpdateCanvases();
         if (chatDetailScrollRect != null) chatDetailScrollRect.verticalNormalizedPosition = 0f;
-
-        RebuildReplyOptions();
     }
 
-    private void RebuildReplyOptions()
+    public void ShowReplyOptions(string[] options)
     {
         if (replyOptionsContent == null) return;
 
         foreach (Transform child in replyOptionsContent) Destroy(child.gameObject);
-        if (openThread == null || openThread.messages.Count == 0) return;
 
-        MessengerMessageData lastMessage = openThread.messages[^1];
-        
-        // 마지막 메시지가 상대방이 보낸 것이고, 선택지가 존재할 때만 띄움
-        bool hasOptions = !lastMessage.isFromMe && lastMessage.replyOptions != null && lastMessage.replyOptions.Length > 0;
-        replyOptionsContent.gameObject.SetActive(hasOptions);
-        
-        if (!hasOptions || replyOptionButtonPrefab == null) return;
+        if (options == null || options.Length == 0)
+        {
+            replyOptionsContent.gameObject.SetActive(false);
+            return;
+        }
+        replyOptionsContent.gameObject.SetActive(true);
 
-        foreach (string option in lastMessage.replyOptions)
+        foreach (string option in options)
         {
             GameObject buttonObject = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
             buttonObject.GetComponentInChildren<TMP_Text>().text = option;
 
+            Debug.Log($"{option}");
             string capturedOption = option;
-            buttonObject.GetComponent<Button>().onClick.AddListener(() => SendReply(capturedOption));
+            buttonObject.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                SendReply(capturedOption);
+                replyOptionsContent.gameObject.SetActive(false);
+            });
         }
     }
-
+    
     private void RefreshUnreadBadges()
     {
         bool hasUnread = threads.Exists(thread => thread.hasUnread);

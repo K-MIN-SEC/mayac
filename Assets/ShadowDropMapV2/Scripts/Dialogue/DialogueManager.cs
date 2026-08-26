@@ -49,9 +49,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Dialogue curDialogue;
 
     [HideInInspector] public bool isTyping;
-    [HideInInspector] public bool panelState;
     [HideInInspector] public bool isEnd;
-    bool isSkip = true;
+
+    bool isOn;
+    bool isSkip;
     bool isOption = false;
     bool isOptionA = false;
 
@@ -74,9 +75,7 @@ public class DialogueManager : MonoBehaviour
 
     public void InitDialogue(Queue<Dialogue> InputDialogue)
     {
-        
         dialogueBox = InputDialogue;
-        OnOffDialogue(true);
         if (dialogueBox.Count > 0)
         {
             InputText(dialogueBox.Dequeue());
@@ -92,9 +91,9 @@ public class DialogueManager : MonoBehaviour
         }
         else if (!isTyping)
         {
-            if (isOption && !isOptionA) {dialogueBox.Dequeue(); isOption = false;}
+            if (isOption && !isOptionA) { dialogueBox.Dequeue(); isOption = false; }
             InputText(dialogueBox.Dequeue());
-            if (isOption && isOptionA) {dialogueBox.Dequeue(); isOption = false;}
+            if (isOption && isOptionA) { dialogueBox.Dequeue(); isOption = false; }
         }
         else if (!isOption)
         {
@@ -103,9 +102,9 @@ public class DialogueManager : MonoBehaviour
         return true;
     }
 
-    public void OnOffDialogue(bool isOn)
+    public void OnOffDialogue(bool onOff)
     {
-        if (isOn)
+        if (onOff)
         {
             //cam.DOOrthoSize(3.5f, 0.5f).SetEase(Ease.OutCubic);
             nameText.text = null;
@@ -118,11 +117,11 @@ public class DialogueManager : MonoBehaviour
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
             onDialogueEnd?.Invoke();
         }
-        focusUI.SetActive(isOn);
+        focusUI.SetActive(onOff);
         //임시 행동 정지
-        if(QuarterViewWalkableNavigator2D.instance != null) QuarterViewWalkableNavigator2D.instance.isDialogue = isOn;
-        textBar.rectTransform.DOSizeDelta(isOn ? new(1920, 300) : Vector2.zero, 0.5f);
-        isSkip = !isSkip;
+        if (QuarterViewWalkableNavigator2D.instance != null) QuarterViewWalkableNavigator2D.instance.isDialogue = onOff;
+        textBar.rectTransform.DOSizeDelta(onOff ? new(1920, 300) : Vector2.zero, 0.5f);
+        isSkip = false;
     }
 
     void OnOption()
@@ -145,13 +144,29 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log($"[Dialogue] {dialogue.name} : {dialogue.text}");
         curDialogue = dialogue;
+        StoryManager.instance.triggerId = curDialogue.triggerType;
+        StoryManager.instance.Event(curDialogue.startEventName, false);
+
+        if (string.IsNullOrEmpty(curDialogue.text))
+        {
+            OnOffDialogue(false);
+            isTyping = false;
+            StoryManager.instance.Event(curDialogue.endEventName, true);
+
+            // 만약 기다려야 할 트리거(triggerType)도 없다면 즉시 다음 큐로 진행
+            if (string.IsNullOrEmpty(curDialogue.triggerType))
+            {
+                TriggerDialogue();
+            }
+            return;
+        }
+
+        OnOffDialogue(true);
         nameText.rectTransform.anchoredPosition = new Vector2(0, nameText.rectTransform.anchoredPosition.y);
         nameText.text = curDialogue.name;
         tempText = curDialogue.text;
         tempText = tempText.Replace("\\", "\n");
         tempText = tempText.Replace("|", ",");
-        StoryManager.instance.Event(curDialogue.startEventName, false);
-        StoryManager.instance.triggerId = curDialogue.triggerType;
         isSkip = false;
 
         StartCoroutine(TypingText());
@@ -178,7 +193,8 @@ public class DialogueManager : MonoBehaviour
         {
             isOption = true;
             OnOption();
-        }else isTyping = false;
+        }
+        else isTyping = false;
         StoryManager.instance.Event(curDialogue.endEventName, true);
     }
 

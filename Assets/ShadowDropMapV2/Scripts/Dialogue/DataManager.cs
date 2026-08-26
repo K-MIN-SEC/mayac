@@ -71,11 +71,13 @@ public class DataManager : MonoBehaviour
                 name = columns[1],
                 text = columns[2],
             };
-            if (columns[3] != "") message.replyOptions = columns[3].Split(']');
-
+            if (!string.IsNullOrEmpty(columns[3]))
+            {
+                message.replyOptions = columns[3].Split(']');
+                if(string.IsNullOrEmpty(message.text)) message.isFromMe = true;
+            }
+            
             //리소스 연결
-            //if(columns[4] != "") message.photo = columns[4];
-
 
             messageBox.Add(message);
         }
