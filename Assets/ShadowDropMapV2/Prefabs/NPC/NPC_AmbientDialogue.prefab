@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 4459433595566649428}
   - component: {fileID: 9154495850720030842}
   - component: {fileID: 1370721226370498539}
+  - component: {fileID: 5244195401537439000}
   - component: {fileID: 8341135259705364011}
   m_Layer: 0
   m_Name: NPC_AmbientDialogue
@@ -465,6 +466,20 @@ MonoBehaviour:
   bubbleRect: {fileID: 5333917476948174919}
   showTime: 6
   dialogueDelay: 1
+--- !u!114 &5244195401537439000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107103198720577262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37edb95d67dd4dc7898ced3e0cf9a446, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::NPCBubblePositioner
+  keepBubbleAwayFromPlayer: 1
+  sideSwitchThreshold: 0.05
 --- !u!114 &8341135259705364011
 MonoBehaviour:
   m_ObjectHideFlags: 0
