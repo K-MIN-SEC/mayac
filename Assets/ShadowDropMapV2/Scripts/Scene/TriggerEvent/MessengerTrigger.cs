@@ -18,9 +18,7 @@ public class MessengerTrigger : Trigger
     public List<PhotoData> photoList = new();
     private Dictionary<string, Sprite> photoDict = new();
 
-    public int index;
-
-    protected override void HandleDialogEvent(string curEvent, bool isEnd)
+    protected override void HandleDialogEvent(string curEvent)
     {
         if (curEvent == "SendMessage")
         {
@@ -34,7 +32,7 @@ public class MessengerTrigger : Trigger
 
     private IEnumerator SendMessage()
     {
-        int index = StoryManager.instance.index;
+        int index = StoryManager.instance.dialogueIndex;
         var textData = DataManager.instance.ParseMessageData(message.text, index);
         
         for (int i = 0; i < textData.Count; i++)
@@ -48,7 +46,7 @@ public class MessengerTrigger : Trigger
 
     private void ReplyMessage()
     {
-        int index = StoryManager.instance.index;
+        int index = StoryManager.instance.dialogueIndex;
         var textData = DataManager.instance.ParseMessageData(message.text, index);
 
         for (int i = 0; i < textData.Count; i++)
@@ -59,8 +57,9 @@ public class MessengerTrigger : Trigger
         }
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         foreach (var data in photoList) photoDict.Add(data.photoId, data.photoSprite);
     }
 
@@ -72,5 +71,4 @@ public class MessengerTrigger : Trigger
     }
 
     protected override void TriggerEvent(){}
-    protected override void EndEvent() {}
 }

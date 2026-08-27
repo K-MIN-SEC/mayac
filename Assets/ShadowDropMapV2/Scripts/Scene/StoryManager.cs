@@ -6,17 +6,18 @@ using DG.Tweening;
 public abstract class StoryManager : MonoBehaviour
 {
     public static StoryManager instance { get; private set; }
-    public Action<string, bool> onEvent;
+    public Action<string> onEvent;
 
-    public void Event(string eventName, bool isEnd)
+    public void Event(string eventName)
     {
-        onEvent?.Invoke(eventName, isEnd);
+        onEvent?.Invoke(eventName);
     }
 
     [SerializeField] protected TextAsset dialogue;
     [SerializeField] protected Image screenFilterImage;
     [SerializeField] protected bool isDialogue;
-    [SerializeField] public int index;
+    [SerializeField] public int dialogueIndex;
+    [SerializeField] public int targetIndex;
     public bool isNext;
     public string triggerId = "";
 
@@ -24,12 +25,12 @@ public abstract class StoryManager : MonoBehaviour
 
     private void HandleDialogueEnd()
     {
-        if (string.IsNullOrEmpty(triggerId)) index++;
+        if (string.IsNullOrEmpty(triggerId)) dialogueIndex++;
     }
 
     public bool Trigger()
     {
-        var temp = DataManager.instance.ParseDialogueData(dialogue.text, index);
+        var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
         if (temp.Count == 0) return false;
         DialogueManager.instance.InitDialogue(temp);
         return true;
@@ -40,7 +41,7 @@ public abstract class StoryManager : MonoBehaviour
         //Debug.Log($"{triggerId} {inputId}");
         if (triggerId == inputId)
         {
-            index++;
+            dialogueIndex++;
             triggerId = "";
 
             isDialogue = Trigger();

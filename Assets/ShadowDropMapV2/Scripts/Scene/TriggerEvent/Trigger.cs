@@ -3,9 +3,9 @@ using UnityEngine;
 
 public abstract class Trigger : MonoBehaviour
 {
-    protected string eventName;
+    protected virtual string eventName => "";
 
-    protected virtual void OnEnable()
+    protected virtual void Start()
     {
         StoryManager.instance.onEvent += HandleDialogEvent;
     }
@@ -15,15 +15,10 @@ public abstract class Trigger : MonoBehaviour
         StoryManager.instance.onEvent -= HandleDialogEvent;
     }
 
-    protected virtual void HandleDialogEvent(string curEvent, bool isEnd)
+    protected virtual void HandleDialogEvent(string curEvent)
     {
-        if (curEvent == eventName)
-        {
-            if (isEnd) EndEvent();
-            else TriggerEvent();
-        }
+        if (curEvent == eventName) TriggerEvent();
     }
     
     protected abstract void TriggerEvent();
-    protected abstract void EndEvent();
 }

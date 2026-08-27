@@ -97,11 +97,7 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         data.isFromMe = false;
-        if (data.replyOptions != null && data.replyOptions.Length > 0)
-        {
-            Debug.Log(data.replyOptions.Length);
-            ShowReplyOptions(data.replyOptions);
-        }
+        if (data.replyOptions != null && data.replyOptions.Length > 0) ShowReplyOptions(data.replyOptions);
         AddMessageToThread(thread, data);
     }
 
@@ -184,7 +180,6 @@ public class MessengerAppUI : MonoBehaviour
     {
         if (openThread == null || chatDetailContent == null) return;
 
-        // 수동 좌표 계산 로직 삭제. VerticalLayoutGroup이 알아서 해줌.
         foreach (Transform child in chatDetailContent) Destroy(child.gameObject);
 
         foreach (MessengerMessageData message in openThread.messages)

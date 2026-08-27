@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ObjMove : Trigger
 {
+    protected override string eventName => "ObjMove";
     [SerializeField] private List<RectTransform> objList = new();
     [SerializeField] private List<Vector2> targetPos = new();
 
@@ -14,18 +15,6 @@ public class ObjMove : Trigger
         if(index > 0)  objList[index].DOComplete();
         index++;
 
-        Debug.Log($"{index} Trigger");
         objList[index].DOAnchorPos(targetPos[index], 0.5f);
-    }
-
-    protected override void EndEvent()
-    {
-        Debug.Log($"{index} End");
-        
-    }
-
-    void Start()
-    {
-        eventName = "ObjMove";
     }
 }

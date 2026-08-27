@@ -1,37 +1,30 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// ÆùÀÇ "Å½»ö±â" ¾Û È­¸é.
-// Å½»ö±â °ü·Ã ¸Ş½ÃÁö°¡ ¿À±â Àü¿£ "Å½»ö±â¸¦ »ç¿ëÇÒ ÀÏÀÌ ¾ø½À´Ï´Ù" ¾È³»¸¸ º¸¿©ÁÜ.
-// ¸Ş½ÃÁö°¡ ¿À¸é(Activate È£Ãâ) ÁöÁ¤µÈ ¸ñÇ¥(µ¸º¸±â Á¶»ç ÁöÁ¡) ÂÊÀ¸·Î,
-// °¡±î¿öÁú¼ö·Ï ÀÚÁÖ ¹İÂ¦ÀÌ¸ç ¾Ë·ÁÁÜ (°Å¸® ¸Ö¸é ´À¸®°Ô, °¡±î¿ì¸é ºü¸£°Ô).
 public class DetectorAppUI : MonoBehaviour
 {
     public static DetectorAppUI Instance { get; private set; }
 
-    [Header("È­¸é ¿ä¼Ò")]
-    public GameObject inactiveMessage;   // "Å½»ö±â¸¦ »ç¿ëÇÒ ÀÏÀÌ ¾ø½À´Ï´Ù" ¹®±¸ ¿ÀºêÁ§Æ®
-    public GameObject activeContent;     // ½ÇÁ¦ Å½Áö±â UI(¹Ù´Ã/¾ÆÀÌÄÜ µî) ¿ÀºêÁ§Æ®
+    [Header("UI ìƒíƒœ ê´€ë¦¬")]
+    public GameObject inactiveMessage;
+    public GameObject activeContent;
+    public GameObject appIconBadgeDetector;
 
-    [Header("Å½»ö±â ¿¬Ãâ")]
-    public Transform player;             // ºñ¿öµÎ¸é "Player" ÅÂ±×·Î ÀÚµ¿ Å½»ö
-    public RectTransform needle;         // ¸ñÇ¥ ¹æÇâÀ» °¡¸®Å°´Â ¹Ù´Ã (¾øÀ¸¸é ºñ¿öµÖµµ µÊ)
+    [Header("ê¸ˆì† íƒì§€ê¸° ì—°ì¶œ")]
+    public Transform player;
     public Image detectorIcon;
     public Color normalColor = Color.white;
     public Color alertColor = Color.yellow;
-    public UIShaker shaker;
+    public UIShaker shaker; // í™”ë©´ í”ë“¤ë¦¼ ì—°ì¶œ
 
-    [Header("È¨ È­¸é Å½»ö±â ¾ÆÀÌÄÜ ¾Ë¸² ¹èÁö (AppIconBadge(detector) ¿ÀºêÁ§Æ® ¿¬°á)")]
-    public GameObject appIconBadgeDetector; // Æò¼Ò¿£ ²¨Á®ÀÖ´Ù°¡, "³×, ÇÒ°Ô¿ä" ´äÀåÇÏ¸é ÄÑÁö´Â »¡°£ Á¡
+    [Header("íƒì§€ ì„¤ì •")]
+    public float detectRadius = 15f;         // ê°ì§€ ì‹œì‘ ê±°ë¦¬
+    public float closeRadius = 1.5f;         // ìµœê³  ì†ë„ ë„ë‹¬ ê±°ë¦¬
+    public float slowestPingInterval = 1.2f; // ë©€ ë•Œì˜ ì•ŒëŒ ì£¼ê¸° (ì´ˆ)
+    public float fastestPingInterval = 0.15f;// ê°€ê¹Œìš¸ ë•Œì˜ ì•ŒëŒ ì£¼ê¸° (ì´ˆ)
 
-    [Header("Å½Áö ¹üÀ§")]
-    public float detectRadius = 15f;
-    public float closeRadius = 1.5f;
-    public float slowestPingInterval = 1.2f;
-    public float fastestPingInterval = 0.15f;
-
-    private bool isActivated = false;   // Å½»ö±â »ç¿ë °¡´É ¿©ºÎ (¸Ş½ÃÁö·Î È°¼ºÈ­µÊ)
-    private bool isScreenOpen = false;  // Áö±İ ÀÌ È­¸éÀ» ½ÇÁ¦·Î º¸°í ÀÖ´ÂÁö
+    private bool isActivated = false;
+    private bool isScreenOpen = false;
     private Transform currentTarget;
     private float pingTimer;
 
@@ -51,7 +44,7 @@ public class DetectorAppUI : MonoBehaviour
         RefreshVisibility();
     }
 
-    // MissionMessageSender µî¿¡¼­, "Å½»ö±â¸¦ ½á¾ß ÇÏ´Â" ¸Ş½ÃÁö°¡ ¿ÔÀ» ¶§ ÀÌ°É È£ÃâÇØ¼­ ÄÔ
+    // ì™¸ë¶€ ì´ë²¤íŠ¸(ë©”ì‹œì§€)ì—ì„œ íƒ€ê²Ÿì„ ì§€ì •í•˜ë©° í™œì„±í™”í•  ë•Œ í˜¸ì¶œ
     public void Activate(Transform target)
     {
         isActivated = true;
@@ -59,11 +52,10 @@ public class DetectorAppUI : MonoBehaviour
         RefreshVisibility();
     }
 
-    // SmartphoneUIManager°¡ ÀÌ È­¸éÀ» ¿­ ¶§/¶°³¯ ¶§ È£ÃâÇØÁÜ
     public void OnScreenOpened()
     {
         isScreenOpen = true;
-        HideAlertBorder(); // ¾ÛÀ» ¿­¾î¼­ È®ÀÎÇßÀ¸´Ï ¾Ë¸² Å×µÎ¸®´Â ²¨ÁÜ
+        HideAlertBorder();
     }
 
     public void OnScreenClosed()
@@ -71,20 +63,17 @@ public class DetectorAppUI : MonoBehaviour
         isScreenOpen = false;
     }
 
-    // "³×, ÇÒ°Ô¿ä" ´äÀåÀ» °í¸£¸é È£ÃâµÇ¾î AppIconBadge(detector)¸¦ ÄÔ
     public void ShowAlertBorder()
     {
-        if (appIconBadgeDetector != null)
-            appIconBadgeDetector.SetActive(true);
+        if (appIconBadgeDetector != null) appIconBadgeDetector.SetActive(true);
     }
 
     public void HideAlertBorder()
     {
-        if (appIconBadgeDetector != null)
-            appIconBadgeDetector.SetActive(false);
+        if (appIconBadgeDetector != null) appIconBadgeDetector.SetActive(false);
     }
 
-    void RefreshVisibility()
+    private void RefreshVisibility()
     {
         if (inactiveMessage != null) inactiveMessage.SetActive(!isActivated);
         if (activeContent != null) activeContent.SetActive(isActivated);
@@ -92,22 +81,17 @@ public class DetectorAppUI : MonoBehaviour
 
     void Update()
     {
-        // Å½»ö±â°¡ È°¼ºÈ­(¸Ş½ÃÁö·Î ÄÑÁü) + Áö±İ ÀÌ È­¸éÀ» ½ÇÁ¦·Î º¸°í ÀÖÀ» ¶§¸¸ µ¿ÀÛ
+        // ì•±ì´ ì¼œì ¸ìˆê³ , íƒ€ê²Ÿì´ ì¡´ì¬í•  ë•Œë§Œ ê±°ë¦¬ ì—°ì‚° ìˆ˜í–‰
         if (!isActivated || !isScreenOpen || currentTarget == null || player == null) return;
 
-        Vector2 toTarget = (Vector2)currentTarget.position - (Vector2)player.position;
-        float distance = toTarget.magnitude;
+        Debug.Log("NOW");
+        float distance = Vector2.Distance(player.position, currentTarget.position);
 
-        if (needle != null && toTarget.sqrMagnitude > 0.0001f)
-        {
-            float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-            needle.localRotation = Quaternion.Euler(0f, 0f, angle - 90f);
-        }
+        // íƒì§€ ë²”ìœ„ ë°–ì´ë©´ ì•„ë¬´ ë°˜ì‘ ì—†ìŒ
+        if (distance > detectRadius) return;
 
-        if (distance > detectRadius)
-            return; // ¹üÀ§ ¹ÛÀÌ¸é Á¶¿ëÈ÷ ´ë±â
-
-        float t = Mathf.InverseLerp(detectRadius, closeRadius, distance); // °¡±î¿ï¼ö·Ï 1¿¡ °¡±î¿ò
+        // ê¸ˆì† íƒì§€ê¸° í•µì‹¬ ë¡œì§: ê±°ë¦¬ì— ë¹„ë¡€í•˜ì—¬ ì•ŒëŒ ì£¼ê¸°(Interval) ê³„ì‚°
+        float t = Mathf.InverseLerp(detectRadius, closeRadius, distance);
         float currentInterval = Mathf.Lerp(slowestPingInterval, fastestPingInterval, t);
 
         pingTimer -= Time.deltaTime;
@@ -118,16 +102,16 @@ public class DetectorAppUI : MonoBehaviour
         }
     }
 
-    void Ping()
+    private void Ping()
     {
         if (detectorIcon != null) detectorIcon.color = alertColor;
         if (shaker != null) shaker.Shake();
 
         CancelInvoke(nameof(ResetColor));
-        Invoke(nameof(ResetColor), 0.15f);
+        Invoke(nameof(ResetColor), 0.15f); // 0.15ì´ˆ ë’¤ ì›ë˜ ìƒ‰ìœ¼ë¡œ ë³µê·€
     }
 
-    void ResetColor()
+    private void ResetColor()
     {
         if (detectorIcon != null) detectorIcon.color = normalColor;
     }

@@ -145,13 +145,13 @@ public class DialogueManager : MonoBehaviour
         //Debug.Log($"[Dialogue] {dialogue.name} : {dialogue.text}");
         curDialogue = dialogue;
         StoryManager.instance.triggerId = curDialogue.triggerType;
-        StoryManager.instance.Event(curDialogue.startEventName, false);
+        StoryManager.instance.Event(curDialogue.startEventName);
 
         if (string.IsNullOrEmpty(curDialogue.text))
         {
             OnOffDialogue(false);
             isTyping = false;
-            StoryManager.instance.Event(curDialogue.endEventName, true);
+            StoryManager.instance.Event(curDialogue.endEventName);
 
             // 만약 기다려야 할 트리거(triggerType)도 없다면 즉시 다음 큐로 진행
             if (string.IsNullOrEmpty(curDialogue.triggerType))
@@ -193,7 +193,7 @@ public class DialogueManager : MonoBehaviour
             OnOption();
         }
         else isTyping = false;
-        StoryManager.instance.Event(curDialogue.endEventName, true);
+        StoryManager.instance.Event(curDialogue.endEventName);
     }
 
     public void Skip()
