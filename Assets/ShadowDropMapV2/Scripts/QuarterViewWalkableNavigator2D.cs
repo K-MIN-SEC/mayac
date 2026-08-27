@@ -52,7 +52,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     {
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
-            if(isDialogue)
+            if (isDialogue)
             {
                 isStop = DialogueManager.instance.TriggerDialogue();
                 return;
@@ -65,7 +65,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
             Vector3 world = inputCamera.ScreenToWorldPoint(
                 new Vector3(screenPosition.x, screenPosition.y, -inputCamera.transform.position.z)
-            ); 
+            );
 
             Collider2D iconHit = Physics2D.OverlapPoint(world, interactionIconLayer);
             if (iconHit != null)
@@ -121,32 +121,67 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
         }
 
         List<Vector2Int> cells = FindPath(start, goal);
-        if (cells.Count == 0)
-        {
-            return false;
-        }
+        if (cells.Count == 0) return false;
 
         path.Clear();
-        Vector2Int previousDirection = new Vector2Int(int.MinValue, int.MinValue);
-        for (int index = 0; index < cells.Count; index++)
+
+        // 스무딩(String Pulling) 처리
+        int currentIndex = 0;
+        //path.Add(CellToWorld(cells[currentIndex]));
+
+        while (currentIndex < cells.Count - 1)
         {
-            Vector2Int direction = index == 0
-                ? Vector2Int.zero
-                : cells[index] - cells[index - 1];
-            bool directionChanged = index > 1 && direction != previousDirection;
-            if (directionChanged)
+            int nextIndex = currentIndex + 1;
+
+            // 현재 위치에서 가장 멀리 있는 타일부터 거꾸로 검사
+            for (int i = cells.Count - 1; i > currentIndex + 1; i--)
             {
-                path.Add(CellToWorld(cells[index - 1]));
+                if (HasLineOfSight(cells[currentIndex], cells[i]))
+                {
+                    nextIndex = i; // 장애물이 없으면 중간 타일들을 전부 건너뜀
+                    break;
+                }
             }
 
-            if (index > 0)
+            path.Add(CellToWorld(cells[nextIndex]));
+            currentIndex = nextIndex;
+        }
+
+        waypointIndex = 0;
+        return true;
+    }
+
+    private bool HasLineOfSight(Vector2Int start, Vector2Int end)
+    {
+        int x0 = start.x;
+        int y0 = start.y;
+        int x1 = end.x;
+        int y1 = end.y;
+
+        int dx = Mathf.Abs(x1 - x0);
+        int dy = Mathf.Abs(y1 - y0);
+        int sx = x0 < x1 ? 1 : -1;
+        int sy = y0 < y1 ? 1 : -1;
+        int err = dx - dy;
+
+        while (true)
+        {
+            if (!IsWalkable(x0, y0)) return false;
+            if (x0 == x1 && y0 == y1) break;
+
+            int e2 = 2 * err;
+            if (e2 > -dy)
             {
-                previousDirection = direction;
+                err -= dy;
+                x0 += sx;
+            }
+            if (e2 < dx)
+            {
+                err += dx;
+                y0 += sy;
             }
         }
 
-        path.Add(CellToWorld(cells[cells.Count - 1]));
-        waypointIndex = 0;
         return true;
     }
 
@@ -227,11 +262,8 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
     private void BlockFootprints()
     {
-        QuarterViewFootprintObstacle2D[] obstacles =
-            FindObjectsByType<QuarterViewFootprintObstacle2D>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None
-            );
+        QuarterViewFootprintObstacle2D[] obstacles = 
+        FindObjectsByType<QuarterViewFootprintObstacle2D>(FindObjectsInactive.Exclude);
 
         foreach (QuarterViewFootprintObstacle2D obstacle in obstacles)
         {
