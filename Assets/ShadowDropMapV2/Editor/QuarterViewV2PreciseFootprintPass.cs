@@ -123,8 +123,7 @@ public static class QuarterViewV2PreciseFootprintPass
         int updated = 0;
         foreach (QuarterViewFootprintObstacle2D obstacle in
                  UnityEngine.Object.FindObjectsByType<QuarterViewFootprintObstacle2D>(
-                     FindObjectsInactive.Include,
-                     FindObjectsSortMode.None
+                     FindObjectsInactive.Include
                  ))
         {
             if (obstacle.gameObject.scene != scene)

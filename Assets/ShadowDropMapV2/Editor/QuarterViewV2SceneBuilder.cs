@@ -97,7 +97,7 @@ public static class QuarterViewV2SceneBuilder
     {
         EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
         QuarterViewWalkableNavigator2D navigator =
-            UnityEngine.Object.FindFirstObjectByType<QuarterViewWalkableNavigator2D>();
+            UnityEngine.Object.FindAnyObjectByType<QuarterViewWalkableNavigator2D>();
         if (navigator == null)
         {
             throw new InvalidOperationException("QuarterViewV2 navigator was not found in the scene.");

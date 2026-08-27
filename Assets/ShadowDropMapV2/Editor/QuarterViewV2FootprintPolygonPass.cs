@@ -48,7 +48,7 @@ public static class QuarterViewV2FootprintPolygonPass
         int props = ConfigureSceneObjects(propParent, false);
 
         QuarterViewWalkableNavigator2D navigator =
-            Object.FindFirstObjectByType<QuarterViewWalkableNavigator2D>();
+            Object.FindAnyObjectByType<QuarterViewWalkableNavigator2D>();
         if (navigator != null)
         {
             SerializedObject serialized = new SerializedObject(navigator);
