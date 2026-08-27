@@ -39,7 +39,7 @@ public class DataManager : MonoBehaviour
                 text = columns[2].Trim(),
                 triggerType = columns[3].Trim()
             };
-
+            newText.text = newText.text.Replace("\\", "\n").Replace("|", ",");
             if (!string.IsNullOrEmpty(columns[4]))
             {
                 newText.isOption = true;
@@ -68,16 +68,16 @@ public class DataManager : MonoBehaviour
 
             MessengerMessageData message = new()
             {
-                name = columns[1],
-                text = columns[2],
+                name = columns[1].Trim(),
+                text = columns[2].Trim(),
             };
+            message.text = message.text.Replace("\\", "\n").Replace("|", ",");
             if (!string.IsNullOrEmpty(columns[3]))
             {
-                message.replyOptions = columns[3].Split(']');
+                message.replyOptions = columns[3].Trim().Split(']');
                 if(string.IsNullOrEmpty(message.text)) message.isFromMe = true;
             }
-            
-            //리소스 연결
+            if(!string.IsNullOrEmpty(columns[4])) message.photoName = columns[4].Trim();
 
             messageBox.Add(message);
         }

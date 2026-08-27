@@ -37,7 +37,7 @@ public abstract class StoryManager : MonoBehaviour
 
     public bool TryPlayStory(string inputId)
     {
-        Debug.Log($"{triggerId} {inputId}");
+        //Debug.Log($"{triggerId} {inputId}");
         if (triggerId == inputId)
         {
             index++;

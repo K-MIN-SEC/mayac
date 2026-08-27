@@ -83,7 +83,7 @@ public class MessengerAppUI : MonoBehaviour
 
         // 현재 켜져있는 화면 갱신
         if (chatListView != null && chatListView.activeSelf) RebuildChatList();
-        if (openThread == thread && chatDetailView != null && chatDetailView.activeSelf) RebuildChatDetail();
+        if (openThread == thread && chatDetailView != null && chatDetailView.activeSelf) AppendMessageToDetail(data);
     }
 
     // 외부에서 NPC 메시지 수신할 때 호출
@@ -97,13 +97,9 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         data.isFromMe = false;
-        if(data.replyOptions != null && data.replyOptions.Length > 0)
-        {  
+        if (data.replyOptions != null && data.replyOptions.Length > 0)
+        {
             Debug.Log(data.replyOptions.Length);
-            if(data.replyOptions.Length > 0)
-            {
-                Debug.Log($"{data.replyOptions[0]} {data.text}");
-            }
             ShowReplyOptions(data.replyOptions);
         }
         AddMessageToThread(thread, data);
@@ -126,6 +122,24 @@ public class MessengerAppUI : MonoBehaviour
         chatDetailView?.SetActive(false);
         chatListView?.SetActive(true);
         RebuildChatList();
+    }
+
+    private void AppendMessageToDetail(MessengerMessageData message)
+    {
+        if (chatDetailContent == null) return;
+
+        GameObject prefab = message.isSystemBox ? systemBoxPrefab : (message.isFromMe ? bubbleMePrefab : bubbleOtherPrefab);
+        if (prefab == null) return;
+
+        GameObject bubble = Instantiate(prefab, chatDetailContent);
+        if (bubble.TryGetComponent(out ChatBubbleUI bubbleUI))
+        {
+            bubbleUI.Set(message.text, message.photo);
+        }
+
+
+        Canvas.ForceUpdateCanvases();
+        if (chatDetailScrollRect != null) chatDetailScrollRect.verticalNormalizedPosition = 0f;
     }
 
     private void RebuildChatList()
@@ -216,7 +230,7 @@ public class MessengerAppUI : MonoBehaviour
             });
         }
     }
-    
+
     private void RefreshUnreadBadges()
     {
         bool hasUnread = threads.Exists(thread => thread.hasUnread);

@@ -39,7 +39,8 @@ public class MessengerTrigger : Trigger
         
         for (int i = 0; i < textData.Count; i++)
         {
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(1);
+            if(!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
             MessengerAppUI.Instance.ReceiveMessage(textData[i]);
         }
         StoryManager.instance.TryPlayStory("WaitNPC");
@@ -53,25 +54,21 @@ public class MessengerTrigger : Trigger
         for (int i = 0; i < textData.Count; i++)
         {
             if (!textData[i].isFromMe) return;
+            if(!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
             MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
         }
     }
 
     void Start()
     {
-        foreach (var data in photoList)
-        {
-            photoDict.Add(data.photoId, data.photoSprite);
-        }
+        foreach (var data in photoList) photoDict.Add(data.photoId, data.photoSprite);
     }
 
     public Sprite GetPhoto(string id)
     {
-        if (photoDict.TryGetValue(id, out Sprite sprite))
-        {
-            return sprite;
-        }
-        return null;
+        if (photoDict.TryGetValue(id, out Sprite sprite)) return sprite;
+        photoDict.TryGetValue("Error", out Sprite error);
+        return error;
     }
 
     protected override void TriggerEvent(){}

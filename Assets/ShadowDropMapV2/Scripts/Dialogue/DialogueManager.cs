@@ -133,7 +133,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ChooseOption(bool isA)
     {
-        Debug.Log("Choose");
+        //Debug.Log("Choose");
         isOptionA = isA;
         isTyping = false;
         optionUI.SetActive(false);
@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
 
     public void InputText(Dialogue dialogue)
     {
-        Debug.Log($"[Dialogue] {dialogue.name} : {dialogue.text}");
+        //Debug.Log($"[Dialogue] {dialogue.name} : {dialogue.text}");
         curDialogue = dialogue;
         StoryManager.instance.triggerId = curDialogue.triggerType;
         StoryManager.instance.Event(curDialogue.startEventName, false);
@@ -165,8 +165,6 @@ public class DialogueManager : MonoBehaviour
         nameText.rectTransform.anchoredPosition = new Vector2(0, nameText.rectTransform.anchoredPosition.y);
         nameText.text = curDialogue.name;
         tempText = curDialogue.text;
-        tempText = tempText.Replace("\\", "\n");
-        tempText = tempText.Replace("|", ",");
         isSkip = false;
 
         StartCoroutine(TypingText());

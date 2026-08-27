@@ -35,7 +35,7 @@ public sealed class InteractionPoint2D : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log($"[Interaction] {gameObject.name}", this);
+        //Debug.Log($"[Interaction] {gameObject.name}", this);
         onInteract?.Invoke();
     }
 
