@@ -32,16 +32,18 @@ public class MessengerTrigger : Trigger
 
     private IEnumerator SendMessage()
     {
+        StoryManager.instance.isNext = false;
         int index = StoryManager.instance.dialogueIndex;
         var textData = DataManager.instance.ParseMessageData(message.text, index);
-        
+
         for (int i = 0; i < textData.Count; i++)
         {
             yield return new WaitForSeconds(1);
-            if(!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
+            if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
             MessengerAppUI.Instance.ReceiveMessage(textData[i]);
         }
-        StoryManager.instance.TryPlayStory("WaitNPC");
+        StoryManager.instance.isNext = true;
+        DialogueManager.instance.TriggerDialogue();
     }
 
     private void ReplyMessage()
@@ -52,7 +54,7 @@ public class MessengerTrigger : Trigger
         for (int i = 0; i < textData.Count; i++)
         {
             if (!textData[i].isFromMe) return;
-            if(!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
+            if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
             MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
         }
     }
@@ -70,5 +72,5 @@ public class MessengerTrigger : Trigger
         return error;
     }
 
-    protected override void TriggerEvent(){}
+    protected override void TriggerEvent() { }
 }

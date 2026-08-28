@@ -34,7 +34,6 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
 
     //임시 다이얼로그 변수
     public bool isDialogue;
-    public bool isStop;
 
     private void Awake()
     {
@@ -54,7 +53,6 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
         {
             if (isDialogue)
             {
-                isStop = DialogueManager.instance.TriggerDialogue();
                 return;
             }
 

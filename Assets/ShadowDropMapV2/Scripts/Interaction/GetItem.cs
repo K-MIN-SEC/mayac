@@ -18,8 +18,10 @@ public class GetItem : MonoBehaviour
     {
         Sequence sequence = DOTween.Sequence();
 
+        image.rotation = Quaternion.identity;
+
         sequence.Append(image.DOAnchorPos(Vector2.zero, 0.5f));
-        sequence.Join(image.DORotate(new Vector3(0, 0, 180), 0.5f));
+        sequence.Join(image.DORotate(new Vector3(0, 0, 360), 0.5f, RotateMode.FastBeyond360));
 
         sequence.AppendInterval(1.0f);
 
@@ -28,7 +30,6 @@ public class GetItem : MonoBehaviour
 
         sequence.OnComplete(() =>
         {
-            image.rotation = Quaternion.identity;
             if (TryGetComponent(out StoryTarget storyTarget))
             {
                 StoryManager.instance.TryPlayStory(storyTarget.targetId);

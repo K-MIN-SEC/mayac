@@ -32,16 +32,13 @@ public class ChatBubbleUI : MonoBehaviour
 
         if (hasPhoto)
         {
-            Debug.Log($"Check Text\n{text}");
-            Debug.Log($"Check Photo - {photo.name}");
-
             cachedPhotoImg.sprite = photo;
             cachedPhotoFitter.aspectRatio = photo.rect.width / photo.rect.height;
             cachedPhotoLayout.preferredWidth = maxPhotoWidth;
         }
 
         photoContainer.SetActive(hasPhoto);
-        
+
         messageText.text = text;
         cachedTextLayout.preferredWidth = Mathf.Min(messageText.preferredWidth, maxTextWidth);
 

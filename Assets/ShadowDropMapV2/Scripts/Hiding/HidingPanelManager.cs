@@ -60,6 +60,7 @@ public class HidingPanelManager : MonoBehaviour
 
         if (examinePanel != null) examinePanel.SetActive(true);
         if (confirmDialog != null) confirmDialog.SetActive(false);
+        StoryManager.instance.TryPlayStory("OpenPanel");
         ConfigureHotspots(spotSprites, spotNames, correctSpotIndex, spotPositions);
     }
 
@@ -140,7 +141,10 @@ public class HidingPanelManager : MonoBehaviour
     public void ConfirmYes()
     {
         string correctText = pendingIsCorrect ? "정답!" : "오답";
-        Debug.Log($"Hidden at {pendingSpotName}. ({correctText})");
+
+        StoryManager.instance.TryPlayStory("Hiding");
+        if (!pendingIsCorrect) StoryManager.instance.indexWeight++;
+
         HidingRecord.Add(pendingSpotName, pendingIsCorrect);
         CloseExaminePanel();
     }

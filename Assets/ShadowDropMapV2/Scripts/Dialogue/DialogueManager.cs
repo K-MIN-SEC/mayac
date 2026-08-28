@@ -149,15 +149,10 @@ public class DialogueManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(curDialogue.text))
         {
-            OnOffDialogue(false);
             isTyping = false;
             StoryManager.instance.Event(curDialogue.endEventName);
 
-            // 만약 기다려야 할 트리거(triggerType)도 없다면 즉시 다음 큐로 진행
-            if (string.IsNullOrEmpty(curDialogue.triggerType))
-            {
-                TriggerDialogue();
-            }
+            if (dialogueBox.Count == 0) OnOffDialogue(false);
             return;
         }
 
@@ -195,6 +190,9 @@ public class DialogueManager : MonoBehaviour
         else isTyping = false;
         StoryManager.instance.Event(curDialogue.endEventName);
     }
+
+    //그거 해놔야함
+    //다이얼로그 오브젝트 띄웠을때,얘말고 다른 상호작용 안되게 막아야함
 
     public void Skip()
     {

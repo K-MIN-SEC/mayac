@@ -37,18 +37,18 @@ public class DataManager : MonoBehaviour
                 index = index,
                 name = columns[1].Trim(),
                 text = columns[2].Trim(),
-                triggerType = columns[3].Trim()
+                triggerType = columns[3].Trim(),
+                startEventName = columns[4].Trim(),
+                endEventName = columns[5].Trim(),
             };
             newText.text = newText.text.Replace("\\", "\n").Replace("|", ",");
-            if (!string.IsNullOrEmpty(columns[4]))
+
+            if (!string.IsNullOrEmpty(columns[6]))
             {
                 newText.isOption = true;
-                newText.OptionA = columns[4].Trim();
-                newText.OptionB = columns[5].Trim();
+                newText.OptionA = columns[6].Trim();
+                newText.OptionB = columns[7].Trim();
             }
-
-            newText.startEventName = columns[6].Trim();
-            newText.endEventName = columns[7].Trim();
 
             dialogBox.Enqueue(newText);
         }

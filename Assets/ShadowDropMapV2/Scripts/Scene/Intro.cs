@@ -43,8 +43,8 @@ public class Intro : MonoBehaviour
         {
             if (!isDialogue)
             {
-                Trigger();
                 isDialogue = true;
+                Trigger();
             }else isDialogue = DialogueManager.instance.TriggerDialogue();
         }
 

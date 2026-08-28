@@ -18,14 +18,20 @@ public abstract class StoryManager : MonoBehaviour
     [SerializeField] protected bool isDialogue;
     [SerializeField] public int dialogueIndex;
     [SerializeField] public int targetIndex;
+    public int indexWeight = 1;
     public bool isNext;
     public string triggerId = "";
 
+    private bool isTransitioning = false;
     
 
     private void HandleDialogueEnd()
     {
-        if (string.IsNullOrEmpty(triggerId)) dialogueIndex++;
+        if (!isTransitioning && string.IsNullOrEmpty(triggerId))
+        {
+            Debug.Log("handle?");
+            dialogueIndex++;
+        }
     }
 
     public bool Trigger()
@@ -41,11 +47,15 @@ public abstract class StoryManager : MonoBehaviour
         //Debug.Log($"{triggerId} {inputId}");
         if (triggerId == inputId)
         {
-            dialogueIndex++;
-            triggerId = "";
+            isTransitioning = true;
 
+            dialogueIndex += indexWeight;
+            triggerId = "";
+            indexWeight = 1;
+            
             isDialogue = Trigger();
 
+            isTransitioning = false;
             return true;
         }
 
