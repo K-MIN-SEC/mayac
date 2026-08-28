@@ -34,7 +34,7 @@ public abstract class StoryManager : MonoBehaviour
         }
     }
 
-    public bool Trigger()
+    public virtual bool Trigger()
     {
         var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
         if (temp.Count == 0) return false;

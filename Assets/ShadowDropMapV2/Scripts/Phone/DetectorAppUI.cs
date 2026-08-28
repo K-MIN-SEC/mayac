@@ -18,7 +18,7 @@ public class DetectorAppUI : MonoBehaviour
     public UIShaker shaker; // 화면 흔들림 연출
 
     [Header("탐지 설정")]
-    public float detectRadius = 15f;         // 감지 시작 거리
+    public float detectRadius = 20f;         // 감지 시작 거리
     public float closeRadius = 1.5f;         // 최고 속도 도달 거리
     public float slowestPingInterval = 1.2f; // 멀 때의 알람 주기 (초)
     public float fastestPingInterval = 0.15f;// 가까울 때의 알람 주기 (초)
@@ -84,7 +84,6 @@ public class DetectorAppUI : MonoBehaviour
         // 앱이 켜져있고, 타겟이 존재할 때만 거리 연산 수행
         if (!isActivated || !isScreenOpen || currentTarget == null || player == null) return;
 
-        Debug.Log("NOW");
         float distance = Vector2.Distance(player.position, currentTarget.position);
 
         // 탐지 범위 밖이면 아무 반응 없음

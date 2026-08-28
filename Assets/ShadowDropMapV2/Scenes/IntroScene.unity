@@ -3260,6 +3260,7 @@ MonoBehaviour:
     index: 0
     name: 
     text: 
+    triggerType: 
     isOption: 0
     OptionA: 
     OptionB: 
@@ -3267,7 +3268,6 @@ MonoBehaviour:
     endEventName: 
     isSound: 0
   isTyping: 0
-  panelState: 0
   isEnd: 0
 --- !u!1 &1281910436
 GameObject:
@@ -5199,8 +5199,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Intro
   dialogue: {fileID: 4900000, guid: f46c9e4f554c53d4b8f6b646a4a34e98, type: 3}
-  index: 0
-  img: {fileID: 1801458276}
+  screenFilterImage: {fileID: 0}
+  isDialogue: 0
+  dialogueIndex: 0
+  targetIndex: 0
+  indexWeight: 1
+  isNext: 0
+  triggerId: 
+  fade: {fileID: 1801458276}
 --- !u!4 &1788376626
 Transform:
   m_ObjectHideFlags: 0
@@ -5228,7 +5234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23268dc20434480438a138caac7c9eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjMove
-  eventName: 
   objList:
   - {fileID: 1418435225}
   - {fileID: 1418435225}

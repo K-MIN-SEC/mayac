@@ -4,30 +4,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Intro : MonoBehaviour
+public class Intro : StoryManager
 {
-    [SerializeField] private TextAsset dialogue;
-    [SerializeField] private int index;
     [SerializeField] private Image fade;
-    private bool isDialogue;
     bool isEnd;
 
-    public void Trigger()
+    public override bool Trigger()
     {
-        var temp = DataManager.instance.ParseDialogueData(dialogue.text, index);
-        if(temp.Count == 0) return;
-        DialogueManager.instance.InitDialogue(temp);
-        index++;
+        return base.Trigger();
+        // var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
+        // if (temp.Count == 0) return false;
+        // DialogueManager.instance.InitDialogue(temp);
+        // return true;
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         DialogueManager.instance.onDialogueEnd += FadeOut;
     }
 
     void FadeOut()
     {
-        var temp = DataManager.instance.ParseDialogueData(dialogue.text, index);
+        var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
         if(temp.Count != 0) return;
         fade.DOFade(1, 0.5f).OnComplete(() =>
                 {
