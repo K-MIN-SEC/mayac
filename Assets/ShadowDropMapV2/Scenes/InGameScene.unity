@@ -4034,6 +4034,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionPoint_Search (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -291.95306
@@ -4255,7 +4259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5588,7 +5592,6 @@ MonoBehaviour:
   waypointTolerance: 0.08
   destinationSnapRadiusCells: 20
   isDialogue: 0
-  isStop: 0
 --- !u!114 &351088283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8780,7 +8783,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_Name
-      value: InteractionPoint_Question
+      value: Test_GetItem
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b9b644afd18c431fa7677a67f08bc35c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8956,7 +8959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &524602333
 Transform:
   m_ObjectHideFlags: 0
@@ -11511,6 +11514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionPoint_Search (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -312.8231
@@ -13983,19 +13990,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1573308257}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_Name
-      value: InteractionPoint_Search
+      value: Test_HidingSpot
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -307.06308
+      value: 22.27
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -154.14363
+      value: -4.26
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26443,7 +26450,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 278901777}
-  - {fileID: 457229238}
   - {fileID: 1625541937}
   - {fileID: 261200485}
   - {fileID: 697503874}
@@ -27112,6 +27118,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_Name
       value: InteractionPoint_Search (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32051,6 +32061,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractionPoint_Search (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_LocalPosition.x
       value: -285.43307
@@ -36065,3 +36079,4 @@ SceneRoots:
   - {fileID: 1573308257}
   - {fileID: 1211206269}
   - {fileID: 521420443}
+  - {fileID: 811544278}
