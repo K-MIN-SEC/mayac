@@ -23,13 +23,12 @@ public abstract class StoryManager : MonoBehaviour
     public string triggerId = "";
 
     private bool isTransitioning = false;
-    
+
 
     private void HandleDialogueEnd()
     {
         if (!isTransitioning && string.IsNullOrEmpty(triggerId))
         {
-            Debug.Log("handle?");
             dialogueIndex++;
         }
     }
@@ -44,7 +43,6 @@ public abstract class StoryManager : MonoBehaviour
 
     public bool TryPlayStory(string inputId)
     {
-        //Debug.Log($"{triggerId} {inputId}");
         if (triggerId == inputId)
         {
             isTransitioning = true;
@@ -52,7 +50,7 @@ public abstract class StoryManager : MonoBehaviour
             dialogueIndex += indexWeight;
             triggerId = "";
             indexWeight = 1;
-            
+
             isDialogue = Trigger();
 
             isTransitioning = false;
@@ -70,5 +68,17 @@ public abstract class StoryManager : MonoBehaviour
     protected virtual void Start()
     {
         DialogueManager.instance.onDialogueEnd += HandleDialogueEnd;
+    }
+
+    public void FadeInOut(bool isOut)
+    {
+        if (isOut) screenFilterImage.DOColor(new Color(0,0,0,1), 1.2f);
+        else screenFilterImage.DOColor(new Color(0,0,0,0), 1.2f);
+    }
+
+    public void ChangeToNight(bool isNight)
+    {
+        if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
+        else screenFilterImage.DOColor(new Color(0,0,0,0), 3.0f);
     }
 }

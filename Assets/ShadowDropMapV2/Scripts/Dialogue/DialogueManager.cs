@@ -15,6 +15,7 @@ public class Dialogue
     public string text;
 
     public string triggerType;
+    public string questName;
 
     public bool isOption;
     public string OptionA;
@@ -36,6 +37,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] Image nameBar;
     [SerializeField] TMP_Text text;
     [SerializeField] TMP_Text nameText;
+    [SerializeField] TMP_Text questText;
 
     [SerializeField] GameObject focusUI;
     [SerializeField] GameObject optionUI;
@@ -115,6 +117,7 @@ public class DialogueManager : MonoBehaviour
         {
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
+            if(!string.IsNullOrEmpty(curDialogue.questName) && questText != null) questText.text = curDialogue.questName;
             onDialogueEnd?.Invoke();
         }
         focusUI.SetActive(onOff);

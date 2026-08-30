@@ -12,6 +12,7 @@ public class SettingTarget : Trigger
         int currentIndex = StoryManager.instance.targetIndex;
         if (currentIndex >= targetPos.Count || targetPos[currentIndex] == null) return;
 
+        targetPos[currentIndex].gameObject.SetActive(true);
         DetectorAppUI.Instance.Activate(targetPos[currentIndex]);
         StoryManager.instance.targetIndex++;
     }

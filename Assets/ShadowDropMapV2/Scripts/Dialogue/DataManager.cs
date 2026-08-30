@@ -38,16 +38,16 @@ public class DataManager : MonoBehaviour
                 name = columns[1].Trim(),
                 text = columns[2].Trim(),
                 triggerType = columns[3].Trim(),
-                startEventName = columns[4].Trim(),
-                endEventName = columns[5].Trim(),
+                startEventName = columns[5].Trim(),
+                endEventName = columns[6].Trim(),
             };
             newText.text = newText.text.Replace("\\", "\n").Replace("|", ",");
-
-            if (!string.IsNullOrEmpty(columns[6]))
+            if (!string.IsNullOrEmpty(columns[4])) newText.questName = columns[4].Trim();
+            if (!string.IsNullOrEmpty(columns[7]))
             {
                 newText.isOption = true;
-                newText.OptionA = columns[6].Trim();
-                newText.OptionB = columns[7].Trim();
+                newText.OptionA = columns[7].Trim();
+                newText.OptionB = columns[8].Trim();
             }
 
             dialogBox.Enqueue(newText);

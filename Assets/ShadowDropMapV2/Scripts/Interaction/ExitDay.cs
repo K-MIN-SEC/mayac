@@ -1,11 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class DialogueObj : MonoBehaviour
+public class ExitDay : MonoBehaviour
 {
-    [SerializeField] private TextAsset dialogue;
-    [SerializeField] private int index; 
-
     void Start()
     {
         if (TryGetComponent<InteractionPoint2D>(out var interactionPoint))
@@ -13,9 +10,10 @@ public class DialogueObj : MonoBehaviour
             interactionPoint.onInteract.AddListener(() => Trigger());
         }
     }
+    
     public void Trigger()
     {
-        DialogueManager.instance.InitDialogue(DataManager.instance.ParseDialogueData(dialogue.text, index));
-        index++;
+        StoryManager.instance.FadeInOut(true);
+        gameObject.SetActive(false);
     }
 }
