@@ -3,6 +3,12 @@ using DG.Tweening;
 
 public class InGame : StoryManager
 {
+    [SerializeField] Transform player;
+    [SerializeField] Vector3 playerpos;
+
+    [SerializeField] SmartphoneUIManager phone;
+    bool i;
+
     protected override void Start()
     {
         base.Start();
@@ -20,4 +26,25 @@ public class InGame : StoryManager
         }
     }
 
+    public override void SetupNextPhase()
+    {
+        isFading = true;
+        fadeImage.color = new Color(0, 0, 0, 0);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(screenFilterImage.DOFade(1f, 1.5f));
+        
+        dialogueIndex++;
+        dialogueTextIndex = 0;
+        indexWeight = 1;
+        triggerId = "";
+
+        isNext = true;
+        isDialogue = false;
+        isTransitioning = false;
+        sequence.AppendInterval(1.0f);
+        player.position = playerpos;
+        phone.ClosePhone();
+        sequence.Append(screenFilterImage.DOFade(0f, 1.5f));
+        sequence.OnComplete(() => { isFading = false; });
+    }
 }

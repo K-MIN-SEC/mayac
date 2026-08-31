@@ -33,7 +33,7 @@ public class MessengerTrigger : Trigger
     private IEnumerator SendMessage()
     {
         StoryManager.instance.isNext = false;
-        int index = StoryManager.instance.dialogueIndex;
+        int index = StoryManager.instance.dialogueTextIndex;
         var textData = DataManager.instance.ParseMessageData(message.text, index);
 
         for (int i = 0; i < textData.Count; i++)
@@ -48,7 +48,7 @@ public class MessengerTrigger : Trigger
 
     private void ReplyMessage()
     {
-        int index = StoryManager.instance.dialogueIndex;
+        int index = StoryManager.instance.dialogueTextIndex;
         var textData = DataManager.instance.ParseMessageData(message.text, index);
 
         for (int i = 0; i < textData.Count; i++)

@@ -26,8 +26,6 @@ public class Intro : StoryManager
 
     void FadeOut()
     {
-        var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
-        if(temp.Count != 0) return;
         fade.DOFade(1, 0.5f).OnComplete(() =>
                 {
                     Debug.Log($"[Intro] Load Scene");

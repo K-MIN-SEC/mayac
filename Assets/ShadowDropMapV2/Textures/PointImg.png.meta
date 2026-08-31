@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0aa0b6d0113094943839978c0d1fe0ff
+guid: bba3d3ba1f61fe74fa84e447f78d31cc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4417287861735351350
-    second: msk_5e65a1179ab47_0
+      213: -642938667502253713
+    second: "\uC2A4\uD06C\uB9B0\uC0F7 2026-08-31 144433_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: msk_5e65a1179ab47_0
+      name: "\uC2A4\uD06C\uB9B0\uC0F7 2026-08-31 144433_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1525
-        height: 1016
+        width: 784
+        height: 664
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acb9e92f714a2b2c0800000000000000
-      internalID: -4417287861735351350
+      spriteID: f694a2730b2d317f0800000000000000
+      internalID: -642938667502253713
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      msk_5e65a1179ab47_0: -4417287861735351350
+      "\uC2A4\uD06C\uB9B0\uC0F7 2026-08-31 144433_0": -642938667502253713
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

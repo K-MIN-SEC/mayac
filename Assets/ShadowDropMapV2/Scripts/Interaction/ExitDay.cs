@@ -13,7 +13,7 @@ public class ExitDay : MonoBehaviour
     
     public void Trigger()
     {
-        StoryManager.instance.FadeInOut(true);
+        StoryManager.instance.SetupNextPhase();
         gameObject.SetActive(false);
     }
 }

@@ -3,37 +3,25 @@ using UnityEngine.UI;
 
 public class SmartphoneUIManager : MonoBehaviour
 {
-    public static SmartphoneUIManager Instance { get; private set; }
-
-    [Header("�� ��ư (�׻� ȭ�鿡 ����, ���� �ϴ�)")]
     public Button phoneButton;
 
-    [Header("����Ʈ�� �г�")]
     public GameObject phonePanel;
     public GameObject homeScreen;
     public GameObject messengerScreen;
     public GameObject settingsScreen;
     public GameObject detectorScreen;
 
-    [Header("Ȩ ȭ�� ��ư")]
     public Button messengerAppIcon;
     public Button settingsAppIcon;
     public Button detectorAppIcon;
     public Button closeButton;
     public Button backButton;
 
-    [Header("�ϴ� ������̼� �� (NavigationBar)")]
     public Button navHomeButton;
     public Button navBackButton;
     public Button navRecentsButton;
 
     public AudioClip clickSound;
-
-    void Awake()
-    {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-    }
 
     void Start()
     {
