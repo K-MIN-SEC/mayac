@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.MPE;
 using UnityEngine;
 
 public class SettingTarget : Trigger
