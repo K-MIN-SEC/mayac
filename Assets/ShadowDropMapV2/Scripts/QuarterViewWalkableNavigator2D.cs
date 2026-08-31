@@ -51,7 +51,7 @@ public sealed class QuarterViewWalkableNavigator2D : MonoBehaviour
     {
         if (TryReadPointerDown(out Vector2 screenPosition, out int pointerId))
         {
-            if (isDialogue)
+            if (isDialogue || StoryManager.instance.isFading)
             {
                 return;
             }

@@ -1,4 +1,4 @@
-﻿idnex,name,text,Trigger,Quest,StartEvent,EndEvent,OptionA,OptionB
+﻿index,name,text,Trigger,Quest,StartEvent,EndEvent,OptionA,OptionB
 0,,,,,SendMessage,,,
 0,민우,지원하자마자 바로 연락이 올 줄은 몰랐네\ 하라는대로만 하면 되겠지?,Reply,핸드폰을 키고 연락을 보내자,,,,
 1,민우,버스정류장에 물건이 있다고?,,,,,,

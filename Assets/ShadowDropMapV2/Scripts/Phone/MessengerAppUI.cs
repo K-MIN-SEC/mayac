@@ -46,7 +46,7 @@ public class MessengerAppUI : MonoBehaviour
     public GameObject phoneButtonBadge;
     public UIShaker phoneShaker;
     public UIShaker appIconShaker;
-    public AudioSource notificationSound;
+    public AudioClip notificationSound;
 
     private ChatThread openThread;
 
@@ -65,7 +65,6 @@ public class MessengerAppUI : MonoBehaviour
         RefreshUnreadBadges();
     }
 
-    // 💡 메시지를 추가하는 핵심 공통 함수
     private void AddMessageToThread(ChatThread thread, MessengerMessageData data)
     {
         thread.messages.Add(data);
@@ -78,7 +77,7 @@ public class MessengerAppUI : MonoBehaviour
             RefreshUnreadBadges();
             phoneShaker?.Shake();
             appIconShaker?.Shake();
-            notificationSound?.Play();
+            SoundManager.instance.SetAudio(notificationSound, false);
         }
 
         // 현재 켜져있는 화면 갱신

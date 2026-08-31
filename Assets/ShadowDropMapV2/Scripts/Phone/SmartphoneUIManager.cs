@@ -1,32 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// ¾À¿¡ ÇÏ³ª¸¸ Á¸Àç. ¿ìÃø ÇÏ´Ü Æù ¹öÆ° -> ½º¸¶Æ®Æù ÆÐ³Î ¿­±â/´Ý±â ¹× È­¸é(È¨/¸Þ½ÅÀú/¼³Á¤/Å½»ö±â) ÀüÈ¯ °ü¸®
 public class SmartphoneUIManager : MonoBehaviour
 {
     public static SmartphoneUIManager Instance { get; private set; }
 
-    [Header("Æù ¹öÆ° (Ç×»ó È­¸é¿¡ º¸ÀÓ, ¿ìÃø ÇÏ´Ü)")]
+    [Header("ï¿½ï¿½ ï¿½ï¿½Æ° (ï¿½×»ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½)")]
     public Button phoneButton;
 
-    [Header("½º¸¶Æ®Æù ÆÐ³Î")]
-    public GameObject phonePanel;      // ÆÐ³Î ÀüÃ¼ (Æò¼Ò¿£ ²¨Á®ÀÖÀ½)
-    public GameObject homeScreen;      // ¾Û ¾ÆÀÌÄÜ + À§Á¬ÀÌ ÀÖ´Â È¨ È­¸é
-    public GameObject messengerScreen; // ¸Þ½ÅÀú ¾Û È­¸é (¸ñ·Ï+»ó¼¼¸¦ ´ã´Â ºÎ¸ð)
-    public GameObject settingsScreen;  // ¼³Á¤ ¾Û È­¸é
-    public GameObject detectorScreen;  // Å½»ö±â ¾Û È­¸é
+    [Header("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ð³ï¿½")]
+    public GameObject phonePanel;
+    public GameObject homeScreen;
+    public GameObject messengerScreen;
+    public GameObject settingsScreen;
+    public GameObject detectorScreen;
 
-    [Header("È¨ È­¸é ¹öÆ°")]
+    [Header("È¨ È­ï¿½ï¿½ ï¿½ï¿½Æ°")]
     public Button messengerAppIcon;
     public Button settingsAppIcon;
     public Button detectorAppIcon;
-    public Button closeButton;         // ÆÐ³Î ¿ÏÀüÈ÷ ´Ý±â
-    public Button backButton;          // ¾Û È­¸é -> µÚ·Î°¡±â (¸Þ½ÅÀú »ó¼¼¸é ¸ñ·ÏÀ¸·Î, ¾Æ´Ï¸é È¨À¸·Î)
+    public Button closeButton;
+    public Button backButton;
 
-    [Header("ÇÏ´Ü ³»ºñ°ÔÀÌ¼Ç ¹Ù (NavigationBar)")]
-    public Button navHomeButton;       // ´©¸£¸é È¨ È­¸éÀ¸·Î
-    public Button navBackButton;       // ´©¸£¸é µÚ·Î°¡±â (backButton°ú µ¿ÀÏ µ¿ÀÛ)
-    public Button navRecentsButton;    // Áö±ÝÀº Àå½Ä¿ë, ÇÊ¿äÇÏ¸é ³ªÁß¿¡ ±â´É Ãß°¡
+    [Header("ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ (NavigationBar)")]
+    public Button navHomeButton;
+    public Button navBackButton;
+    public Button navRecentsButton;
+
+    public AudioClip clickSound;
 
     void Awake()
     {
@@ -38,17 +39,24 @@ public class SmartphoneUIManager : MonoBehaviour
     {
         phonePanel.SetActive(false);
 
-        if (phoneButton != null) phoneButton.onClick.AddListener(TogglePhone);
-        if (closeButton != null) closeButton.onClick.AddListener(ClosePhone);
-        if (backButton != null) backButton.onClick.AddListener(OnBackPressed);
-        if (messengerAppIcon != null) messengerAppIcon.onClick.AddListener(OpenMessenger);
-        if (settingsAppIcon != null) settingsAppIcon.onClick.AddListener(OpenSettings);
-        if (detectorAppIcon != null) detectorAppIcon.onClick.AddListener(OpenDetector);
+        BindButton(phoneButton, TogglePhone);
+        BindButton(closeButton, ClosePhone);
+        BindButton(backButton, OnBackPressed);
+        BindButton(messengerAppIcon, OpenMessenger);
+        BindButton(settingsAppIcon, OpenSettings);
+        BindButton(detectorAppIcon, OpenDetector);
+        BindButton(navHomeButton, GoHome);
+        BindButton(navBackButton, OnBackPressed);
+        BindButton(navRecentsButton, ClosePhone);
+    }
 
-        // ÇÏ´Ü ³»ºñ°ÔÀÌ¼Ç ¹Ù ¿¬°á: È¨ ¹öÆ°Àº È¨ È­¸éÀ¸·Î, µÚ·Î°¡±â ¹öÆ°Àº backButton°ú µ¿ÀÏÇÏ°Ô µ¿ÀÛ
-        if (navHomeButton != null) navHomeButton.onClick.AddListener(GoHome);
-        if (navBackButton != null) navBackButton.onClick.AddListener(OnBackPressed);
-        if (navRecentsButton != null) navRecentsButton.onClick.AddListener(ClosePhone);
+    private void BindButton(Button button, UnityEngine.Events.UnityAction action)
+    {
+        if (button != null)
+        {
+            button.onClick.AddListener(action);
+            button.onClick.AddListener(() => SoundManager.instance.SetAudio(clickSound, false)); // ë¯¸ë¦¬ ë§Œë“¤ì–´ë‘” ì‚¬ìš´ë“œ ì¶œë ¥ í•¨ìˆ˜
+        }
     }
 
     public void TogglePhone()
@@ -82,7 +90,6 @@ public class SmartphoneUIManager : MonoBehaviour
         }
     }
 
-    // phone ¹öÆ°(°ú ±× ÀÚ½Ä ÀÌ¹ÌÁöµé)ÀÇ Åõ¸íµµ¸¦ ÇÑ¹ø¿¡ Á¶Àý
     void SetPhoneButtonAlpha(float alpha)
     {
         Graphic[] graphics = phoneButton.GetComponentsInChildren<Graphic>(true);
@@ -112,9 +119,7 @@ public class SmartphoneUIManager : MonoBehaviour
         if (detectorScreen != null) detectorScreen.SetActive(false);
 
         if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
-
-        if (MessengerAppUI.Instance != null)
-            MessengerAppUI.Instance.OpenChatList();
+        if (MessengerAppUI.Instance != null) MessengerAppUI.Instance.OpenChatList();
     }
 
     public void OpenSettings()
@@ -137,29 +142,15 @@ public class SmartphoneUIManager : MonoBehaviour
         if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenOpened();
     }
 
-    // µÚ·Î°¡±â ¹öÆ° ÇÏ³ª·Î "»ó¼¼ -> ¸ñ·Ï -> È¨ -> ÆÐ³Î ´Ý±â" ¼ø¼­·Î ÀÚ¿¬½º·´°Ô ºüÁöµµ·Ï Ã³¸®
-    // publicÀ¸·Î µÇ¾îÀÖ¾î¼­ NavBackButtonÀÇ On Click()¿¡µµ Á÷Á¢ ¿¬°á °¡´É
     public void OnBackPressed()
     {
         bool inMessengerDetail = messengerScreen.activeSelf
             && MessengerAppUI.Instance != null
             && MessengerAppUI.Instance.chatDetailView.activeSelf;
 
-        if (inMessengerDetail)
-        {
-            // ¸Þ½ÅÀú ´ëÈ­ »ó¼¼ È­¸é -> ´ëÈ­ ¸ñ·ÏÀ¸·Î
-            MessengerAppUI.Instance.OpenChatList();
-        }
+        if (inMessengerDetail) MessengerAppUI.Instance.OpenChatList();
         else if (messengerScreen.activeSelf || settingsScreen.activeSelf
-                 || (detectorScreen != null && detectorScreen.activeSelf))
-        {
-            // ¸Þ½ÅÀú/¼³Á¤/Å½»ö±â È­¸é -> È¨ È­¸éÀ¸·Î (ÆÐ³ÎÀº ±×´ë·Î À¯Áö)
-            GoHome();
-        }
-        else
-        {
-            // ÀÌ¹Ì È¨ È­¸éÀÌ¸é (´Ù¸¥ È­¸éÀÌ ¾Æ¹«°Íµµ ¾È ÄÑÁ®ÀÖÀ¸¸é) -> ÆÐ³Î ÀÚÃ¼¸¦ ´Ý±â
-            ClosePhone();
-        }
+                 || (detectorScreen != null && detectorScreen.activeSelf)) GoHome();
+        else ClosePhone();
     }
 }

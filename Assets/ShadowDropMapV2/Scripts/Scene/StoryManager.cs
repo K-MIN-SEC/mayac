@@ -20,6 +20,7 @@ public abstract class StoryManager : MonoBehaviour
     [SerializeField] public int targetIndex;
     public int indexWeight = 1;
     public bool isNext;
+    public bool isFading = false;
     public string triggerId = "";
 
     private bool isTransitioning = false;
@@ -72,13 +73,20 @@ public abstract class StoryManager : MonoBehaviour
 
     public void FadeInOut(bool isOut)
     {
-        if (isOut) screenFilterImage.DOColor(new Color(0,0,0,1), 1.2f);
-        else screenFilterImage.DOColor(new Color(0,0,0,0), 1.2f);
+        isFading = true;
+        Sequence sequence = DOTween.Sequence();
+        if (isOut) sequence.Append(screenFilterImage.DOColor(new Color(0, 0, 0, 1), 1.5f));
+        else
+        {
+            screenFilterImage.color = Color.black;
+            sequence.Append(screenFilterImage.DOColor(new Color(0, 0, 0, 0), 1.5f));
+        }
+        sequence.OnComplete(() => { isFading = false; });
     }
 
     public void ChangeToNight(bool isNight)
     {
         if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
-        else screenFilterImage.DOColor(new Color(0,0,0,0), 3.0f);
+        else screenFilterImage.DOColor(new Color(0, 0, 0, 0), 3.0f);
     }
 }
