@@ -53,7 +53,6 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public bool isTyping;
     [HideInInspector] public bool isEnd;
 
-    bool isOn;
     bool isSkip;
     bool isOption = false;
     bool isOptionA = false;
@@ -106,9 +105,9 @@ public class DialogueManager : MonoBehaviour
 
     public void OnOffDialogue(bool onOff)
     {
+        if (focusUI.activeSelf == onOff) return;
         if (onOff)
         {
-            //cam.DOOrthoSize(3.5f, 0.5f).SetEase(Ease.OutCubic);
             nameText.text = null;
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-660, 0.5f);
@@ -118,13 +117,19 @@ public class DialogueManager : MonoBehaviour
             text.text = null;
             nameBar.rectTransform.DOLocalMoveX(-1410, 0.5f);
             if(!string.IsNullOrEmpty(curDialogue.questName) && questText != null) questText.text = curDialogue.questName;
-            onDialogueEnd?.Invoke();
         }
         focusUI.SetActive(onOff);
-        //임시 행동 정지
         if (QuarterViewWalkableNavigator2D.instance != null) QuarterViewWalkableNavigator2D.instance.isDialogue = onOff;
-        textBar.rectTransform.DOSizeDelta(onOff ? new(1920, 300) : Vector2.zero, 0.5f);
         isSkip = false;
+        textBar.rectTransform.DOSizeDelta(onOff ? new(1920, 300) : Vector2.zero, 0.5f).OnComplete(() =>
+        {
+            if (!onOff)
+            {
+                Debug.Log($"[Dialogue] Dialogue Ended");
+                onDialogueEnd?.Invoke();
+            }
+        });
+        
     }
 
     void OnOption()

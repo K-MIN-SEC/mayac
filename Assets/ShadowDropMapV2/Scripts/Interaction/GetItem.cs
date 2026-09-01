@@ -5,6 +5,7 @@ using UnityEngine;
 public class GetItem : MonoBehaviour
 {
     [SerializeField] RectTransform image;
+    bool isTrigger = false;
 
     void Start()
     {
@@ -15,6 +16,8 @@ public class GetItem : MonoBehaviour
     }
     public void Trigger()
     {
+        if(isTrigger) return;
+        isTrigger = true;
         Sequence sequence = DOTween.Sequence();
 
         image.rotation = Quaternion.identity;
@@ -34,6 +37,7 @@ public class GetItem : MonoBehaviour
                 StoryManager.instance.TryPlayStory(storyTarget.targetId);
                 gameObject.SetActive(false);
             }
+            isTrigger = false;
         });
     }
 }

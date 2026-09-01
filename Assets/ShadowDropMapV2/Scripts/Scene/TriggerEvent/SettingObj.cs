@@ -5,7 +5,7 @@ using System;
 public class SettingObj : Trigger
 {
     protected override string eventName => "SettingObj";
-    [SerializeField] List<GameObject> dayList = new();
+    [SerializeField] List<DayObj    > dayList = new();
     [SerializeField] List<TargetObj> targets = new();
     int index;
 
@@ -28,12 +28,29 @@ public class SettingObj : Trigger
     protected override void Init()
     {
         int curIndex = StoryManager.instance.dialogueIndex;
-        for (int i = 0; i < targets.Count; i++)
+        for (int i = 0; i < dayList.Count; i++)
         {
-            if (curIndex != i) dayList[i].SetActive(false);
-            else dayList[i].SetActive(true);
+            if (curIndex == i)
+            {
+                dayList[i].gameObject.SetActive(true);
+                if(dayList[i].isNight) StoryManager.instance.ChangeToNight(true);
+                else StoryManager.instance.ChangeToNight(false);
+
+            }
+            else dayList[i].gameObject.SetActive(false);
+        }
+        for(int i = 0; i < targets.Count; i++)
+        {
+            if (curIndex != i) continue;
+            for (int j = 0; j < targets[i].targetPos.Count; j++) targets[i].targetPos[j].SetActive(false);
         }
         index = 0;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        Init();
     }
 }
 

@@ -11,6 +11,7 @@ public abstract class StoryManager : MonoBehaviour
 
     public void Event(string eventName)
     {
+        Debug.Log($"[StoryManager] Event Triggered: {eventName}", this);
         onEvent?.Invoke(eventName);
     }
 
@@ -19,6 +20,7 @@ public abstract class StoryManager : MonoBehaviour
     [SerializeField] protected Image fadeImage;
     [SerializeField] protected bool isDialogue;
     
+    [Header("Story State")]
     public int dialogueIndex;
     public int dialogueTextIndex;
     public int targetIndex;
@@ -95,8 +97,10 @@ public abstract class StoryManager : MonoBehaviour
 
     public void ChangeToNight(bool isNight)
     {
-        if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
-        else screenFilterImage.DOColor(new Color(0, 0, 0, 0), 3.0f);
+        // if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
+        // else screenFilterImage.DOColor(new Color(0, 0, 0, 0), 3.0f);
+        if(isNight) screenFilterImage.color = new Color(0.0f, 0.1f, 0.4f, 0.5f);
+        else screenFilterImage.color = new Color(0, 0, 0, 0);
     }
 
     public virtual void SetupNextPhase(){}

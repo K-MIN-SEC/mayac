@@ -28547,6 +28547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688426925}
+  - component: {fileID: 1688426926}
   m_Layer: 0
   m_Name: Day2
   m_TagString: Untagged
@@ -28572,6 +28573,19 @@ Transform:
   - {fileID: 278901777}
   m_Father: {fileID: 1954090316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1688426926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688426924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab172b5aeee7aca4283bf2b4f12606b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayObj
+  isNight: 1
 --- !u!1 &1691820179
 GameObject:
   m_ObjectHideFlags: 0
@@ -33566,6 +33580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1950804411}
+  - component: {fileID: 1950804412}
   m_Layer: 0
   m_Name: Day1
   m_TagString: Untagged
@@ -33590,6 +33605,19 @@ Transform:
   - {fileID: 1852639754}
   m_Father: {fileID: 1954090316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1950804412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950804410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab172b5aeee7aca4283bf2b4f12606b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayObj
+  isNight: 0
 --- !u!1 &1954090315
 GameObject:
   m_ObjectHideFlags: 0
@@ -33660,8 +33688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingInteract
   dayList:
-  - {fileID: 1950804410}
-  - {fileID: 1688426924}
+  - {fileID: 1950804412}
+  - {fileID: 1688426926}
   targets:
   - targetPos:
     - {fileID: 799976109}

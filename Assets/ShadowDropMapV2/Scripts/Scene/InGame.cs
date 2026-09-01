@@ -31,7 +31,7 @@ public class InGame : StoryManager
         isFading = true;
         fadeImage.color = new Color(0, 0, 0, 0);
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(screenFilterImage.DOFade(1f, 1.5f));
+        sequence.Append(fadeImage.DOFade(1f, 1.5f));
         
         dialogueIndex++;
         dialogueTextIndex = 0;
@@ -42,10 +42,9 @@ public class InGame : StoryManager
         isNext = true;
         isDialogue = false;
         isTransitioning = false;
-        sequence.AppendInterval(1.0f);
-        player.position = playerpos;
+        sequence.AppendInterval(0.5f).OnComplete(() => { player.position = playerpos; });
         phone.ClosePhone();
-        sequence.Append(screenFilterImage.DOFade(0f, 1.5f)).SetEase(Ease.Linear);
+        sequence.Append(fadeImage.DOFade(0f, 1.5f)).SetEase(Ease.Linear);
         sequence.OnComplete(() => { isFading = false; });
     }
 }
