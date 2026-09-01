@@ -42,7 +42,7 @@ public class DataManager : MonoBehaviour
                 endEventName = columns[6].Trim(),
             };
             newText.text = newText.text.Replace("\\", "\n").Replace("|", ",");
-            if (!string.IsNullOrEmpty(columns[4])) newText.questName = columns[4].Trim();
+            if (!string.IsNullOrEmpty(columns[4])) newText.questName = columns[4].Replace("\\", "\n").Replace("|", ",").Trim();
             if (!string.IsNullOrEmpty(columns[7]))
             {
                 newText.isOption = true;

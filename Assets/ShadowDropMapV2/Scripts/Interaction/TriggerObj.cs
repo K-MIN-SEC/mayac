@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class ExitDay : MonoBehaviour
+public class TriggerObj : MonoBehaviour
 {
     void Start()
     {
@@ -13,7 +13,10 @@ public class ExitDay : MonoBehaviour
     
     public void Trigger()
     {
-        StoryManager.instance.SetupNextPhase();
-        gameObject.SetActive(false);
+        if (TryGetComponent(out StoryTarget storyTarget))
+            {
+                StoryManager.instance.TryPlayStory(storyTarget.targetId);
+                gameObject.SetActive(false);
+            }
     }
 }

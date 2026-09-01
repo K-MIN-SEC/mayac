@@ -4263,7 +4263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_Name
-      value: TestTrigger
+      value: TestExit
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       propertyPath: m_IsActive
@@ -4369,9 +4369,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1420255207}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1420255206}
@@ -23950,19 +23947,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c668ccee6468e47addf31faae532c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueObj
---- !u!114 &1420255207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420255205}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 398dbed704b94bf42bab3fdf61cea6c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StoryTarget
-  targetId: Interact
 --- !u!1 &1441852279
 GameObject:
   m_ObjectHideFlags: 0
