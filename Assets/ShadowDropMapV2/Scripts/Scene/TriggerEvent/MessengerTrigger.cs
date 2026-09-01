@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [Serializable]
+public class MessageData
+{
+    public TextAsset message;
+    public List<PhotoData> photoList = new();
+}
+
+[Serializable]
 public class PhotoData
 {
     public string photoId;
@@ -14,12 +21,13 @@ public class PhotoData
 
 public class MessengerTrigger : Trigger
 {
-    [SerializeField] TextAsset message;
-    public List<PhotoData> photoList = new();
+    public List<MessageData> messageList = new();
     private Dictionary<string, Sprite> photoDict = new();
+    [SerializeField] private Sprite error;
 
     protected override void HandleDialogEvent(string curEvent)
     {
+        base.HandleDialogEvent(curEvent);
         if (curEvent == "SendMessage")
         {
             StartCoroutine(SendMessage());
@@ -34,14 +42,20 @@ public class MessengerTrigger : Trigger
     {
         StoryManager.instance.isNext = false;
         int index = StoryManager.instance.dialogueTextIndex;
-        var textData = DataManager.instance.ParseMessageData(message.text, index);
-
-        for (int i = 0; i < textData.Count; i++)
+        int messageIndex = StoryManager.instance.dialogueIndex;
+        if (messageList[messageIndex].message != null)
         {
-            yield return new WaitForSeconds(1);
-            if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
-            MessengerAppUI.Instance.ReceiveMessage(textData[i]);
+            var textData = DataManager.instance.ParseMessageData(messageList[messageIndex].message.text, index);
+
+            for (int i = 0; i < textData.Count; i++)
+            {
+                yield return new WaitForSeconds(1);
+                if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
+                MessengerAppUI.Instance.ReceiveMessage(textData[i]);
+            }
         }
+
+
         StoryManager.instance.isNext = true;
         DialogueManager.instance.TriggerDialogue();
     }
@@ -49,26 +63,34 @@ public class MessengerTrigger : Trigger
     private void ReplyMessage()
     {
         int index = StoryManager.instance.dialogueTextIndex;
-        var textData = DataManager.instance.ParseMessageData(message.text, index);
-
-        for (int i = 0; i < textData.Count; i++)
+        int messageIndex = StoryManager.instance.dialogueIndex;
+        if (messageList[messageIndex].message != null)
         {
-            if (!textData[i].isFromMe) return;
-            if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
-            MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
+            var textData = DataManager.instance.ParseMessageData(messageList[messageIndex].message.text, index);
+
+            for (int i = 0; i < textData.Count; i++)
+            {
+                if (!textData[i].isFromMe) return;
+                if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
+                MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
+            }
         }
     }
 
-    protected override void Start()
+    protected override void Init()
     {
-        base.Start();
-        foreach (var data in photoList) photoDict.Add(data.photoId, data.photoSprite);
+        photoDict.Clear();
+        int messageIndex = StoryManager.instance.dialogueIndex;
+        if (messageList[messageIndex].photoList != null)
+        {
+            foreach (var data in messageList[messageIndex].photoList)
+                photoDict[data.photoId] = data.photoSprite;
+        }
     }
 
     public Sprite GetPhoto(string id)
     {
         if (photoDict.TryGetValue(id, out Sprite sprite)) return sprite;
-        photoDict.TryGetValue("Error", out Sprite error);
         return error;
     }
 

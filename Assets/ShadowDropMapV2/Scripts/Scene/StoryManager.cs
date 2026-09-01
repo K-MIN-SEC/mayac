@@ -18,9 +18,11 @@ public abstract class StoryManager : MonoBehaviour
     [SerializeField] protected Image screenFilterImage;
     [SerializeField] protected Image fadeImage;
     [SerializeField] protected bool isDialogue;
-    [SerializeField] public int dialogueTextIndex;
-    [SerializeField] public int targetIndex;
-    protected int dialogueIndex;
+    
+    public int dialogueIndex;
+    public int dialogueTextIndex;
+    public int targetIndex;
+
     public int indexWeight = 1;
     public bool isNext;
     public bool isFading = false;
@@ -81,12 +83,12 @@ public abstract class StoryManager : MonoBehaviour
         if (isOut)
         {
             fadeImage.color = new Color(0,0,0,0);
-            sequence.Append(fadeImage.DOFade(1, 1.5f));
+            sequence.Append(fadeImage.DOFade(1, 1f));
         }
         else
         {
             fadeImage.color = Color.black;
-            sequence.Append(fadeImage.DOFade(0, 1.5f));
+            sequence.Append(fadeImage.DOFade(0, 1f)).SetEase(Ease.Linear);
         }
         sequence.OnComplete(() => { isFading = false; });
     }

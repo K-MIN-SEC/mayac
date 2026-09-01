@@ -37,6 +37,7 @@ public class InGame : StoryManager
         dialogueTextIndex = 0;
         indexWeight = 1;
         triggerId = "";
+        Event("Init");
 
         isNext = true;
         isDialogue = false;
@@ -44,7 +45,7 @@ public class InGame : StoryManager
         sequence.AppendInterval(1.0f);
         player.position = playerpos;
         phone.ClosePhone();
-        sequence.Append(screenFilterImage.DOFade(0f, 1.5f));
+        sequence.Append(screenFilterImage.DOFade(0f, 1.5f)).SetEase(Ease.Linear);
         sequence.OnComplete(() => { isFading = false; });
     }
 }

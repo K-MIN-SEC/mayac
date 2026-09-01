@@ -6,6 +6,7 @@ public class NextPhase : Trigger
 
     protected override void TriggerEvent()
     {
+        Debug.Log("NextPhase Triggered");
         StoryManager.instance.SetupNextPhase();
     }
 }
