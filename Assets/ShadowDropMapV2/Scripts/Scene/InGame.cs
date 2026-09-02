@@ -32,21 +32,24 @@ public class InGame : StoryManager
         Sequence sequence = DOTween.Sequence();
         sequence.Append(fadeImage.DOFade(1f, 1.5f));
 
-        
+
         dialogueIndex++;
         indexWeight = 1;
         triggerId = "";
-        Event("Init");
+
 
         isNext = true;
         isDialogue = false;
         isTransitioning = false;
 
-        sequence.AppendInterval(0.5f).OnComplete(() =>
+        sequence.AppendInterval(0.5f);
+        sequence.AppendCallback(() =>
         {
             player.position = playerpos;
+            phone.ClosePhone();
+            Event("Init");
         });
-        phone.ClosePhone();
+        
         sequence.Append(fadeImage.DOFade(0f, 1.5f)).SetEase(Ease.Linear);
         sequence.OnComplete(() =>
         {
