@@ -24,6 +24,7 @@ public class MessengerTrigger : Trigger
     public List<MessageData> messageList = new();
     private Dictionary<string, Sprite> photoDict = new();
     [SerializeField] private Sprite error;
+    [SerializeField] MessengerMessageData data;
 
     protected override void HandleDialogEvent(string curEvent)
     {
@@ -50,6 +51,7 @@ public class MessengerTrigger : Trigger
             for (int i = 0; i < textData.Count; i++)
             {
                 yield return new WaitForSeconds(1);
+                data = textData[i];
                 if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
                 MessengerAppUI.Instance.ReceiveMessage(textData[i]);
             }
@@ -70,11 +72,13 @@ public class MessengerTrigger : Trigger
 
             for (int i = 0; i < textData.Count; i++)
             {
-                if (!textData[i].isFromMe) return;
+                data = textData[i];
+                if (!textData[i].isFromMe) { Debug.Log("Message is not from me"); return; }
                 if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
+                Debug.Log("Show");
                 MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
             }
-        }
+        }else Debug.Log("message is null");
     }
 
     protected override void Init()

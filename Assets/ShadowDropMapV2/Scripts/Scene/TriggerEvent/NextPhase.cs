@@ -11,7 +11,6 @@ public class NextPhase : Trigger
 
     protected override void TriggerEvent()
     {
-        StoryManager.instance.triggerId = string.Empty;
         StoryManager.instance.SetupNextPhase();
     }
 

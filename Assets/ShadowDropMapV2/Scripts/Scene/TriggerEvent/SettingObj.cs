@@ -46,12 +46,6 @@ public class SettingObj : Trigger
         }
         index = 0;
     }
-
-    protected override void Start()
-    {
-        base.Start();
-        Init();
-    }
 }
 
 [Serializable]

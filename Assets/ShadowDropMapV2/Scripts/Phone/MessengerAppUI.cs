@@ -207,6 +207,7 @@ public class MessengerAppUI : MonoBehaviour
         if (options == null || options.Length == 0)
         {
             replyOptionsContent.gameObject.SetActive(false);
+            Debug.Log("No reply options");
             return;
         }
         replyOptionsContent.gameObject.SetActive(true);

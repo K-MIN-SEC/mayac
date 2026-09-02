@@ -103,9 +103,9 @@ public class DialogueManager : MonoBehaviour
         return true;
     }
 
-    public void OnOffDialogue(bool onOff)
+    public void OnOffDialogue(bool onOff, bool EvnetTrigger = false)
     {
-        if (focusUI.activeSelf == onOff) return;
+        if (focusUI.activeSelf == onOff && !EvnetTrigger) return;
         if (onOff)
         {
             nameText.text = null;
@@ -125,7 +125,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (!onOff)
             {
-                Debug.Log($"[Dialogue] Dialogue Ended");
+                //Debug.Log($"[Dialogue] Dialogue Ended");
                 onDialogueEnd?.Invoke();
             }
         });
@@ -160,7 +160,7 @@ public class DialogueManager : MonoBehaviour
             isTyping = false;
             StoryManager.instance.Event(curDialogue.endEventName);
 
-            if (dialogueBox.Count == 0) OnOffDialogue(false);
+            if (dialogueBox.Count == 0) OnOffDialogue(false, true);
             return;
         }
 

@@ -8,6 +8,7 @@ public abstract class Trigger : MonoBehaviour
     protected virtual void Start()
     {
         StoryManager.instance.onEvent += HandleDialogEvent;
+        Init();
     }
 
     protected virtual void OnDisable()

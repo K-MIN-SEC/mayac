@@ -1,0 +1,3 @@
+﻿index,name,text,Trigger,Quest,StartEvent,EndEvent,OptionA,OptionB
+0,테스트,안녕하세요 저는 테스트용 다이얼로그 시스템이에요,,,,,,
+0,테스트,그럼 안녕히,NextPhase,,,,,
