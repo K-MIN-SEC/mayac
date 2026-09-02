@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ShadowDropMapV2/Scenes/InGameScene.unity
     guid: d472423cb84667548b239213e71b8aef
+  - enabled: 1
+    path: Assets/ShadowDropMapV2/Scenes/EnddingScene.unity
+    guid: 4972be4e4d9201b4f9c169c277d32261
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

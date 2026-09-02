@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class InGame : StoryManager
 {
@@ -55,6 +56,20 @@ public class InGame : StoryManager
         {
             dialogueTextIndex = 0;
             isFading = false;
+        });
+    }
+
+    public override void SetupNextScene()
+    {
+        isFading = true;
+        fadeImage.color = new Color(0, 0, 0, 0);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(fadeImage.DOFade(1f, 1.5f));
+
+        sequence.AppendInterval(0.5f);
+        sequence.AppendCallback(() =>
+        {
+            SceneManager.LoadScene(3);
         });
     }
 }

@@ -107,4 +107,5 @@ public abstract class StoryManager : MonoBehaviour
     }
 
     public virtual void SetupNextPhase() { }
+    public virtual void SetupNextScene() { }
 }
