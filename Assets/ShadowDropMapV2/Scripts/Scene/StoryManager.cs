@@ -11,7 +11,7 @@ public abstract class StoryManager : MonoBehaviour
 
     public void Event(string eventName)
     {
-        if(!string.IsNullOrEmpty(eventName)) Debug.Log($"[StoryManager] Event Triggered: {eventName}", this);
+        //if(!string.IsNullOrEmpty(eventName)) Debug.Log($"[StoryManager] Event Triggered: {eventName}", this);
         onEvent?.Invoke(eventName);
     }
 
@@ -37,6 +37,7 @@ public abstract class StoryManager : MonoBehaviour
     {
         if (!isTransitioning && string.IsNullOrEmpty(triggerId))
         {
+            //Debug.Log($"HandleDialogueEnd {dialogueTextIndex} + {indexWeight} = {dialogueTextIndex + indexWeight}");
             dialogueTextIndex += indexWeight;
             indexWeight = 1;
         }
@@ -56,6 +57,7 @@ public abstract class StoryManager : MonoBehaviour
         {
             isTransitioning = true;
 
+            //Debug.Log($"TryPlayStory {dialogueTextIndex} + {indexWeight} = {dialogueTextIndex + indexWeight}");
             dialogueTextIndex += indexWeight;
             triggerId = "";
             indexWeight = 1;

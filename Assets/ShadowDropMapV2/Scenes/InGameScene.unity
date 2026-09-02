@@ -34231,12 +34231,13 @@ MonoBehaviour:
   dialogue:
   - {fileID: 4900000, guid: 50170d45f5969814a89163aa5a28378b, type: 3}
   - {fileID: 4900000, guid: 63e6e75c15d809f4ba39819f8643e107, type: 3}
+  - {fileID: 4900000, guid: 76f539f20e673b34ca9f1334cd2317e5, type: 3}
   - {fileID: 4900000, guid: 94ba6b7bb567b484da9033027f9dedcd, type: 3}
-  - {fileID: 4900000, guid: 6f5e49dc4fd739145899561e50e47185, type: 3}
+  - {fileID: 4900000, guid: d377416c443f4de419735a28bc661cdb, type: 3}
   screenFilterImage: {fileID: 1042614284}
   fadeImage: {fileID: 1630687573}
   isDialogue: 0
-  dialogueIndex: 2
+  dialogueIndex: 4
   dialogueTextIndex: 0
   targetIndex: 0
   indexWeight: 1

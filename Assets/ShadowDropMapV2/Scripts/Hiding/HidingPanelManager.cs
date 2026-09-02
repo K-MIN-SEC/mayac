@@ -144,6 +144,7 @@ public class HidingPanelManager : MonoBehaviour
 
         StoryManager.instance.TryPlayStory("Hiding");
         if (!pendingIsCorrect) StoryManager.instance.indexWeight++;
+        //Debug.Log($"[ConfirmYes] {StoryManager.instance.indexWeight}");
 
         HidingRecord.Add(pendingSpotName, pendingIsCorrect);
         CloseExaminePanel();

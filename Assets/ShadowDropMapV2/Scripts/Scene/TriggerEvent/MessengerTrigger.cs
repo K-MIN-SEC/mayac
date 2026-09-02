@@ -73,9 +73,8 @@ public class MessengerTrigger : Trigger
             for (int i = 0; i < textData.Count; i++)
             {
                 data = textData[i];
-                if (!textData[i].isFromMe) { Debug.Log("Message is not from me"); return; }
+                if (!textData[i].isFromMe) { Debug.Log($"Message is not from me\n{textData[i].text}"); return; }
                 if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
-                Debug.Log("Show");
                 MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
             }
         }else Debug.Log("message is null");

@@ -7,11 +7,14 @@ public class LoopDialogue : Trigger
         if (curEvent == "Escape")
         {
             StoryManager.instance.indexWeight = 2;
+            //Debug.Log($"[Escape] {StoryManager.instance.indexWeight}");
         }
         if (curEvent == "Loop")
         {
             StoryManager.instance.indexWeight = -2;
+            //Debug.Log($"[LoopDialogue] {StoryManager.instance.indexWeight}");
         }
+        
     }
 
     protected override void TriggerEvent(){}
