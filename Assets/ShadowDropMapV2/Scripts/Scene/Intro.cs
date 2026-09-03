@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Intro : StoryManager
 {
     [SerializeField] private Image fade;
-    bool isEnd;
+    public bool isEndding = false;
 
     public override bool Trigger()
     {
@@ -26,9 +26,9 @@ public class Intro : StoryManager
 
     void FadeOut()
     {
+        if (isEndding) return;
         fade.DOFade(1, 0.5f).OnComplete(() =>
                 {
-                    Debug.Log($"[Intro] Load Scene");
                     SceneManager.LoadScene(2);
                 });
     }
