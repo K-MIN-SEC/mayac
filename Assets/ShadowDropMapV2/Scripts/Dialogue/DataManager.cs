@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance { get; private set; }
+    public TextAsset curNpcDialogueData;
+
     private void Awake()
     {
         if (instance != null)
@@ -82,5 +84,21 @@ public class DataManager : MonoBehaviour
             messageBox.Add(message);
         }
         return messageBox;
+    }
+
+    public List<string> ParseNPCDialogueData(int index)
+    {
+        List<string> npcDialogueBox = new();
+        string[] rows = curNpcDialogueData.text.Split('\n');
+        for (int i = 1; i < rows.Length; i++)
+        {
+            string[] columns = rows[i].Split(',');
+            if (columns.Length == 0) continue;
+            if (columns[0] == "") continue;
+            if (index != int.Parse(columns[0])) continue;
+
+            npcDialogueBox.Add(columns[1].Trim());
+        }
+        return npcDialogueBox;
     }
 }

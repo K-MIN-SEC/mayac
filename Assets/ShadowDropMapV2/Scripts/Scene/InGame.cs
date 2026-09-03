@@ -14,6 +14,7 @@ public class InGame : StoryManager
     {
         base.Start();
         FadeInOut(false);
+        DataManager.instance.curNpcDialogueData = npcDialogue[dialogueIndex];
     }
 
     void Update()
@@ -37,7 +38,7 @@ public class InGame : StoryManager
         dialogueIndex++;
         indexWeight = 1;
         triggerId = "";
-
+        DataManager.instance.curNpcDialogueData = npcDialogue[dialogueIndex];
 
         isNext = true;
         isDialogue = false;

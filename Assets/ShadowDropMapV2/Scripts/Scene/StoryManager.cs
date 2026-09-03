@@ -16,6 +16,7 @@ public abstract class StoryManager : MonoBehaviour
     }
 
     [SerializeField] protected List<TextAsset> dialogue;
+    [SerializeField] protected List<TextAsset> npcDialogue;
     [SerializeField] protected Image screenFilterImage;
     [SerializeField] protected Image fadeImage;
     [SerializeField] protected bool isDialogue;
