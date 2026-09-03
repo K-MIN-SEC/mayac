@@ -7,15 +7,12 @@ using UnityEngine.UI;
 public class Intro : StoryManager
 {
     [SerializeField] private Image fade;
+    bool isEnd;
     public bool isEndding = false;
 
     public override bool Trigger()
     {
         return base.Trigger();
-        // var temp = DataManager.instance.ParseDialogueData(dialogue.text, dialogueIndex);
-        // if (temp.Count == 0) return false;
-        // DialogueManager.instance.InitDialogue(temp);
-        // return true;
     }
 
     protected override void Start()
@@ -26,11 +23,16 @@ public class Intro : StoryManager
 
     void FadeOut()
     {
-        if (isEndding) return;
-        fade.DOFade(1, 0.5f).OnComplete(() =>
-                {
-                    SceneManager.LoadScene(2);
-                });
+        if (isEnd) return;
+        isEnd = true;
+        
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(fade.DOFade(1, 0.5f));
+        if (!isEndding)
+        {
+            sequence.OnComplete(() => { SceneManager.LoadScene(2); });
+        }
+
     }
 
     void Update()
@@ -42,7 +44,8 @@ public class Intro : StoryManager
             {
                 isDialogue = true;
                 Trigger();
-            }else isDialogue = DialogueManager.instance.TriggerDialogue();
+            }
+            else isDialogue = DialogueManager.instance.TriggerDialogue();
         }
 
     }

@@ -13,6 +13,11 @@ public class TriggerObj : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        isTrigger = false;
+    }
+
     public void Trigger()
     {
         if (isTrigger) return;
