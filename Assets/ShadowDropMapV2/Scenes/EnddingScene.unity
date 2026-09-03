@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8683377165651472197, guid: e38e797e3b14d4843b2153b23062af41, type: 3}
+  m_Sprite: {fileID: 2202536000310082963, guid: 2d2f99d8eda6952409b792837ad45935, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5291,7 +5291,7 @@ MonoBehaviour:
   isFading: 0
   triggerId: 
   fade: {fileID: 1801458276}
-  isEndding: 0
+  isEndding: 1
 --- !u!4 &1788376626
 Transform:
   m_ObjectHideFlags: 0

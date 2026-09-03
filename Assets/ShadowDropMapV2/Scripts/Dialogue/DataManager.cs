@@ -97,7 +97,9 @@ public class DataManager : MonoBehaviour
             if (columns[0] == "") continue;
             if (index != int.Parse(columns[0])) continue;
 
-            npcDialogueBox.Add(columns[1].Trim());
+            var npcDialogue = columns[1].Trim();
+            npcDialogue = npcDialogue.Replace("\\", "\n").Replace("|", ",");
+            npcDialogueBox.Add(npcDialogue);
         }
         return npcDialogueBox;
     }

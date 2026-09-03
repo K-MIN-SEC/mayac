@@ -1601,6 +1601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 483d62b660d429b48b2d81f2da396375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataManager
+  curNpcDialogueData: {fileID: 0}
 --- !u!4 &561925680
 Transform:
   m_ObjectHideFlags: 0
@@ -1870,7 +1871,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2202536000310082963, guid: 2d2f99d8eda6952409b792837ad45935, type: 3}
+  m_Sprite: {fileID: -8683377165651472197, guid: e38e797e3b14d4843b2153b23062af41, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5278,6 +5279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Intro
   dialogue:
   - {fileID: 4900000, guid: f46c9e4f554c53d4b8f6b646a4a34e98, type: 3}
+  npcDialogue: []
   screenFilterImage: {fileID: 1523177984}
   fadeImage: {fileID: 1801458276}
   isDialogue: 0
@@ -5289,6 +5291,7 @@ MonoBehaviour:
   isFading: 0
   triggerId: 
   fade: {fileID: 1801458276}
+  isEndding: 0
 --- !u!4 &1788376626
 Transform:
   m_ObjectHideFlags: 0
