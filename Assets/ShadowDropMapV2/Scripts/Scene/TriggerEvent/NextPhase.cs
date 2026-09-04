@@ -5,7 +5,6 @@ public class NextPhase : Trigger
 {
     protected override void Start()
     {
-        StoryManager.instance.onEvent += HandleDialogEvent;
         DialogueManager.instance.onDialogueEnd += HandleDialogEvent;
     }
 
@@ -17,10 +16,6 @@ public class NextPhase : Trigger
     void HandleDialogEvent()
     {
         if(StoryManager.instance.triggerId == "NextPhase") TriggerEvent();
-    }
-
-    protected override void HandleDialogEvent(string curEvent)
-    {
-        if (curEvent == "NextScene") StoryManager.instance.SetupNextScene();
+        if(StoryManager.instance.triggerId == "NextScene") StoryManager.instance.SetupNextScene();
     }
 }

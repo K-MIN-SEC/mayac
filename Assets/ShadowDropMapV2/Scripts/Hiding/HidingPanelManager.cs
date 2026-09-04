@@ -11,6 +11,8 @@ public class HidingPanelManager : MonoBehaviour
     public GameObject examinePanel;
     public Image photoImage;
 
+    public Sprite curPointImage;
+
     [Header("Selectable hiding spots")]
     [SerializeField] private HideSpotHotspot[] hotspotButtons;
 
@@ -98,10 +100,11 @@ public class HidingPanelManager : MonoBehaviour
         confirmDialog.SetActive(false);
     }
 
-    public void RequestHide(string spotName, bool isCorrectSpot = false)
+    public void RequestHide(string spotName, Sprite pointImage, bool isCorrectSpot)
     {
         pendingSpotName = spotName;
         pendingIsCorrect = isCorrectSpot;
+        curPointImage = pointImage;
         
         confirmText.text = $"Hide in {spotName}?";
         confirmDialog.SetActive(true);

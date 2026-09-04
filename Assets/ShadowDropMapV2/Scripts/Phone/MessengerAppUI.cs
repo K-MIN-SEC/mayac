@@ -48,7 +48,7 @@ public class MessengerAppUI : MonoBehaviour
     public UIShaker appIconShaker;
     public AudioClip notificationSound;
 
-    private ChatThread openThread;
+    public ChatThread openThread;
 
     private void Awake()
     {
@@ -96,16 +96,21 @@ public class MessengerAppUI : MonoBehaviour
         }
 
         data.isFromMe = false;
-        if (data.replyOptions != null && data.replyOptions.Length > 0) ShowReplyOptions(data.replyOptions);
+        if (data.replyOptions != null && data.replyOptions.Length > 0) ShowReplyOptions(data);
         AddMessageToThread(thread, data);
     }
 
     // 유저가 답장 버튼을 눌렀을 때 호출
-    public void SendReply(string text)
+    public void SendReply(MessengerMessageData data)
     {
         if (openThread == null) return;
 
-        var myMessage = new MessengerMessageData { text = text, isFromMe = true };
+        var myMessage = new MessengerMessageData 
+        { 
+            text = data.replyOptions[0], 
+            photo = data.photo,          
+            isFromMe = true              
+        };
         AddMessageToThread(openThread, myMessage);
 
         // 스토리에 트리거 전달
@@ -127,6 +132,7 @@ public class MessengerAppUI : MonoBehaviour
         if (prefab == null) return;
 
         GameObject bubble = Instantiate(prefab, chatDetailContent);
+
         if (bubble.TryGetComponent(out ChatBubbleUI bubbleUI))
         {
             bubbleUI.Set(message.text, message.photo);
@@ -197,20 +203,21 @@ public class MessengerAppUI : MonoBehaviour
         if (chatDetailScrollRect != null) chatDetailScrollRect.verticalNormalizedPosition = 0f;
     }
 
-    public void ShowReplyOptions(string[] options)
+    public void ShowReplyOptions(MessengerMessageData data)
     {
-        if (options == null || options.Length == 0)
+        if (data.replyOptions == null || data.replyOptions.Length == 0)
         {
             return;
         }
 
-        replyText.text = options[0];
+        replyText.text = data.replyOptions[0];
 
         replyButton.onClick.RemoveAllListeners();
         replyButton.onClick.AddListener(() =>
         {
-            SendReply(replyText.text);
+            SendReply(data);
             replyText.text = null;
+            replyButton.onClick.RemoveAllListeners();
         });
     }
 

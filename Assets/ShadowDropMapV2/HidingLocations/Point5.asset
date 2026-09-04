@@ -22,7 +22,7 @@ MonoBehaviour:
   - "\uD558\uC218\uAD6C"
   - "\uC790\uC804\uAC70"
   - "\uC4F0\uB808\uAE30\uB354\uBBF8"
-  correctSpotIndex: 2
+  correctSpotIndex: -1
   spotPositions:
   - {x: -628, y: -356}
   - {x: 326, y: -312}

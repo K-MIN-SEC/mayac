@@ -1896,7 +1896,7 @@ MonoBehaviour:
   npcDialogue: []
   screenFilterImage: {fileID: 1523177984}
   fadeImage: {fileID: 1801458276}
-  isDialogue: 1
+  isDialogue: 0
   dialogueIndex: 0
   dialogueTextIndex: 0
   targetIndex: 0

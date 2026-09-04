@@ -49,6 +49,7 @@ public class InGame : StoryManager
         {
             player.position = playerpos;
             phone.ClosePhone();
+            MessengerAppUI.Instance.openThread.messages.Clear();
             Event("Init");
         });
         

@@ -24,7 +24,6 @@ public class MessengerTrigger : Trigger
     public List<MessageData> messageList = new();
     private Dictionary<string, Sprite> photoDict = new();
     [SerializeField] private Sprite error;
-    [SerializeField] MessengerMessageData data;
 
     protected override void HandleDialogEvent(string curEvent)
     {
@@ -51,7 +50,6 @@ public class MessengerTrigger : Trigger
             for (int i = 0; i < textData.Count; i++)
             {
                 yield return new WaitForSeconds(1);
-                data = textData[i];
                 if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
                 MessengerAppUI.Instance.ReceiveMessage(textData[i]);
             }
@@ -72,10 +70,9 @@ public class MessengerTrigger : Trigger
             Debug.Log($"ReplyMessage {textData.Count}");
             for (int i = 0; i < textData.Count; i++)
             {
-                data = textData[i];
                 if (!textData[i].isFromMe) { Debug.Log($"Message is not from me\n{textData[i].text}"); return; }
                 if (!string.IsNullOrEmpty(textData[i].photoName)) textData[i].photo = GetPhoto(textData[i].photoName);
-                MessengerAppUI.Instance.ShowReplyOptions(textData[i].replyOptions);
+                MessengerAppUI.Instance.ShowReplyOptions(textData[i]);
             }
         }else Debug.Log("message is null");
     }
@@ -94,7 +91,12 @@ public class MessengerTrigger : Trigger
     public Sprite GetPhoto(string id)
     {
         if (photoDict.TryGetValue(id, out Sprite sprite)) return sprite;
-        return error;
+        else if(id == "Hide")
+        {
+            Debug.Log($"GetPhoto {id} : {HidingPanelManager.Instance.curPointImage}");
+            return HidingPanelManager.Instance.curPointImage;
+        }
+        else return error;
     }
 
     protected override void TriggerEvent() { }
