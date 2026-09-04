@@ -57,6 +57,9 @@ public class DialogueManager : MonoBehaviour
     bool isOption = false;
     bool isOptionA = false;
 
+    private float lastTriggerTime = 0f;
+private const float triggerCooldown = 0.1f;
+
     public Action onDialogueEnd;
 
     WaitForSeconds waitTime;
@@ -85,6 +88,9 @@ public class DialogueManager : MonoBehaviour
 
     public bool TriggerDialogue()
     {
+        if (Time.time - lastTriggerTime < triggerCooldown) return true;
+            lastTriggerTime = Time.time;
+
         if (dialogueBox.Count == 0 && !isTyping || isEnd)
         {
             OnOffDialogue(false);
