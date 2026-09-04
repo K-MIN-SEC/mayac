@@ -52,6 +52,13 @@ public class DetectorAppUI : MonoBehaviour
         RefreshVisibility();
     }
 
+    public void Deactivate()
+    {
+        isActivated = false;
+        currentTarget = null;
+        RefreshVisibility();
+    }
+
     public void OnScreenOpened()
     {
         isScreenOpen = true;

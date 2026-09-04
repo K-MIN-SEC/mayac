@@ -8,10 +8,10 @@ public class ChatBubbleUI : MonoBehaviour
     public GameObject textBackground;
     public GameObject photoContainer;
 
-    private Image cachedPhotoImg;
-    private AspectRatioFitter cachedPhotoFitter;
-    private LayoutElement cachedPhotoLayout;
-    private LayoutElement cachedTextLayout;
+    public Image cachedPhotoImg;
+    public AspectRatioFitter cachedPhotoFitter;
+    public LayoutElement cachedPhotoLayout;
+    public LayoutElement cachedTextLayout;
 
     [Header("UI Settings")]
     public float maxTextWidth = 240f;

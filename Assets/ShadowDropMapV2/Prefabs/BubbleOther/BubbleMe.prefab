@@ -64,6 +64,10 @@ MonoBehaviour:
   messageText: {fileID: 1461784188523987563}
   textBackground: {fileID: 3102497526124684903}
   photoContainer: {fileID: 8286218695904075144}
+  cachedPhotoImg: {fileID: 1885635507404557739}
+  cachedPhotoFitter: {fileID: 5676358329541149669}
+  cachedPhotoLayout: {fileID: 3644228747119930619}
+  cachedTextLayout: {fileID: 5580138547454599655}
   maxTextWidth: 240
   maxPhotoWidth: 240
 --- !u!114 &314432041942018748

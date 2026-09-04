@@ -44,6 +44,7 @@ public class SettingObj : Trigger
             if (curIndex != i) continue;
             for (int j = 0; j < targets[i].targetPos.Count; j++) targets[i].targetPos[j].SetActive(false);
         }
+        DetectorAppUI.Instance.Deactivate();
         index = 0;
     }
 }

@@ -38,8 +38,8 @@ public class MessengerAppUI : MonoBehaviour
     public ScrollRect chatDetailScrollRect;
 
     [Header("Reply options")]
-    public Transform replyOptionsContent;
-    public GameObject replyOptionButtonPrefab;
+    public Button replyButton;
+    public TMP_Text replyText;
 
     [Header("Notifications")]
     public GameObject appIconBadge;
@@ -193,37 +193,25 @@ public class MessengerAppUI : MonoBehaviour
             }
         }
 
-        // 스크롤 맨 아래로 내리기 (레이아웃 갱신 후 실행되도록 딜레이 적용 필요할 수 있음)
         Canvas.ForceUpdateCanvases();
         if (chatDetailScrollRect != null) chatDetailScrollRect.verticalNormalizedPosition = 0f;
     }
 
     public void ShowReplyOptions(string[] options)
     {
-        if (replyOptionsContent == null) return;
-
-        foreach (Transform child in replyOptionsContent) Destroy(child.gameObject);
-
         if (options == null || options.Length == 0)
         {
-            replyOptionsContent.gameObject.SetActive(false);
-            Debug.Log("No reply options");
             return;
         }
-        replyOptionsContent.gameObject.SetActive(true);
 
-        foreach (string option in options)
+        replyText.text = options[0];
+
+        replyButton.onClick.RemoveAllListeners();
+        replyButton.onClick.AddListener(() =>
         {
-            GameObject buttonObject = Instantiate(replyOptionButtonPrefab, replyOptionsContent);
-            buttonObject.GetComponentInChildren<TMP_Text>().text = option;
-
-            string capturedOption = option;
-            buttonObject.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                SendReply(capturedOption);
-                replyOptionsContent.gameObject.SetActive(false);
-            });
-        }
+            SendReply(replyText.text);
+            replyText.text = null;
+        });
     }
 
     private void RefreshUnreadBadges()

@@ -69,7 +69,7 @@ public class MessengerTrigger : Trigger
         if (messageList[messageIndex].message != null)
         {
             var textData = DataManager.instance.ParseMessageData(messageList[messageIndex].message.text, index);
-
+            Debug.Log($"ReplyMessage {textData.Count}");
             for (int i = 0; i < textData.Count; i++)
             {
                 data = textData[i];

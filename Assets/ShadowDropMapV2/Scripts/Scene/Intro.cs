@@ -45,7 +45,7 @@ public class Intro : StoryManager
                 isDialogue = true;
                 Trigger();
             }
-            else isDialogue = DialogueManager.instance.TriggerDialogue();
+            else DialogueManager.instance.TriggerDialogue();
         }
 
     }
