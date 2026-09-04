@@ -898,11 +898,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.18
+      value: 7.53
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.370002
+      value: -17.640001
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1543,7 +1543,7 @@ RectTransform:
   m_AnchorMin: {x: 0.39251575, y: 0.45200002}
   m_AnchorMax: {x: 0.39251575, y: 0.45200002}
   m_AnchoredPosition: {x: -3, y: 1}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &42944401
 MonoBehaviour:
@@ -2948,7 +2948,7 @@ Transform:
   m_GameObject: {fileID: 86390190}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.9, y: 4.9, z: 0}
+  m_LocalPosition: {x: 30.32, y: 5.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5071,18 +5071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e379aa8ddbac3848a7cbb7aa85c2aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineTrigger
-  location: {fileID: 11400000, guid: 2a9ae60875ca4e8f9de12e7610f90871, type: 2}
-  photo: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  spotNames:
-  - Stairway
-  - Utility box
-  - Window ledge
-  correctSpotIndex: -1
-  spotPositions: []
+  location: {fileID: 11400000, guid: 11aeb98d2f454faaa7527033edb41cf9, type: 2}
 --- !u!1 &185244475
 GameObject:
   m_ObjectHideFlags: 0
@@ -7340,11 +7329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.26
+      value: 8.610001
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.1900015
+      value: -17.460001
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7933,8 +7922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -582, y: -86}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -628, y: -356}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &295861852
 MonoBehaviour:
@@ -7950,7 +7939,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 1
   isCorrectSpot: 0
-  spotImage: {fileID: 0}
+  spotImage: {fileID: 295861854}
+  rectTransform: {fileID: 295861851}
 --- !u!114 &295861853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8027,8 +8017,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 8288803412022479607, guid: fb8febdfc6aa7e344b576ea6b415c2d7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11514,18 +11504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e379aa8ddbac3848a7cbb7aa85c2aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineTrigger
-  location: {fileID: 11400000, guid: 2a9ae60875ca4e8f9de12e7610f90871, type: 2}
-  photo: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  spotNames:
-  - Stairway
-  - Utility box
-  - Window ledge
-  correctSpotIndex: -1
-  spotPositions: []
+  location: {fileID: 11400000, guid: 4db2673b17054501a348df4d9800486f, type: 2}
 --- !u!1001 &379223694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11572,11 +11551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.010000229
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2200003
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12603,7 +12582,7 @@ Transform:
   m_GameObject: {fileID: 427485213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.63, y: 9.85, z: 0}
+  m_LocalPosition: {x: 11.32, y: 11.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13389,17 +13368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineTrigger
   location: {fileID: 11400000, guid: 2a9ae60875ca4e8f9de12e7610f90871, type: 2}
-  photo: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  spotNames:
-  - Stairway
-  - Utility box
-  - Window ledge
-  correctSpotIndex: -1
-  spotPositions: []
 --- !u!4 &457229238 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: ac2aea3c3def45679ae3729dbd2b3c15, type: 3}
@@ -13578,8 +13546,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -410, y: -284}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -166, y: -314}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &467410248
 MonoBehaviour:
@@ -13595,7 +13563,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 3
   isCorrectSpot: 0
-  spotImage: {fileID: 0}
+  spotImage: {fileID: 467410250}
+  rectTransform: {fileID: 467410247}
 --- !u!114 &467410249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13672,8 +13641,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -831400496402652719, guid: f0558285afe46394da434a87db7f1d88, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -15535,7 +15504,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 42f877f515704d14c8c7e4e7c319f72a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21813,11 +21782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.11
+      value: 6.46
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.290002
+      value: -17.560001
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21971,18 +21940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e379aa8ddbac3848a7cbb7aa85c2aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineTrigger
-  location: {fileID: 11400000, guid: 2a9ae60875ca4e8f9de12e7610f90871, type: 2}
-  photo: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  spotNames:
-  - Stairway
-  - Utility box
-  - Window ledge
-  correctSpotIndex: -1
-  spotPositions: []
+  location: {fileID: 11400000, guid: bc5408434e1e47f181038cff8b594138, type: 2}
 --- !u!1 &792160710
 GameObject:
   m_ObjectHideFlags: 0
@@ -26209,11 +26167,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.80999947
+      value: -0.48
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.19999981
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27638,7 +27596,7 @@ RectTransform:
   m_AnchorMin: {x: 0.629, y: 0.45200002}
   m_AnchorMax: {x: 0.629, y: 0.45200002}
   m_AnchoredPosition: {x: 2, y: 2}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978203924
 MonoBehaviour:
@@ -28495,8 +28453,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 531, y: -278}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: 326, y: -312}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &997794882
 MonoBehaviour:
@@ -28512,7 +28470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HideSpotHotspot
   spotName: 2
   isCorrectSpot: 0
-  spotImage: {fileID: 0}
+  spotImage: {fileID: 997794884}
+  rectTransform: {fileID: 997794881}
 --- !u!114 &997794883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28589,8 +28548,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 751927462002341772, guid: 99cea7e4ef149d84a8db428c5d8fd4ae, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -39911,11 +39870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.315
+      value: -0.9
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1550007
+      value: 1.57
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46054,7 +46013,7 @@ Transform:
   m_GameObject: {fileID: 1728091181}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.26, y: -11.46, z: 0}
+  m_LocalPosition: {x: 7.61, y: -15.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52146,7 +52105,7 @@ MonoBehaviour:
   screenFilterImage: {fileID: 1042614284}
   fadeImage: {fileID: 1630687573}
   isDialogue: 0
-  dialogueIndex: 1
+  dialogueIndex: 2
   dialogueTextIndex: 0
   targetIndex: 0
   indexWeight: 1
@@ -54357,11 +54316,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.1499996
+      value: 0.69
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13999987
+      value: -0.64
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55427,18 +55386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e379aa8ddbac3848a7cbb7aa85c2aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExamineTrigger
-  location: {fileID: 11400000, guid: 2a9ae60875ca4e8f9de12e7610f90871, type: 2}
-  photo: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  spotNames:
-  - Stairway
-  - Utility box
-  - Window ledge
-  correctSpotIndex: -1
-  spotPositions: []
+  location: {fileID: 11400000, guid: be26906573d645769447623e14cb4ee3, type: 2}
 --- !u!1 &2093992456
 GameObject:
   m_ObjectHideFlags: 0
@@ -56525,7 +56473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1400001
+      value: -2.15
       objectReference: {fileID: 0}
     - target: {fileID: 6672950708744489115, guid: bec5efaea7438f047bf9cc0099837c58, type: 3}
       propertyPath: m_LocalPosition.z

@@ -30,81 +30,54 @@ public class HidingPanelManager : MonoBehaviour
         }
 
         Instance = this;
-        if (examinePanel != null) examinePanel.SetActive(false);
-        if (confirmDialog != null) confirmDialog.SetActive(false);
+        
+        // 💡 굳이 null 체크를 하지 않습니다. 할당이 안 되어 있으면 여기서 에러가 나도록 유도합니다.
+        examinePanel.SetActive(false);
+        confirmDialog.SetActive(false);
     }
 
-    public void OpenExaminePanel(Sprite photo)
+    public void OpenExaminePanel(HidingLocationData data)
     {
-        OpenExaminePanel(photo, null, null, -1, null);
+        photoImage.sprite = data.background;
+        photoImage.preserveAspect = true;
+
+        examinePanel.SetActive(true);
+        confirmDialog.SetActive(false);
+        
+        StoryManager.instance.TryPlayStory("OpenPanel");
+        ConfigureHotspots(data);
     }
 
-    public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames)
+    private void ConfigureHotspots(HidingLocationData data)
     {
-        OpenExaminePanel(photo, spotSprites, spotNames, -1, null);
-    }
-
-    public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames, int correctSpotIndex)
-    {
-        OpenExaminePanel(photo, spotSprites, spotNames, correctSpotIndex, null);
-    }
-
-    // spotPositions: 각 지점을 사진 속 어디에 배치할지 (없으면 null, 그러면 위치는 그대로 둠)
-    public void OpenExaminePanel(Sprite photo, Sprite[] spotSprites, string[] spotNames, int correctSpotIndex, Vector2[] spotPositions)
-    {
-        if (photoImage != null)
+        if (data.spotSprites == null || data.spotSprites.Length == 0)
         {
-            photoImage.sprite = photo;
-            photoImage.preserveAspect = true;
+            foreach (var btn in hotspotButtons) btn.gameObject.SetActive(false);
+            return; 
         }
 
-        if (examinePanel != null) examinePanel.SetActive(true);
-        if (confirmDialog != null) confirmDialog.SetActive(false);
-        StoryManager.instance.TryPlayStory("OpenPanel");
-        ConfigureHotspots(spotSprites, spotNames, correctSpotIndex, spotPositions);
-    }
-
-    private void ConfigureHotspots(Sprite[] spotSprites, string[] spotNames, int correctSpotIndex, Vector2[] spotPositions)
-    {
-        if ((hotspotButtons == null || hotspotButtons.Length == 0) && examinePanel != null)
-            hotspotButtons = examinePanel.GetComponentsInChildren<HideSpotHotspot>(true);
-        if (hotspotButtons == null || hotspotButtons.Length == 0)
-            return;
-
-        bool hasConfiguredSpots = spotSprites != null && spotSprites.Length > 0;
-        if (hasConfiguredSpots)
-            EnsureHotspotCapacity(spotSprites.Length);
+        EnsureHotspotCapacity(data.spotSprites.Length);
 
         for (int index = 0; index < hotspotButtons.Length; index++)
         {
-            if (!hasConfiguredSpots)
-            {
-                hotspotButtons[index].gameObject.SetActive(true);
-                continue;
-            }
-
-            bool hasSpot = index < spotSprites.Length && spotSprites[index] != null;
+            bool hasSpot = index < data.spotSprites.Length;
             hotspotButtons[index].gameObject.SetActive(hasSpot);
-            if (!hasSpot)
-                continue;
+            
+            if (!hasSpot) continue;
 
-            string spotName = spotNames != null && index < spotNames.Length
-                ? spotNames[index]
-                : $"Spot {index + 1}";
-            bool isCorrect = index == correctSpotIndex;
-
-            Vector2? position = null;
-            if (spotPositions != null && index < spotPositions.Length)
-                position = spotPositions[index];
-
-            hotspotButtons[index].Configure(spotName, spotSprites[index], isCorrect, position);
+            hotspotButtons[index].Configure(
+                data.spotNames[index], 
+                data.spotSprites[index], 
+                index == data.correctSpotIndex, 
+                data.spotPositions[index],
+                data.spotSizes[index]
+            );
         }
     }
 
     private void EnsureHotspotCapacity(int requiredCount)
     {
-        if (requiredCount <= hotspotButtons.Length)
-            return;
+        if (requiredCount <= hotspotButtons.Length) return;
 
         HideSpotHotspot template = hotspotButtons[hotspotButtons.Length - 1];
         int previousCount = hotspotButtons.Length;
@@ -121,30 +94,23 @@ public class HidingPanelManager : MonoBehaviour
 
     public void CloseExaminePanel()
     {
-        if (examinePanel != null) examinePanel.SetActive(false);
-        if (confirmDialog != null) confirmDialog.SetActive(false);
+        examinePanel.SetActive(false);
+        confirmDialog.SetActive(false);
     }
 
-    public void RequestHide(string spotName)
-    {
-        RequestHide(spotName, false);
-    }
-
-    public void RequestHide(string spotName, bool isCorrectSpot)
+    public void RequestHide(string spotName, bool isCorrectSpot = false)
     {
         pendingSpotName = spotName;
         pendingIsCorrect = isCorrectSpot;
-        if (confirmText != null) confirmText.text = $"Hide in {spotName}?";
-        if (confirmDialog != null) confirmDialog.SetActive(true);
+        
+        confirmText.text = $"Hide in {spotName}?";
+        confirmDialog.SetActive(true);
     }
 
     public void ConfirmYes()
     {
-        string correctText = pendingIsCorrect ? "정답!" : "오답";
-
         StoryManager.instance.TryPlayStory("Hiding");
         if (!pendingIsCorrect) StoryManager.instance.indexWeight++;
-        //Debug.Log($"[ConfirmYes] {StoryManager.instance.indexWeight}");
 
         HidingRecord.Add(pendingSpotName, pendingIsCorrect);
         CloseExaminePanel();
@@ -152,6 +118,6 @@ public class HidingPanelManager : MonoBehaviour
 
     public void ConfirmNo()
     {
-        if (confirmDialog != null) confirmDialog.SetActive(false);
+        confirmDialog.SetActive(false);
     }
 }

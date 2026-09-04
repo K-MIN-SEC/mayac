@@ -13,17 +13,9 @@ MonoBehaviour:
   m_Name: Point3
   m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
   locationName: Point 3
-  background: {fileID: -4178046375966092550, guid: 094137b5deb8dd244bf825400a117804, type: 3}
-  spotSprites:
-  - {fileID: -855298285791758126, guid: dd7b659265cef514d823a4cfb35da0e6, type: 3}
-  - {fileID: 6937817954938267909, guid: 58799e23c96b8ec4bb6b8fe8fbafc416, type: 3}
-  - {fileID: -6470460504253458178, guid: a7c9fce10169fc44ba617a964b664cbb, type: 3}
-  spotNames:
-  - "\uD1B5"
-  - "\uC0C1\uC790"
-  - "\uBD09\uC9C0"
-  correctSpotIndex: 0
-  spotPositions:
-  - {x: -492, y: -437}
-  - {x: 668, y: -278}
-  - {x: -57, y: -248}
+  background: {fileID: 21300000, guid: a078a69c9bf1b1f489466ace9992f7a4, type: 3}
+  spotSprites: []
+  spotNames: []
+  correctSpotIndex: -1
+  spotPositions: []
+  spotSizes: []

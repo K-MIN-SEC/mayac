@@ -13,20 +13,21 @@ MonoBehaviour:
   m_Name: Point1
   m_EditorClassIdentifier: Assembly-CSharp::HidingLocationData
   locationName: Point 1
-  background: {fileID: 4130640169021434097, guid: f9a86fa97fc327a45b2ef58a1598381a, type: 3}
+  background: {fileID: 21300000, guid: 8830154f2719007449da8e65f105c479, type: 3}
   spotSprites:
-  - {fileID: -855298285791758126, guid: 53c9134b59a635944aab0fab90fe736c, type: 3}
-  - {fileID: 6937817954938267909, guid: f91c4917ea3865649bb029f75f68aaae, type: 3}
-  - {fileID: -6470460504253458178, guid: 4b084b5f0a4ea7746bb4276049def2f8, type: 3}
-  - {fileID: -4178046375966092550, guid: d2426d0766dd4164089a98660fcd8537, type: 3}
+  - {fileID: 21300000, guid: b1bc1b22b1354e34fbe8285c30ae0709, type: 3}
+  - {fileID: 4653932814348791077, guid: f2fd491df566ada44a4db2cbfbd354d2, type: 3}
+  - {fileID: 690243772044861111, guid: 0781956d3f86d1849ba349887f68b06b, type: 3}
   spotNames:
-  - "\uD658\uD48D\uAD6C"
-  - "\uBD09\uC9C0"
-  - "\uD3EC\uC2A4\uD130"
-  - "\uC950\uAD6C\uBA4D"
-  correctSpotIndex: 3
+  - "\uACC4\uB7C9\uAE30"
+  - "\uC4F0\uB808\uAE30 \uB354\uBBF8"
+  - "\uCF00\uC774\uBE14 \uB9B4"
+  correctSpotIndex: 0
   spotPositions:
-  - {x: -784, y: -5}
-  - {x: -485, y: -413}
-  - {x: -297, y: -134}
-  - {x: 714, y: -360}
+  - {x: -762, y: 134}
+  - {x: -293, y: -200}
+  - {x: 142, y: -87}
+  spotSizes:
+  - {x: 250, y: 250}
+  - {x: 325, y: 250}
+  - {x: 150, y: 150}
