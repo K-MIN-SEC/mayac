@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class InGame : StoryManager
 {
@@ -8,13 +9,16 @@ public class InGame : StoryManager
     [SerializeField] Vector3 playerpos;
 
     [SerializeField] SmartphoneUIManager phone;
-    bool i;
+    [SerializeField] AudioClip dayBgm;
+    [SerializeField] AudioClip nightBgm;
+    bool isNight;
 
     protected override void Start()
     {
         base.Start();
         FadeInOut(false);
         DataManager.instance.curNpcDialogueData = npcDialogue[dialogueIndex];
+        StartCoroutine(PlaySoundRoutine());
     }
 
     void Update()
@@ -24,6 +28,20 @@ public class InGame : StoryManager
             if (!isNext || isFading) return;
             if (!isDialogue && string.IsNullOrEmpty(triggerId)) isDialogue = Trigger();
             else isDialogue = DialogueManager.instance.TriggerDialogue();
+        }
+    }
+
+    private IEnumerator PlaySoundRoutine()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(10, 13);
+            yield return new WaitForSeconds(waitTime);
+
+            if (SoundManager.instance != null && !isFading)
+            {
+                SoundManager.instance.SetAudio(isNight ? nightBgm : dayBgm, false);
+            }
         }
     }
 
@@ -73,5 +91,11 @@ public class InGame : StoryManager
         {
             SceneManager.LoadScene(3);
         });
+    }
+
+    public override void ChangeToNight(bool isNight)
+    {
+        base.ChangeToNight(isNight);
+        this.isNight = isNight;
     }
 }

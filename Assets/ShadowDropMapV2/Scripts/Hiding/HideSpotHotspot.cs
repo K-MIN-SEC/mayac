@@ -23,7 +23,6 @@ public class HideSpotHotspot : MonoBehaviour
 
     public void OnHotspotClicked()
     {
-        if (HidingPanelManager.Instance != null)
-            HidingPanelManager.Instance.RequestHide(spotName, spotImage.sprite, isCorrectSpot);
+        HidingPanelManager.Instance.RequestHide(spotName, spotImage.sprite, isCorrectSpot);
     }
 }

@@ -99,7 +99,7 @@ public abstract class StoryManager : MonoBehaviour
         sequence.OnComplete(() => { isFading = false; });
     }
 
-    public void ChangeToNight(bool isNight)
+    public virtual void ChangeToNight(bool isNight)
     {
         // if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
         // else screenFilterImage.DOColor(new Color(0, 0, 0, 0), 3.0f);

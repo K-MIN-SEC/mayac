@@ -24,6 +24,7 @@ public class SoundManager : MonoBehaviour
         sound.clip = clip;
         sound.loop = looping;
         sound.pitch = pitch;
+        sound.volume = soundVolume;
         sound.Play();
         if (!looping) Destroy(sound.gameObject, sound.clip.length);
     }

@@ -467,7 +467,7 @@ Transform:
   m_GameObject: {fileID: 6355924}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.84, y: -13.28, z: 0}
+  m_LocalPosition: {x: -2.25, y: -14.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -52110,7 +52110,7 @@ MonoBehaviour:
   screenFilterImage: {fileID: 1042614284}
   fadeImage: {fileID: 1630687573}
   isDialogue: 0
-  dialogueIndex: 1
+  dialogueIndex: 0
   dialogueTextIndex: 0
   targetIndex: 0
   indexWeight: 1
@@ -52120,6 +52120,8 @@ MonoBehaviour:
   player: {fileID: 351088281}
   playerpos: {x: -15, y: -15, z: 5}
   phone: {fileID: 1776170959}
+  dayBgm: {fileID: 8300000, guid: 4e28d58f2e39c324ea773aa0b11ab70f, type: 3}
+  nightBgm: {fileID: 8300000, guid: 19ace4b86ece2024fb543f49e81a4fad, type: 3}
 --- !u!114 &1954090323
 MonoBehaviour:
   m_ObjectHideFlags: 0
