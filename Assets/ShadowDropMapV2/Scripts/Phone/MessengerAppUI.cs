@@ -104,15 +104,21 @@ public class MessengerAppUI : MonoBehaviour
     public void SendReply(MessengerMessageData data)
     {
         if (openThread == null) return;
-
-        var myMessage = new MessengerMessageData 
-        { 
-            text = data.replyOptions[0], 
-            photo = data.photo,          
-            isFromMe = true              
+        Debug.Log($"[상태 추적] SendReply 실행됨 / 현재 넘어온 상태값: {HidingPanelManager.Instance.hidingResultState}");
+        var myMessage = new MessengerMessageData
+        {
+            text = data.replyOptions[0],
+            photo = data.photo,
+            isFromMe = true
         };
         AddMessageToThread(openThread, myMessage);
+        if (HidingPanelManager.Instance.hidingResultState != 0)
+        {
+            if (HidingPanelManager.Instance.hidingResultState == 2) StoryManager.instance.indexWeight = 2;
+            else if (HidingPanelManager.Instance.hidingResultState == 1) StoryManager.instance.indexWeight = 1;
 
+            HidingPanelManager.Instance.hidingResultState = 0;
+        }
         // 스토리에 트리거 전달
         StoryManager.instance.TryPlayStory("Reply");
     }

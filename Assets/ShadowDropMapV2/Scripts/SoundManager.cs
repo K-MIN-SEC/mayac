@@ -18,13 +18,13 @@ public class SoundManager : MonoBehaviour
 
     
 
-    public void SetAudio(AudioClip clip, bool looping, float pitch = 1)
+    public void SetAudio(AudioClip clip, bool looping, float pitch = 1, float volume = 1)
     {
         var sound = Instantiate(soundObj, Vector3.zero, Quaternion.identity);
         sound.clip = clip;
         sound.loop = looping;
         sound.pitch = pitch;
-        sound.volume = soundVolume;
+        sound.volume = volume * soundVolume;
         sound.Play();
         if (!looping) Destroy(sound.gameObject, sound.clip.length);
     }

@@ -196,6 +196,7 @@ private const float triggerCooldown = 0.1f;
             text.text += tempText[i];
             yield return waitTime;
         }
+        yield return new WaitForSeconds(0.2f);
         if (curDialogue.isOption)
         {
             isOption = true;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SmartphoneUIManager : MonoBehaviour
 {
@@ -22,10 +23,14 @@ public class SmartphoneUIManager : MonoBehaviour
     public Button navRecentsButton;
 
     public AudioClip clickSound;
+    private Image backButtonSprite;
+    private Tween blinkTween;
+    private Color originalColor = new Color32(178, 178, 178, 255);
 
     void Start()
     {
         phonePanel.SetActive(false);
+        backButtonSprite = navBackButton.GetComponent<Image>();
 
         BindButton(phoneButton, TogglePhone);
         BindButton(closeButton, ClosePhone);
@@ -36,6 +41,11 @@ public class SmartphoneUIManager : MonoBehaviour
         BindButton(navHomeButton, GoHome);
         BindButton(navBackButton, OnBackPressed);
         BindButton(navRecentsButton, ClosePhone);
+    }
+    private void OnDisable()
+    {
+        blinkTween?.Kill();
+        backButtonSprite.color = originalColor;
     }
 
     private void BindButton(Button button, UnityEngine.Events.UnityAction action)
@@ -94,6 +104,7 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(true);
         messengerScreen.SetActive(false);
         settingsScreen.SetActive(false);
+        OnOffBack(false);
         if (detectorScreen != null) detectorScreen.SetActive(false);
 
         if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
@@ -104,6 +115,7 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(false);
         messengerScreen.SetActive(true);
         settingsScreen.SetActive(false);
+        OnOffBack(true);
         if (detectorScreen != null) detectorScreen.SetActive(false);
 
         if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
@@ -115,6 +127,7 @@ public class SmartphoneUIManager : MonoBehaviour
         homeScreen.SetActive(false);
         messengerScreen.SetActive(false);
         settingsScreen.SetActive(true);
+        OnOffBack(true);
         if (detectorScreen != null) detectorScreen.SetActive(false);
 
         if (DetectorAppUI.Instance != null) DetectorAppUI.Instance.OnScreenClosed();
@@ -140,5 +153,25 @@ public class SmartphoneUIManager : MonoBehaviour
         else if (messengerScreen.activeSelf || settingsScreen.activeSelf
                  || (detectorScreen != null && detectorScreen.activeSelf)) GoHome();
         else ClosePhone();
+    }
+
+    void OnOffBack(bool onOff)
+    {
+        if (onOff)
+        {
+            if (blinkTween != null && blinkTween.IsActive()) return;
+            backButtonSprite.color = originalColor;
+            blinkTween = DOTween.Sequence()
+                .Append(backButtonSprite.DOColor(Color.red, 0.5f)) 
+                .AppendInterval(0.5f)                    
+                .Append(backButtonSprite.DOColor(originalColor, 0.5f)) 
+                .AppendInterval(0.5f)    
+                .SetLoops(-1);
+        }
+        else
+        {
+            blinkTween?.Kill();
+            backButtonSprite.color = originalColor;
+        }
     }
 }

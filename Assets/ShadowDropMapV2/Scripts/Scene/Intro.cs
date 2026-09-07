@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 public class Intro : StoryManager
 {
     [SerializeField] private Image fade;
+    [SerializeField] private TMP_Text text;
     bool isEnd;
     public bool isEndding = false;
 
@@ -28,10 +30,11 @@ public class Intro : StoryManager
         
         Sequence sequence = DOTween.Sequence();
         sequence.Append(fade.DOFade(1, 0.5f));
-        if (!isEndding)
+
+        if (isEndding)
         {
-            sequence.OnComplete(() => { SceneManager.LoadScene(2); });
-        }
+            sequence.Join(text.DOFade(1, 0.5f)); 
+        }else sequence.OnComplete(() => { SceneManager.LoadScene(2); });
 
     }
 

@@ -40,7 +40,7 @@ public class InGame : StoryManager
 
             if (SoundManager.instance != null && !isFading)
             {
-                SoundManager.instance.SetAudio(isNight ? nightBgm : dayBgm, false);
+                SoundManager.instance.SetAudio(isNight ? nightBgm : dayBgm, false, 1, 0.4f);
             }
         }
     }

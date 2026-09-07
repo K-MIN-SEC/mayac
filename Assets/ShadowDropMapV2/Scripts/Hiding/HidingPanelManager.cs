@@ -22,6 +22,8 @@ public class HidingPanelManager : MonoBehaviour
 
     private string pendingSpotName;
     private bool pendingIsCorrect;
+    bool isHiding = false;
+    [HideInInspector] public int hidingResultState = 0;
 
     private void Awake()
     {
@@ -33,13 +35,14 @@ public class HidingPanelManager : MonoBehaviour
 
         Instance = this;
         
-        // 💡 굳이 null 체크를 하지 않습니다. 할당이 안 되어 있으면 여기서 에러가 나도록 유도합니다.
         examinePanel.SetActive(false);
         confirmDialog.SetActive(false);
     }
 
     public void OpenExaminePanel(HidingLocationData data)
     {
+        if(StoryManager.instance.isDialogue) return;
+
         photoImage.sprite = data.background;
         photoImage.preserveAspect = true;
 
@@ -96,6 +99,8 @@ public class HidingPanelManager : MonoBehaviour
 
     public void CloseExaminePanel()
     {
+        if(StoryManager.instance.isDialogue) return;
+
         examinePanel.SetActive(false);
         confirmDialog.SetActive(false);
     }
@@ -105,18 +110,23 @@ public class HidingPanelManager : MonoBehaviour
         pendingSpotName = spotName;
         pendingIsCorrect = isCorrectSpot;
         curPointImage = pointImage;
-        
+        isHiding = false;
+
         confirmText.text = $"Hide in {spotName}?";
+        Debug.Log($"RequestHide: {spotName}, isCorrectSpot: {isCorrectSpot}");
         confirmDialog.SetActive(true);
     }
 
     public void ConfirmYes()
     {
+        if(isHiding) return;
+        isHiding = true;
+        hidingResultState = pendingIsCorrect ? 1 : 2;
         StoryManager.instance.TryPlayStory("Hiding");
-        if (!pendingIsCorrect) StoryManager.instance.indexWeight++;
 
-        HidingRecord.Add(pendingSpotName, pendingIsCorrect);
-        CloseExaminePanel();
+        //HidingRecord.Add(pendingSpotName, pendingIsCorrect);
+        examinePanel.SetActive(false);
+        confirmDialog.SetActive(false);
     }
 
     public void ConfirmNo()
