@@ -79,6 +79,10 @@ private const float triggerCooldown = 0.1f;
 
     public void InitDialogue(Queue<Dialogue> InputDialogue)
     {
+        // A previous close animation can finish after the next story has started
+        // and invoke onDialogueEnd for the wrong dialogue index.
+        textBar.rectTransform.DOKill(false);
+
         dialogueBox = InputDialogue;
         if (dialogueBox.Count > 0)
         {
