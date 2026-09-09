@@ -798,11 +798,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 4460517c-f199-4973-bfdd-696694c9e1a6
+  cloudProjectId: f1d5d62b-3b9c-429d-85f5-9592e06920d4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: mayac
-  organizationId: seungmin7954
+  organizationId: seok_912
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

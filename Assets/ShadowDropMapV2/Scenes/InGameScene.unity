@@ -13560,6 +13560,7 @@ MonoBehaviour:
   - {fileID: 467410248}
   confirmDialog: {fileID: 254949563}
   confirmText: {fileID: 1323844471}
+  hidingResultState: 0
 --- !u!4 &471627623
 Transform:
   m_ObjectHideFlags: 0
@@ -51703,7 +51704,7 @@ MonoBehaviour:
   screenFilterImage: {fileID: 1042614284}
   fadeImage: {fileID: 1630687573}
   isDialogue: 0
-  dialogueIndex: 4
+  dialogueIndex: 0
   dialogueTextIndex: 0
   targetIndex: 0
   indexWeight: 1

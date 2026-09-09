@@ -5,7 +5,6 @@ public class OffScreenBubbleUI : MonoBehaviour
 {
     [Header("UI References")]
     public RectTransform bubbleBodyRect;
-    public RectTransform tailPivot;
     public TMP_Text dialogueText;
 
     [Header("Settings")]
@@ -69,23 +68,6 @@ public class OffScreenBubbleUI : MonoBehaviour
             float logicalT = Mathf.Min(logicalHalfW / absDirX, logicalHalfH / absDirY);
             float pixelT = logicalT * canvasScale;
             float distToNPC = Vector2.Distance(clampedPos, npcScreenPos);
-
-            if (distToNPC > pixelT + minTailDistance)
-            {
-                tailPivot.localPosition = dir * logicalT;
-
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-                tailPivot.gameObject.SetActive(true);
-                tailPivot.rotation = Quaternion.Euler(0, 0, angle);
-            }
-            else
-            {
-                tailPivot.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            tailPivot.gameObject.SetActive(false);
         }
     }
 }
