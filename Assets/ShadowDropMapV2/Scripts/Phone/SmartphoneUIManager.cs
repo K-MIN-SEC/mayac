@@ -42,6 +42,15 @@ public class SmartphoneUIManager : MonoBehaviour
         BindButton(navBackButton, OnBackPressed);
         BindButton(navRecentsButton, ClosePhone);
     }
+
+    private void Update()
+    {
+        if (phonePanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnBackPressed();
+        }
+    }
+
     private void OnDisable()
     {
         blinkTween?.Kill();
@@ -145,14 +154,10 @@ public class SmartphoneUIManager : MonoBehaviour
 
     public void OnBackPressed()
     {
-        bool inMessengerDetail = messengerScreen.activeSelf
-            && MessengerAppUI.Instance != null
-            && MessengerAppUI.Instance.chatDetailView.activeSelf;
+        if (!phonePanel.activeSelf) return;
 
-        if (inMessengerDetail) MessengerAppUI.Instance.OpenChatList();
-        else if (messengerScreen.activeSelf || settingsScreen.activeSelf
-                 || (detectorScreen != null && detectorScreen.activeSelf)) GoHome();
-        else ClosePhone();
+        if (homeScreen.activeSelf) ClosePhone();
+        else GoHome();
     }
 
     void OnOffBack(bool onOff)

@@ -5,12 +5,10 @@ public class Title : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            SceneManager.LoadScene(1);
-        }
+        bool isPointerDown = Input.GetMouseButtonDown(0)
+            || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
 
-        if(Input.GetTouch(0).phase == TouchPhase.Began)
+        if (isPointerDown)
         {
             SceneManager.LoadScene(1);
         }
