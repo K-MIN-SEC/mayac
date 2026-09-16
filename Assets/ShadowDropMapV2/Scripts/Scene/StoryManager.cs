@@ -103,7 +103,7 @@ public abstract class StoryManager : MonoBehaviour
     {
         // if (isNight) screenFilterImage.DOColor(new Color(0.0f, 0.1f, 0.4f, 0.5f), 3.0f);
         // else screenFilterImage.DOColor(new Color(0, 0, 0, 0), 3.0f);
-        if (isNight) screenFilterImage.color = new Color(0.0f, 0.1f, 0.4f, 0.5f);
+        if (isNight) screenFilterImage.color = new Color(0.0f, 0.1f, 0.4f, 0.35f);
         else screenFilterImage.color = new Color(0, 0, 0, 0);
     }
 
